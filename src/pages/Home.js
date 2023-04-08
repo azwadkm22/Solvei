@@ -7,10 +7,11 @@ function Home() {
   return (
     <div>
         <div className='main-content'>
-
         <FoldableContainer semester="1st Year 1st Semester" />
         <FoldableContainer semester="1st Year 2nd Semester" />
+        
         </div>
+        
         <div className='side-content'>
         <SideMenu title="Semester Top Contributors" content="Azwad" />
 
