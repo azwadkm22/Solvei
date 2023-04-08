@@ -1,0 +1,36 @@
+* {
+    background-color: #EFEFEF;
+    font-size: 13px;
+}
+
+.foldable-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px;
+    margin-left: 30px;
+    border: solid 1px;
+    border-color: #242424;
+    border-radius: 10px 10px 0px 0px;
+    width: 75%;
+    float: left;
+}
+
+.foldable-container-header {
+    display: flex;
+    padding: 0px 20px;
+    background-color: #242424;
+    color: #EFEFEF;
+    border-radius: 10px 10px 0px 0px;
+}
+
+h1 {
+    background-color: #242424;
+    color: #EFEFEF;
+    font-size: 28px;
+}
+
+.foldable-container-content {
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: row;
+}

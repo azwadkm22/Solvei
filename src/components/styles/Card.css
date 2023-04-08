@@ -1,0 +1,30 @@
+* {
+    background-color: #EFEFEF;
+    font-size: 13px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px;
+    border-color: #242424;
+    border-radius: 10px 10px 0px 0px;
+    margin: 10px;
+    width: 20%;
+}
+.card-header {
+    border-radius: 10px 10px 0px 0px;
+    padding: 0px 10px;
+    background-color: #242424;
+    color: #EFEFEF;
+}
+
+h2{
+    font-size: 18px;
+    background-color: #242424;
+    color: #EFEFEF;
+}
+
+.card-subtext {
+    padding: 0px 10px;
+}
