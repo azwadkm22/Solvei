@@ -1,8 +1,9 @@
 import React from 'react'
+import "./styles/Button.css";
 
-function Button() {
+function Button(props) {
   return (
-    <div>Button</div>
+    <div className='btn'>{props.title}</div>
   )
 }
 
