@@ -28,3 +28,13 @@ h2{
 .card-subtext {
     padding: 0px 10px;
 }
+
+.question-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.question-card {
+    width: 15%;
+}

@@ -3,10 +3,11 @@
     display: inline;
     border-radius: 10px;
     border: 1px solid;
-    padding: 4px 30px;
+    padding: 4px 10px;
     text-align: center;
-    margin: auto 40px;
+    margin: auto 20px;
     height: 20px;
+    width: 60px;
     color: #242424;
     background-color: #efefef;
 }

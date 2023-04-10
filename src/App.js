@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Course from './pages/Course';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" exact element={<Home />}/>
+        <Route path="/" exact element={<Course courseName="Fundamentals" courseCode="CSE-1010" semesterYear="1st Year 1st Semester"/>}/>
       </Routes>
     </Router>
     
