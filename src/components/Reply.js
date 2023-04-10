@@ -1,18 +1,19 @@
 import React from "react";
-import "./styles/Solution.css"
+import "./styles/Reply.css"
 
-function Solution(props) {
+function Reply(props) {
     return (
-        <>
-            <div className="votes">
-                <div className="upvote" />
+        <div className="reply-row">
+            <div className="reply-votes">
+                <div>^</div>
+                {/* <div className="upvote" /> */}
                 <div className="vote-count">{props.vote}</div>
-                <div className="downvote" />
+                <div>#</div>
             </div>
 
-            <div className="solution">
-                <h3 className="solution-header">Solution to 1</h3>
-                <p className="solution-text">
+            <div className="reply-main-container">
+                <div className="reply-header">Reply to 1</div>
+                <p className="reply-text">
                     Lorem Ipsum is simply dummy text of the printi
                     ng and typesetting industry. Lorem Ipsum has b
                     een the industry's standard dummy text ever si
@@ -28,8 +29,8 @@ function Solution(props) {
                     of Lorem Ipsum
                 </p>
             </div>
-        </>
+        </div>
     );
 }
 
-export default Solution
+export default Reply

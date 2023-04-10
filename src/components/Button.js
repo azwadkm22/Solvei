@@ -3,7 +3,7 @@ import "./styles/Button.css";
 
 function Button(props) {
   return (
-    <div className='btn'>{props.title}</div>
+    <div className={props.theme}>{props.title}</div>
   )
 }
 

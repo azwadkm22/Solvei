@@ -1,38 +1,44 @@
 import React from 'react'
-import "./styles/Question.css"
-import Solution from '../components/Solution'
+import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
-
-function Question(props) {
+import Button from '../components/Button'
+import "./styles/Question.css"
+function Question(props) {  
   return (
     <div>
-        <header>
-            <div className='course-code-name'>
-                {props.course}
-            </div>
-
-            <div className='batch'>{props.batch}</div>
-            <div className='exam-type'>{props.examType}</div>
-        </header>
-
         <div className='main-content'>
-            <QuestionViewer />
-            
-            <Solution className="main-solution"/>
+              <header>
+                  <div className='first-line'>
+                      <h3>{props.course}</h3>
+                      <Button theme="btn dark" title={props.batch} />
+                      <div className='btn dark'>{props.examType}</div>
+                  </div>
+              </header>
 
-            <div className="reply">
-                <Solution />
-                <Solution />
+            <div>
+                <QuestionViewer />
+                <div className='solution-container'>
+                    <Reply className="main-reply" vote={10} />
+                    <div className="reply-container">
+                        <Reply vote={10}/>
+                        <Reply vote={10} />
+                    </div>
+                </div>
+                
             </div>
         </div>
 
         <div className='side-content'>
-            <div className='teacher'>
-                <h2>Teacher</h2>
-                Teacher name
+            <div className='card teacher-card'>
+                <div className='card-header'>
+                    <h2>Teacher</h2>
+                </div>
+                <h3 className='card-subtext'>Teacher name</h3>
             </div>
-            <div className='topics'>
-                <h2>Topics</h2>
+            <div className='card topics'>
+                  <div className='card-header'>
+                      <h2>Topics</h2>
+                  </div>
                 <ul className='topic-list'>
                     <li>adsf</li>
                     <li>zxcv</li>

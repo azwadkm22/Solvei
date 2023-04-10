@@ -2,12 +2,20 @@
     font-size: 16px;
     display: inline;
     border-radius: 10px;
-    border: 1px solid;
     padding: 4px 10px;
     text-align: center;
     margin: auto 20px;
     height: 20px;
     width: 60px;
+}
+
+.light {
     color: #242424;
     background-color: #efefef;
+}
+
+
+.dark {
+    color: #efefef;
+    background-color: #242424;
 }
