@@ -1,0 +1,50 @@
+header {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.course-code-name {
+    background-color: #b8ea97;
+}
+
+.batch {
+    background-color: rgb(54, 121, 99);
+}
+
+.exam-type {
+    background-color: rgb(183, 202, 121);
+}
+
+.main-content {
+    margin: 2%;
+    margin-right: 1%;
+    float: left;
+    width: 74%;
+}
+
+.question-section {
+    background-color: #b8ea97;
+    width: 80px;
+    height: 90px;
+}
+
+.reply {
+    margin-left: 10%;
+}
+
+.side-content {
+    width: 20%;
+    margin: 2%;
+    margin-left: 1%;
+    float: right;
+}
+
+.teacher {
+    background-color: blueviolet;
+}
+
+.topics {
+    background-color: blue;
+}
