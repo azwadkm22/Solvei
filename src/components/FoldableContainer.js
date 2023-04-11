@@ -11,6 +11,10 @@ function FoldableContainer(props) {
         <div className='foldable-container-content'>
             <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
             <CourseCard courseCode="CSE-1102" courseName="Physics" />
+            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
+            <CourseCard courseCode="CSE-1102" courseName="Physics" />
+            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
+            <CourseCard courseCode="CSE-1102" courseName="Physics" />
             
         </div>
         

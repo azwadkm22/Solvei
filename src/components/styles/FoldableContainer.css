@@ -25,7 +25,9 @@ h1 {
 }
 
 .foldable-container-content {
-    padding: 0px 10px;
-    display: flex;
-    flex-direction: row;
+    padding: 10px 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Change the number '3' to the desired number of columns */
+    gap: 10px;
 }

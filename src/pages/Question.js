@@ -1,8 +1,9 @@
 import React from 'react'
 import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
-import Button from '../components/Button'
+import "../components/styles/Button.css"
 import "./styles/Question.css"
+
 function Question(props) {  
   return (
     <div>
@@ -10,7 +11,7 @@ function Question(props) {
               <header>
                   <div className='first-line'>
                       <h3>{props.course}</h3>
-                      <Button theme="btn dark" title={props.batch} />
+                      <div className='btn dark'>{props.batch}</div>
                       <div className='btn dark'>{props.examType}</div>
                   </div>
               </header>

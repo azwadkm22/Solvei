@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function CourseCard(props) {
   return (
-      <Link to="/question" className='card'>
+      <Link to="/course" className='card'>
         <div className='card-header'>
           <h2>{props.courseCode}</h2>
         </div>
