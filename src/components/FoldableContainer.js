@@ -7,7 +7,6 @@ function FoldableContainer(props) {
     <div className='foldable-container'>
         <div className='foldable-container-header'>
             <h1>{props.semester}</h1>
-            
         </div>
         <div className='foldable-container-content'>
             <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />

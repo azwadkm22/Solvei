@@ -10,8 +10,10 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        {/* <Route path="/" exact element={<Course courseName="Fundamentals" courseCode="CSE-1010" semesterYear="1st Year 1st Semester"/>}/> */}
-        <Route path="/" exact element={<Question course="CSE-4102: Fundamental of Everything Computer Related" batch="25" examType="Final"/>}/>
+        <Route path="/" exact element={<Home />}/>
+        <Route path="/question" exact element={<Question course="CSE-4102: Fundamental of Everything Computer Related" batch="25" examType="Final" />} />
+        <Route path="/course" exact element={<Course courseCode="CSE-4102" courseName="Fundamental of Everything Computer Related" semesterYear="1st Semester 1st Year"/>} />
+
       </Routes>
     </Router>
     

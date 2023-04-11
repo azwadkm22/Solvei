@@ -31,12 +31,12 @@ header {
     justify-content: space-between;
 }
 
-h1 {
+/* h1 {
     margin: 10px 30px;
     font-size: 64px;
     background-color: #efefef;
     color: #242424;
-}
+} */
 
 .question-divider {
     width: 100%;

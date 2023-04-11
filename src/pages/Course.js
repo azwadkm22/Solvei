@@ -1,6 +1,6 @@
+import "./styles/Course.css"
 import React from 'react'
 import QuestionCard from '../components/QuestionCard'
-import "./styles/Course.css"
 
 function Course(props) {
   return (

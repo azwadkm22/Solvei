@@ -1,9 +1,4 @@
-* {
-    background-color: #EFEFEF;
-    font-size: 13px;
-}
-
-.card {
+.card{
     display: flex;
     flex-direction: column;
     border: solid 1px;
@@ -12,6 +7,8 @@
     margin: 10px;
     width: 20%;
 }
+
+
 .card-header {
     border-radius: 10px 10px 0px 0px;
     padding: 0px 10px;
@@ -42,3 +39,4 @@ h2{
 .teacher-card {
     width: 95%;
 }
+

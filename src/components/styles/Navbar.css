@@ -1,4 +1,3 @@
-
 .navbar {
     color: #efefef;
     display: flex;
@@ -11,12 +10,38 @@
     background-color: #242424;
 }
 
-.title{
+.navbar>.title,
+.navbar>.title:link,
+.navbar>.title:visited,
+.navbar>.title:focus,
+.navbar>.title:hover,
+.navbar>.title:active {
     background-color: #242424;
+    color: #efefef;
     text-align: center;
     margin: auto 40px;
     font-size: 43px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    text-decoration: none;
 }
 
+
+.navbar>.profile-btn,
+.navbar>.profile-btn:link,
+.navbar>.profile-btn:visited,
+.navbar>.profile-btn:focus,
+.navbar>.profile-btn:hover,
+.navbar>.profile-btn:active {
+    font-size: 16px;
+    display: inline;
+    border-radius: 10px;
+    padding: 4px 10px;
+    text-align: center;
+    margin: auto 20px;
+    height: 20px;
+    width: 60px;
+    color: #242424;
+    background-color: #efefef;
+    text-decoration: none;
+}
