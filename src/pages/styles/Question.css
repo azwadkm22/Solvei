@@ -51,7 +51,8 @@ header > div > h3 {
     width: 90%;
 }
 
-.solution-container {
+.reply-container {
     display: block;
+    margin-left: 10%;
     /* flex-direction: column; */
 }

@@ -18,10 +18,10 @@ function Question(props) {
             <div>
                 <QuestionViewer />
                 <div className='solution-container'>
-                    <Reply className="main-reply" vote={10} />
+                    <Reply className="main-reply" vote={15} />
                     <div className="reply-container">
                         <Reply vote={10}/>
-                        <Reply vote={10} />
+                        <Reply vote={11} />
                     </div>
                 </div>
                 
