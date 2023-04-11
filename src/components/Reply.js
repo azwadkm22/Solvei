@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/Reply.css"
 
 function Reply(props) {
+    const [voteCount, setVoteCount] = useState(props.vote);
+
+    function upvote() {
+        setVoteCount(voteCount + 1);
+    }
+
+    function downvote() {
+        setVoteCount(voteCount - 1);
+    }
+
+
     return (
         <div className="reply-row">
             <div className="reply-votes">
-                <div>^</div>
-                {/* <div className="upvote" /> */}
-                <div className="vote-count">{props.vote}</div>
-                <div>#</div>
+                <div className="upvote" onClick={upvote}>^</div>
+                <div className="vote-count">{voteCount}</div>
+                <div className="downvote" onClick={downvote}>#</div>
             </div>
 
             <div className="reply-main-container">
