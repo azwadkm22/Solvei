@@ -9,7 +9,7 @@ function Navbar() {
           <div>Solvei</div>
         </Link>
 
-      <Link to="/question" className="profile-btn">
+      <Link to="/login" className="profile-btn">
             Profile
         </Link >
     </div>

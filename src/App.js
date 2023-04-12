@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import SearchResult from './pages/SearchResult';
 import Profile from './pages/Profile';
+import Upload from './pages/UploadForm';
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
         <Route path="/result" exact element={<SearchResult />} />
-
         <Route path="/profile" exact element={<Profile />} />
+        <Route path="/upload" exact element={<Upload />} />
 
       </Routes>
     </Router>

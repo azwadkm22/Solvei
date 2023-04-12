@@ -15,8 +15,9 @@ const LoginForm = () => {
         <div>
             <form onSubmit={handleSubmit}>
 
-                <label htmlFor="login-email">Email Address</label>
+                <label htmlFor="login-email" >Email Address</label>
                 <input
+                    className='auth-form-content'
                     type="email"
                     id="login-email"
                     value={email}
@@ -24,8 +25,9 @@ const LoginForm = () => {
                     required
                 />
 
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" >Password</label>
                 <input
+                    className='auth-form-content'
                     type="password"
                     id="login-password"
                     value={password}
@@ -36,11 +38,11 @@ const LoginForm = () => {
 
                 {/* Recaptcha Prompt component here */}
                 {/* Replace the below placeholder with your actual Recaptcha component */}
-                <p>Recaptcha Prompt component here</p>
+                {/* <p>Recaptcha Prompt component here</p> */}
 
-                <button id='submit-button' type="submit">Submit</button>
+                <button className='submit-button' type="submit">Submit</button>
 
-                <Link to="/question" className='link-page'>Don’t have an account? Create one</Link>
+                <Link to="/register" className='link-page'>Don’t have an account? Create one</Link>
             </form>
             
         </div>

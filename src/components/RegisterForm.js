@@ -21,6 +21,7 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="fullName">Full Name</label>
                 <input
+                    className='auth-form-content'
                     type="text"
                     id="fullName"
                     value={fullName}
@@ -30,6 +31,7 @@ const RegisterForm = () => {
 
                 <label htmlFor="univRegNumber">University Registration Number</label>
                 <input
+                    className='auth-form-content'
                     type="text"
                     id="univRegNumber"
                     value={univRegNumber}
@@ -39,6 +41,7 @@ const RegisterForm = () => {
 
                 <label htmlFor="email">Email Address</label>
                 <input
+                    className='auth-form-content'
                     type="email"
                     id="email"
                     value={email}
@@ -48,6 +51,7 @@ const RegisterForm = () => {
 
                 <label htmlFor="batchNumber">Batch Number</label>
                 <input
+                    className='auth-form-content'
                     type="number"
                     id="batchNumber"
                     value={batchNumber}
@@ -57,6 +61,7 @@ const RegisterForm = () => {
 
                 <label htmlFor="password">Password</label>
                 <input
+                    className='auth-form-content'
                     type="password"
                     id="password"
                     value={password}
@@ -66,6 +71,7 @@ const RegisterForm = () => {
 
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
+                    className='auth-form-content'
                     type="password"
                     id="confirmPassword"
                     value={confirmPassword}
@@ -75,9 +81,9 @@ const RegisterForm = () => {
 
                 {/* Recaptcha Prompt component here */}
                 {/* Replace the below placeholder with your actual Recaptcha component */}
-                <p>Recaptcha Prompt component here</p>
+                {/* <p>Recaptcha Prompt component here</p> */}
 
-                <button id='submit-button' type="submit">Submit</button>
+                <button className='submit-button' type="submit">Submit</button>
 
                 <Link to="/login" className='link-page'>Already have an account? Login</Link>
             </form>
