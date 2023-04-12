@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
 import "./styles/AuthForm.css";
-import { Link } from 'react-router-dom';
+import { useLogin } from '../hook/useLogin'
+import { Link , useNavigate} from 'react-router-dom';
 
 const LoginForm = () => {
+    const {login, error, isLoading} = useLogin();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const redirectToHome = () => {
+        console.log("in redirect to home");
+        navigate('/')
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
+        const ok = await login(email, password)
+        
+        if(ok) {
+            redirectToHome();
+        } else {
+            alert("Could not log in")
+        }
     };
 
     return (

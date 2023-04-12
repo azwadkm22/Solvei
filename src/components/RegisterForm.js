@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import "./styles/AuthForm.css";
-import { Link } from 'react-router-dom';
+import { useRegister } from '../hook/useRegister';
+import { Link , useNavigate} from 'react-router-dom';
 
 const RegisterForm = () => {
+    const {register, error, isLoading} = useRegister();
+
     const [fullName, setFullName] = useState('');
     const [univRegNumber, setUnivRegNumber] = useState('');
     const [email, setEmail] = useState('');
@@ -11,9 +14,26 @@ const RegisterForm = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [recaptchaResponse, setRecaptchaResponse] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate()
+
+    const redirectToHome = () => {
+        console.log("in redirect to home");
+        navigate('/')
+    }
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
+        console.log(email, password, fullName, batchNumber)
+        const ok = await register(email, password, fullName,batchNumber)
+        console.log("ok", ok)
+        if(ok) {
+            redirectToHome();
+        } else {
+            alert("Could not register user")
+        }
+        
     };
 
     return (
