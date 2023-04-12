@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 
 
 function CourseCard(props) {
+  
   return (
-      <Link to="/course" className='card'>
+    <Link to = "/course"
+          state = {{
+            courseCode: props.courseCode,
+            courseName: props.courseName
+          }}
+         className='card'>
         <div className='card-header'>
           <h2>{props.courseCode}</h2>
         </div>
