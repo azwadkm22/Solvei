@@ -7,9 +7,9 @@ function CourseCard(props) {
   return (
       <Link to="/course" className='card'>
         <div className='card-header'>
-          <h2>{props.courseCode}</h2>
+        <h2 className='card-header-h2 clickable-light'>{props.courseCode}</h2>
         </div>
-        <h3 className='card-subtext'>{props.courseName}</h3>
+      <h3 className='card-subtext clickable-dark'>{props.courseName}</h3>
       </Link >
   )
 }

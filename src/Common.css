@@ -1,0 +1,16 @@
+*:link,
+*:visited,
+*:focus,
+*:hover,
+*:active {
+    text-decoration: none;
+}
+
+
+.clickable-light {
+    color: #EFEFEF;
+}
+
+.clickable-dark {
+    color: #242424;
+}

@@ -45,3 +45,7 @@
     background-color: #efefef;
     text-decoration: none;
 }
+
+.hamburger-menu {
+    display: none;
+}

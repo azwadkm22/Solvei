@@ -5,7 +5,7 @@
     border-color: #242424;
     border-radius: 10px 10px 0px 0px;
     margin: 10px;
-    width: 300px;
+    width: 100%;
 }
 
 
@@ -16,7 +16,7 @@
     color: #EFEFEF;
 }
 
-h2{
+.card-header-h2{
     font-size: 18px;
     background-color: #242424;
     color: #EFEFEF;

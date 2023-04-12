@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import SearchResult from './pages/SearchResult';
 import Profile from './pages/Profile';
 import Upload from './pages/UploadForm';
+import "./Common.css"
+import "./Mobile.css"
 
 function App() {
   return (

@@ -1,9 +1,10 @@
 .question-card-container {
-    padding: 0px 30px;
-    width: 100%;
+    padding: 0px 40px;
+    /* margin-right: 10px; */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    gap: 20px;
+    /* width: 100%; */
 }
 
 .question-card-container > div{

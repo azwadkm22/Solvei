@@ -26,3 +26,29 @@
     height: 500px;
     border: 10px solid #000;
 }
+
+@media screen and (max-width: 480px) {
+    .logo-content {
+        display: none;
+        width: 0px;
+        background-color: aquamarine;
+    }
+
+    .auth-center-container {
+        background-color: antiquewhite;
+    }
+
+    .auth-content {
+        width: 100%;
+        background-color: aliceblue;
+        /* padding: 80px; */
+        /* height: 1px;
+        margin: 100px 0px; */
+    }
+
+    .form-content {
+        width: 100%;
+        display: block;
+        background-color: beige;
+    }
+}
