@@ -25,6 +25,14 @@ function Question(props) {
                         <Reply vote={11} />
                     </div>
                 </div>
+
+                <div className='solution-container'>
+                    <Reply className="main-reply" vote={15} />
+                    <div className="reply-container">
+                        <Reply vote={10}/>
+                        <Reply vote={11} />
+                    </div>
+                </div>
                 
             </div>
         </div>

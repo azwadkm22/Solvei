@@ -4,7 +4,8 @@ import "./styles/Auth.css"
 import RegisterForm from '../components/RegisterForm'
 import { Link } from 'react-router-dom'
 
-function Register() {
+
+function Register () {
   return (
     <div className='auth-center-container'>
       <div className='auth-content'>
