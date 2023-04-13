@@ -45,7 +45,7 @@ function Question(props) {
         <div className='side-content'>
             <div className='card teacher-card'>
                 <div className='card-header'>
-                    <h2>Teacher Nma</h2>
+                    <h2>Teacher Name</h2>
                 </div>
                 <h3 className='card-subtext'>John Doe</h3>
             </div>
