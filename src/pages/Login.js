@@ -7,7 +7,7 @@ function Login() {
   return (
     <div className='auth-center-container'>
       <div className='auth-content'> 
-        <img className='logo-content' src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'/>
+        <img className='logo-content' src='https://i.imgur.com/qaZ4f4R.png'/>
       </div>
       <div className='auth-content form-content'> 
         <LoginForm /> 
