@@ -1,16 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Activity from "../components/Activity";
 import "./styles/Profile.css"
-function Profile() {
+import { useLocation } from 'react-router-dom';
+import { API_BASE_URL, AUTH, USER } from '../utils/constants';
+import  Axios  from 'axios';
 
-  const [isUser, setIsUser] = useState(true);
+function Profile() {
+  const location = useLocation()
+  const {email} = location.state
+  const [isUser, setIsUser] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   //Nashmin bring stuff here
-  const userInfo = {
-    "fullName": "K. M. Azwad Hossain",
-    "batch": 25,
-    "registrationNumber": "2018-525-331",
-    "email": "azwadkm22@gmail.com"} 
+  // const userInfo = {
+  //   "fullName": "K. M. Azwad Hossain",
+  //   "batch": 25,
+  //   "registrationNumber": "2018-525-331",
+  //   "email": email} 
+
+    useEffect(() => {
+      // Fetch all courses from the backend when the component mounts
+      Axios.get(API_BASE_URL + AUTH + USER + email)
+        .then((response) => {
+          console.log(response.data)
+          // setAllCourses(response.data.courses);
+          setIsUser(true)
+          setUserInfo(response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
 
   return (
     <div className='profile-page-container'>
@@ -23,9 +43,9 @@ function Profile() {
         {
           isUser ? 
           <div className='user-info-container'>
-              <p className='user-info'>{userInfo.fullName}</p>
+              <p className='user-info'>{userInfo.name}</p>
               <p className='user-info'>{userInfo.batch}</p>
-              <p className='user-info'>{userInfo.registrationNumber}</p>
+              {/* <p className='user-info'>{userInfo.registrationNumber}</p> */}
               <p className='user-info'>{userInfo.email}</p>
               <div className='edit-pass-btn user-info'> Edit Password </div>
           </div>
@@ -33,7 +53,7 @@ function Profile() {
           :
 
           <div className='user-info-container'>
-              <p className='user-info'>{userInfo.fullName}</p>
+              <p className='user-info'>{userInfo.name}</p>
               <p className='user-info'>{userInfo.batch}</p>
           </div>
         }   
