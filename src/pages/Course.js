@@ -20,12 +20,12 @@ function Course(props) {
   return (
     
     <div className="course-body">
-      <header>
+      <header className="course-body-header">
         <div className='first-line'>
-          <h1>{courseCode}</h1>
-          <h2>{getSemesterYear()}</h2>
+          <h1 className="course-page-h1">{courseCode}</h1>
+          <h2 className="course-page-h2">{getSemesterYear()}</h2>
         </div>
-        <h1 className="second-line">{courseName}</h1>
+        <h1 className="course-page-h1">{courseName}</h1>
       </header>
       <div className='question-card-section'>
         <div className='question-divider'>

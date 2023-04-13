@@ -8,7 +8,7 @@ function Question(props) {
   return (
     <div>
         <div className='main-content'>
-              <header>
+              <header className='question-body-header'>
                   <div className='first-line'>
                       <h3>{props.course}</h3>
                       <div className='btn dark'>{props.batch}</div>

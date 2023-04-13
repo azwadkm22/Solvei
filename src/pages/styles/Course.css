@@ -1,59 +1,42 @@
 .question-card-container {
-    padding: 0px 40px;
+    /* padding: 0px 20px; */
     /* margin-right: 10px; */
+    margin: 1% 2%;
+    /* justify-content: center; */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    /* width: 100%; */
-}
-
-.question-card-container > div{
-    display: flex;
-    flex-direction: row;
-    margin: 0px 30px;
+    /* gap: 30px; */
+    width: 96%;
 }
 
 
 .course-body {
     background-color: #efefef;
 }
-header {
-    flex-wrap: wrap;
+
+
+.course-body-header {
+    /* flex-wrap: wrap; */
     display: flex;
     flex-direction: column;
-    /* margin: 0px; */
+    width: 96%;
+    margin: 0% 2%;
+    /* background-color: aqua; */
 }
 
 .first-line {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-    /* border: 10px solid olivedrab; */
     padding: 0px 0px;
-    margin: 0px;
-}
-
-.first-line > h2 {
-    font-size: 46px;
-    color: #242424;
-    background-color: #efefef;
-    padding: auto;
-    margin: auto 30px;
-    justify-content: space-between;
-}
-
-.first-line > h1, .second-line {
-    margin: 10px 30px;
-    font-size: 64px;
-    background-color: #efefef;
-    color: #242424;
+    /* margin: 30px; */
 }
 
 .question-divider {
-    width: 100%;
-    margin: 20px 30px;
+    width: 96%;
+    margin: 1% 2%;
+    display: flex;
+    justify-content: center;
     /* padding: auto; */
     
 }
@@ -68,5 +51,22 @@ header {
     border-radius: 10px;
     padding: auto;
     margin: auto;
-    width: 94%;
+    width: 100%;
+}
+
+
+.course-page-h1 {
+    display: block;
+    margin: 10px 0px;
+    font-size: 64px;
+    background-color: #efefef;
+    color: #242424;
+}
+
+.course-page-h2 {
+    display: block;
+    margin: 10px 0px;
+    font-size: 58px;
+    background-color: #efefef;
+    color: #242424;
 }

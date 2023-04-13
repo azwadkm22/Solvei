@@ -1,4 +1,4 @@
-header {
+.question-body-header {
     flex-wrap: wrap;
     display: flex;
     flex-direction: column;
