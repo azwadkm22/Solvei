@@ -29,14 +29,15 @@ function QuestionViewer() {
 
 
   return (
-    <div className='question-container'>
-      <Document file={pdfFile} onLoadSuccess={onDocumentSuccess}>
-          <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false}></Page>
-      </Document>
-      <button onClick={onPrevClickHandler}>Prev Page</button>
-      <button onClick={onNextClickHandler}>Next Page</button>
+    // <div className='question-container'>
+    //   <Document file={pdfFile} onLoadSuccess={onDocumentSuccess}>
+    //       <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false}></Page>
+    //   </Document>
+    //   <button onClick={onPrevClickHandler}>Prev Page</button>
+    //   <button onClick={onNextClickHandler}>Next Page</button>
       
-    </div>
+    // </div>
+    <iframe className='question-container' src="https://drive.google.com/file/d/1WRQZT11QwwUJIskuUczZpWsNPEqLIysA/preview" width="640" height="480" allow="autoplay"></iframe>
   )
 }
 

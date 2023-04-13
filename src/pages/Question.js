@@ -11,26 +11,31 @@ function Question(props) {
               <header className='question-body-header'>
                   <div className='first-line'>
                       <h3>{props.course}</h3>
-                      <div className='btn dark'>{props.batch}</div>
-                      <div className='btn dark'>{props.examType}</div>
+                      <div className='btn big dark'>{props.batch}</div>
+                      <div className='btn big dark'>{props.examType}</div>
                   </div>
               </header>
 
             <div>
                 <QuestionViewer />
+                <div className='add-solution-btn dark'>
+                    Submit a solution 
+                </div>
                 <div className='solution-container'>
-                    <Reply className="main-reply" vote={15} />
+                      <Reply className="main-reply" vote={15} isSolution={true} />
+                      <div className='reply-btn dark'> Reply </div>
                     <div className="reply-container">
-                        <Reply vote={10}/>
-                        <Reply vote={11} />
+                    <Reply vote={10} isSolution={false} />
+                    <Reply vote={11} isSolution={false} />
                     </div>
                 </div>
 
                 <div className='solution-container'>
-                    <Reply className="main-reply" vote={15} />
+                    <Reply className="main-reply" vote={15} isSolution={true} />
+                    <div className='reply-btn dark'> Reply </div>
                     <div className="reply-container">
-                        <Reply vote={10}/>
-                        <Reply vote={11} />
+                        <Reply vote={10} isSolution={false} />
+                        <Reply vote={11} isSolution={false} />
                     </div>
                 </div>
                 
@@ -40,18 +45,19 @@ function Question(props) {
         <div className='side-content'>
             <div className='card teacher-card'>
                 <div className='card-header'>
-                    <h2>Teacher</h2>
+                    <h2>Teacher Nma</h2>
                 </div>
-                <h3 className='card-subtext'>Teacher name</h3>
+                <h3 className='card-subtext'>John Doe</h3>
             </div>
             <div className='card topics'>
                   <div className='card-header'>
                       <h2>Topics</h2>
                   </div>
                 <ul className='topic-list'>
-                    <li>adsf</li>
-                    <li>zxcv</li>
-                    <li>qwer</li>
+                    <li>A* Algorithm</li>
+                    <li>CSP</li>
+                    <li>MDP</li>
+                    <li>POMDP</li>
                 </ul>
             </div>
         </div>

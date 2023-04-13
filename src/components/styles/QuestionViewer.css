@@ -1,6 +1,7 @@
 .question-container {
     width: 100%;
-    background-color: aquamarine;
+    height: 720px;
+    background-color: rgb(255, 255, 255);
 }
 
 .react-pdf__Page__canvas {

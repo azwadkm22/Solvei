@@ -53,6 +53,34 @@ header > div > h3 {
 
 .reply-container {
     display: block;
-    margin-left: 10%;
+    margin-left: 5%;
     /* flex-direction: column; */
+}
+
+.add-solution-btn {
+    margin: 5px 20px;
+    border-radius: 10px;
+    /* width: 20%; */
+    font-size: 36px;
+    position: relative;
+    float: right;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.solution-container {
+    margin-left: 30px;
+}
+
+.reply-btn {
+    border-radius: 20px;
+    padding: 5px 0px;
+    font-size: 18px;
+    float: right;
+    width: 8%;
+    margin: 0px 20px;
+    margin-top: -15px;
+    display: flex;
+    justify-content: center;
 }
