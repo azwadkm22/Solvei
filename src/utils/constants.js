@@ -1,5 +1,6 @@
 export const API_BASE_URL = "https://solvei-api.onrender.com/api/";
 export const AUTH = "auth/";
+export const USER = "user/?email="
 export const REG = "register/"
 export const HOME = "course/";
 export const LOGIN = "login/";
