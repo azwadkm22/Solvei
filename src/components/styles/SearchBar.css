@@ -1,0 +1,18 @@
+.search-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    border: 2px solid #efefef;
+    border-radius: 40px;
+    width: 240px;
+    color: #efefef;
+    background-color: #242424;
+    cursor: pointer;
+}
+
+.search-btn-element {
+    display: flex;
+    margin: auto 20%;
+}
+

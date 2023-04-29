@@ -3,19 +3,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* margin: 20px; */
     width: 100%;
     height: 80px;
     font-size: 28px;
     background-color: #242424;
 }
 
-.navbar>.title,
-.navbar>.title:link,
-.navbar>.title:visited,
-.navbar>.title:focus,
-.navbar>.title:hover,
-.navbar>.title:active {
+.title,
+.title:link,
+.title:visited,
+.title:focus,
+.title:hover,
+.title:active {
     background-color: #242424;
     color: #efefef;
     text-align: center;
@@ -27,12 +26,12 @@
 }
 
 
-.navbar>.profile-btn,
-.navbar>.profile-btn:link,
-.navbar>.profile-btn:visited,
-.navbar>.profile-btn:focus,
-.navbar>.profile-btn:hover,
-.navbar>.profile-btn:active {
+.profile-btn,
+.profile-btn:link,
+.profile-btn:visited,
+.profile-btn:focus,
+.profile-btn:hover,
+.profile-btn:active {
     font-size: 16px;
     display: inline;
     border-radius: 10px;
@@ -48,4 +47,29 @@
 
 .hamburger-menu {
     display: none;
+}
+
+.upload-redir,
+.upload-redir:link,
+.upload-redir:visited,
+.upload-redir:focus,
+.upload-redir:hover,
+.upload-redir:active {
+    text-decoration: underline;
+    color: #efefef;
+    font-size: 20px;
+    margin: auto;
+}
+
+li.nav-link {
+    list-style: none;
+        margin: 0.5rem 1rem;
+        padding: 0.4rem;
+        display: flex;
+        align-items: center;
+}
+
+ul.nav-links {
+    display: flex;
+    margin: auto 0px;
 }

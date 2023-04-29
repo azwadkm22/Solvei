@@ -4,10 +4,15 @@ import React, { useState, useEffect } from 'react'
 
 function FoldableContainer(props) {
   const [courses, setCourses] = useState(props.courses);
+  const [isFolded, setIsFolded] = useState(false);
 
   useEffect(() => {
     setCourses(props.courses);
   }, [props.courses]);
+
+  function toggleFolded(){
+    setIsFolded(!isFolded);
+  }
 
   const getCourseCards = () => {
     console.log("in foldable containers : ",courses);
@@ -19,12 +24,13 @@ function FoldableContainer(props) {
 
   return (
     <div className='foldable-container'>
-      <div className='foldable-container-header'>
+      <div className='foldable-container-header' onClick={toggleFolded}>
         <h1 className="foldable-container-h1">{props.semester}</h1>
       </div>
-      <div className='foldable-container-content'>
-          {getCourseCards()}
-      </div>
+      {isFolded ? <></> : <div className='foldable-container-content'>
+      {getCourseCards()}
+    </div>}
+      
     </div>
 
   )
