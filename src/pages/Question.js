@@ -3,21 +3,25 @@ import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
 import "../components/styles/Button.css"
 import "./styles/Question.css"
+import { useLocation } from 'react-router-dom'
 
-function Question(props) {  
+function Question() {  
+    const location = useLocation();
+    const props = location.state?.parameter;
+    console.log(props)
   return (
     <div>
         <div className='main-content'>
               <header className='question-body-header'>
                   <div className='first-line'>
-                      <h3>{props.course}</h3>
+                      <h3>{props.courseCode}</h3>
                       <div className='btn big dark'>{props.batch}</div>
                       <div className='btn big dark'>{props.examType}</div>
                   </div>
               </header>
 
             <div>
-                <QuestionViewer />
+                <QuestionViewer pdfFile={props.pdfFile}/>
                 <div className='add-solution-btn dark'>
                     Submit a solution 
                 </div>
@@ -47,17 +51,22 @@ function Question(props) {
                 <div className='card-header'>
                     <h2>Teacher Name</h2>
                 </div>
-                <h3 className='card-subtext'>John Doe</h3>
+                <h3 className='card-subtext'>{props.teacher}</h3>
             </div>
             <div className='card topics'>
                   <div className='card-header'>
                       <h2>Topics</h2>
                   </div>
+
+                  {/* courses.map((course, index) => (
+      <CourseCard key={index} courseCode={course.courseCode} courseName={course.courseName} />
+    )); */}
+
+
                 <ul className='topic-list'>
-                    <li>A* Algorithm</li>
-                    <li>CSP</li>
-                    <li>MDP</li>
-                    <li>POMDP</li>
+                    {props.topics.map((topic, index) => (
+                        <li id={index}>{topic}</li>
+                    ))}
                 </ul>
             </div>
         </div>
