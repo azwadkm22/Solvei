@@ -9,19 +9,17 @@ function Navbar() {
 
   return (
     <div className='navbar'>
+        <Link to="/" className='title'>
+          <div>Solvei</div>
+        </Link>
 
         <ul className='nav-links'>
-          <li className='nav-link'>
-          <Link to="/" className='title'>
-            <div>Solvei</div>
-          </Link>
-        </li>
-        <li className='nav-link'>
-
-        <SearchBar/>
-
-        </li>
+        <li className='nav-link'> <SearchBar />
+          </li>
         </ul>
+        
+        <div className="empty-div-with-width"></div>
+      
 
         <ul className='nav-links'>
         <li className='nav-link'>
