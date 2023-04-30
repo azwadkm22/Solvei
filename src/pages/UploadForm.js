@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./styles/UploadForm.css"
 import FileDrop from '../components/FileDrop';
 import { useAuthContext } from '../hook/useAuthContext';
 import { API_BASE_URL } from '../utils/constants';
+import { type } from '@testing-library/user-event/dist/type';
 
 const UploadForm = () => {
+    const navigate = useNavigate();
     const [courseCode, setCourseCode] = useState('');
     const [batch, setBatch] = useState('');
     const [examType, setExamType] = useState('');
@@ -38,6 +41,10 @@ const UploadForm = () => {
         setTopics(e.target.value.split(','));
     };
 
+    const goToQuestionPage = (question) => {
+        navigate("/question", { state: { parameter: question } });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -66,8 +73,10 @@ const UploadForm = () => {
         });
       
         if (response.ok) {
-            console.log('Question posted successfully');
-            
+            response.json().then(data => {
+                console.log('Question posted successfully');
+                goToQuestionPage(data);
+            })            
         } else {
             console.error('Could not post question', response.status);
         }
