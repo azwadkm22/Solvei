@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 function FoldableContainer(props) {
   const [courses, setCourses] = useState(props.courses);
-  const [isFolded, setIsFolded] = useState(false);
+  const [isFolded, setIsFolded] = useState(true);
 
   useEffect(() => {
     setCourses(props.courses);

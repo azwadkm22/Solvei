@@ -24,6 +24,21 @@
     border-radius: 10px;
 }
 
+.star-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 2px 4px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 2px solid #efefef;
+    border-radius: 10px;
+}
+
+.gold-variant {
+    background-color: #303030;
+}
+
 
 .flag-dropdown-container{
     position: relative;

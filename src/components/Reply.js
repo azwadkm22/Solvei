@@ -31,9 +31,9 @@ function Reply(props) {
             </div>
 
             <div className="reply-main-container">
-                <div className="reply-header">
-                    {props.isSolution ? <>Solution 1</> : <>Reply to 1</>}                    
-                </div>
+                {/* <div className="reply-header">
+                    {props.isSolution ? <>Solution 1 </> : <>Reply to 1</>}                    
+                </div> */}
                 <p className="reply-text">
                     Lorem Ipsum is simply dummy text of the printi
                     ng and typesetting industry. Lorem Ipsum has b

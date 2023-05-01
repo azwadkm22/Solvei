@@ -9,6 +9,7 @@ import { type } from '@testing-library/user-event/dist/type';
 const UploadForm = () => {
     const navigate = useNavigate();
     const [courseCode, setCourseCode] = useState('');
+    const [courseName, setCourseName] = useState('');
     const [batch, setBatch] = useState('');
     const [examType, setExamType] = useState('');
     const [teacher, setTeacher] = useState('');
@@ -19,6 +20,10 @@ const UploadForm = () => {
 
     const handleCourseCodeChange = (e) => {
         setCourseCode(e.target.value);
+    };
+
+    const handleCourseNameChange = (e) => {
+        setCourseName(e.target.value);
     };
 
     const handleBatchChange = (e) => {
@@ -37,13 +42,21 @@ const UploadForm = () => {
         setPdfFile(e.target.files[0]);
     };
 
-    const handleTopicsChange = (e) => {
-        setTopics(e.target.value.split(','));
+    const handleNumOfQuestionsChange = (e) => {
+        setNumOfQuestions(e.target.value)
+    };
+
+    const handleTopicsChange = (index, event) => {
+        const newFields = [...topics];
+        newFields[index] = event.target.value;
+        setTopics(newFields);
     };
 
     const goToQuestionPage = (question) => {
         navigate("/question", { state: { parameter: question } });
     };
+
+   
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,7 +94,16 @@ const UploadForm = () => {
             console.error('Could not post question', response.status);
         }
     };
-    
+
+    const addTopic = () => {
+        setTopics([...topics, '']);
+    };
+
+    const removeTopic = () => {
+        if (topics.length > 0) {
+            setTopics(topics.slice(0, -1));
+        }
+    };
 
     return (
         <div className='question-form-container'>
@@ -89,13 +111,35 @@ const UploadForm = () => {
                 <label className='question-form-content'>
                     Course Code:
                     <input
+                    list='course-code-list'
                         className='question-form-box'
                         type="text"
                         value={courseCode}
                         onChange={handleCourseCodeChange}
                         required
                     />
+
+                    <datalist id="course-code-list">
+                        {/* {getCourseOptions()} */}
+                    </datalist>
                 </label >
+
+                <label className='question-form-content'>
+                    Course Name:
+                    <input
+                        list='courses-list'
+                        className='question-form-box'
+                        type="text"
+                        value={courseName}
+                        onChange={handleCourseNameChange}
+                        required
+                    />
+
+                    <datalist id="courses-list">
+                        {/* {getCourseOptions()} */}
+                    </datalist>
+                </label >
+                
                 <label className = 'question-form-content'>
                     Batch:
                     <input
@@ -152,14 +196,39 @@ const UploadForm = () => {
                     />
                 </label>
                 <label className='question-form-content'>
-                    Topics (separated by comma):
+                    Number of Questions in Exam:
                     <input
                         className='question-form-box'
-                        type="text"
-                        value={topics.join(',')}
-                        onChange={handleTopicsChange}
+                        type="number"
+                        value={numOfQuestions}
+                        onChange={handleNumOfQuestionsChange}
                         required
                     />
+                </label>
+                <label className='question-form-content'>
+                    Topics:
+                    <div className='tt'>
+                    {
+                        topics.length == 0 ?
+                        <div> No topics added.</div>
+                        
+                        :
+                        
+                        topics.map((topic, index) => (
+                            <div key={index}>
+                                <input className='question-form-box topic-box' type="text" value={topic} onChange={event => handleTopicsChange(index, event)} />
+                            </div>
+                        ))
+                            
+                    }
+                    
+                    </div>
+                    
+                    <div className='topic-btn-container'>
+                        <div title="Add Topic" className='add-topic-btn' onClick={addTopic}> + </div>
+                        <div title="Remove Topic" className='remove-topic-btn' onClick={removeTopic}> - </div>
+                    </div>
+                    
                 </label>
                 <button type="submit" className='submit-button'>Submit</button>
             </form>

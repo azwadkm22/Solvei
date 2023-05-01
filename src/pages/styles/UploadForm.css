@@ -6,6 +6,7 @@
 }
 
 .question-form-content {
+    position: relative;
     width: 100%;
     justify-content: center;
     display: flex; 
@@ -79,4 +80,46 @@
     /* change background color when pressed */
     color: #fff;
     /* change text color when pressed */
+}
+
+.tt {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.topic-box {
+    display: flex;
+    width: 95%;
+    margin: 1% 0px;
+} 
+
+.topic-btn-container {
+    position: absolute;
+    top: 0px;
+    right: -150px;
+    display: flex;
+    margin: 10px 10px;
+
+}
+
+
+.remove-topic-btn, .add-topic-btn {
+    border-radius: 10px;
+    font-size: large;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 5px;
+    cursor: pointer;
+    border: 2px solid #242424;
+}
+.remove-topic-btn
+{
+    background-color: rgb(255, 142, 127);
+}
+
+.add-topic-btn{
+    background-color: rgb(127, 176, 255);
 }

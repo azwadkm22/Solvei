@@ -75,6 +75,7 @@ header > div > h3 {
 
 .solution-container {
     margin-left: 30px;
+    position: relative;
 }
 
 .reply-btn {
@@ -87,17 +88,37 @@ header > div > h3 {
     margin-top: -15px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
-
 
 .flag-table {
+    padding: 10px 20px;
+    font-size: 20px;
 }
 
-
 .flag-table-row {
-
 }
 
 .flag-table-data {
 
+    /* border-left: 1px solid #242424; */
+}   
+
+
+.hide-btn {
+    border-radius: 5px;
+    /* height: 20px; */
+    position: absolute;
+    left: 10px;
+    width: 2%;
+    margin: 10px 28px;
+    /* padding: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide-soln-editor-btn {
+    top: 0px;
+    left: -60px;
 }
