@@ -13,7 +13,7 @@ function Home() {
         // Fetch all courses from the backend when the component mounts
         Axios.get(API_BASE_URL + HOME)
           .then((response) => {
-            console.log(response.data.courses)
+            // console.log(response.data.courses)
             setAllCourses(response.data.courses);
           })
           .catch((error) => {
@@ -26,7 +26,7 @@ function Home() {
         const filteredCourses = allCourses.filter((course) => {
             return String(course.courseCode).includes(semester);
         });
-        console.log("semester: ", semester, "filteredCourses:", filteredCourses);
+        // console.log("semester: ", semester, "filteredCourses:", filteredCourses);
         return filteredCourses;
     };
 

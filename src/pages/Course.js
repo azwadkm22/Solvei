@@ -1,14 +1,15 @@
 import "./styles/Course.css"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from "react-router-dom";
 import QuestionCard from '../components/QuestionCard'
-import { position } from "../utils/constants";
+import { API_BASE_URL, QUESTION_SEARCH,position } from "../utils/constants";
+import Axios from "axios";
 
-function Course(props) {
+function Course() {
   const location = useLocation()
-  console.log(location)
+  const [questions, setQuestions] = useState([]);
+  // console.log("location in course.js: ",location)
   const { courseCode, courseName } = location.state;
-  console.log(courseCode, courseName)
 
   const getSemesterYear = () => {
     const [letter, code] = courseCode.split('-')
@@ -16,6 +17,24 @@ function Course(props) {
     // console.log("semyear: ", semYear)
     return semYear
   }
+
+  useEffect(() => {
+    const courseUrl = courseCode + ': ' + courseName.replace(' ', "%20")
+    Axios.get(API_BASE_URL + QUESTION_SEARCH + 'course=' + courseUrl)
+      .then((response) => {
+        setQuestions(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, []);
+
+  const getQuestionCards = ()=> {
+    return questions.map((question, index) => (
+      <QuestionCard key={index} examBatch={question.batch} examType={question.examType} 
+        teacherName={question.teacher} courseCode={question.courseCode} question={question}  />
+    ));
+  };
 
   return (
     
@@ -32,16 +51,8 @@ function Course(props) {
             <h3>Questions</h3>
         </div>
         <div className='question-card-container'> 
-            <QuestionCard examBatch="Batch 25" examType="Final" teacherName="Asif Hossain Khan"/>
-            <QuestionCard examBatch="Batch 24" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-            <QuestionCard examBatch="Batch 23" examType="Incourse" teacherName="Asif Hossain Khan" />
-            <QuestionCard examBatch="Batch 25" examType="Final" teacherName="Asif Hossain Khan" />
-            <QuestionCard examBatch="Batch 24" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-            <QuestionCard examBatch="Batch 25" examType="Final" teacherName="Asif Hossain Khan" />
-            <QuestionCard examBatch="Batch 24" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-            <QuestionCard examBatch="Batch 23" examType="Incourse" teacherName="Asif Hossain Khan" />
-            <QuestionCard examBatch="Batch 25" examType="Final" teacherName="Asif Hossain Khan" />
-        
+            {getQuestionCards()}
+
         </div>
 
       </div>
