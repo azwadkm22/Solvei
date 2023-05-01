@@ -1,15 +1,155 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./styles/SearchBar.css";
+import Axios from 'axios';
+import { API_BASE_URL, HOME, position, QUESTION_SEARCH, COURSE_SEARCH } from '../utils/constants';
 
 function SearchBar() {
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);  
+    const [allCourses, setAllCourses] = useState([]);
+    const [course, setCourse] = useState("");
+    const [batch, setBatch] = useState("");
+    const [yearSemester, setYearSemester] = useState("");
+    const [teacher, setTeacher] = useState("");
+    const [examType, setExamType] = useState("");
+    const [queryType, setQueryType] = useState("");
+    const [submitEnable, setSubmit] = useState(true);
+
+
+    useEffect(() => {
+        // Fetch all courses from the backend when the component mounts
+        Axios.get(API_BASE_URL + HOME)
+          .then((response) => {
+            // console.log(response.data.courses)
+            setAllCourses(response.data.courses);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
+
+    // for setting teachers
+    // useEffect(() )
+    const goToResult = (result) => {
+        const typeQuestion = (queryType === 'question')
+        navigate('/result', {
+            state: {
+                parameter: result,
+                typeQuestion: typeQuestion
+            }
+        })
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // handle form submission here
+        setSubmit(false)
+        
+        var params = ""
+        console.log(course.length, batch.length, yearSemester.length, teacher.length, examType.length)
+        if(course.length > 0) {
+            console.log("in course")
+            params += (params.length > 0?'&':"") + 'course=' + course.replaceAll(' ', "%20")
+        }
+
+        if(batch.length > 0) {
+            console.log("in batch")
+            params += (params.length > 0?'&':"") + 'batch='+ batch
+        }
+
+        if(yearSemester.length > 0) {
+            console.log("in year semester ", yearSemester[0], yearSemester[9])
+            params += (params.length > 0?'&':"") + 'yearSemester=' + yearSemester[0] + yearSemester[9]
+        }
+
+        if(teacher.length > 0) {
+            console.log("in teacher")
+            params += (params.length > 0?'&':"") + 'teacher=' + teacher.replaceAll(' ', "%20")
+        }
+
+        if(examType.length > 0) {
+            console.log("in exam type")
+            params += (params.length > 0?'&':"") + 'examType=' + examType
+        }
+        
+
+        let getReq
+        if(queryType.length > 0) {
+            if(queryType==='question') {
+                getReq = QUESTION_SEARCH
+            } else {
+                getReq = COURSE_SEARCH
+            }
+        } else {
+            getReq = QUESTION_SEARCH
+        }
+        console.log("params:", params, "_getReq:", getReq)
+
+        Axios.get(API_BASE_URL + getReq + params)
+          .then((response) => {
+            console.log(response.data)
+            setSubmit(true) // before navigation
+            goToResult(response.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+
+        
+        
+        
     };
 
+    const getCourseOptions = ()=> {
+        return allCourses.map((course, index) => (
+            <option key={index} value={course.courseCode + ": " + course.courseName}></option>
+        ));
+    };
+
+    const handleCourse = (e)=> {
+        setCourse( e.target.value );
+        const temp = String(e.target.value);
+        if (temp.includes('-', 0)) {
+            const code = String(temp.split('-')[1]);
+            const yearSemester = position[(code[0]) - '0'] + " Year " + position[(code[1]) - '0'] + " Semester";
+            setYearSemester(yearSemester)
+        }
+    }
+
+    const handleBatch = (e) => {
+        var b = e.target.value
+        console.log("raw b:", b)
+
+        if( String(e.target.value).includes('-', 0) || String(e.target.value).includes('.', 0)) {
+            console.log("minus or . found")
+            setBatch("")
+        }
+        if(b > 0 && b % 1 === 0) {
+            setBatch(b)
+        } else {
+            setBatch("")
+        }
+    }
+
+    const handleYearSemester = (e) => {
+        setYearSemester(e.target.value)
+    }
+
+    const handleQueryType = (e) => {
+        setQueryType(e.target.value)
+        console.log("query type:", e.target.value)
+    }
+
+    const handleTeacher = (e) => {
+        setTeacher(e.target.value)
+    }
+
+    const handleExamType = (e) => {
+        setExamType(e.target.value)
+        console.log(e.target.value)
+    }
     
     return (
 
@@ -28,32 +168,19 @@ function SearchBar() {
                 {expanded && (
                     <div className='search-form-container'> 
                         <form onSubmit={handleSubmit}>
-                            <label className='search-form-element'> Course Code:
-                            <input type="text" name="course-code" list="course-code-list" placeholder="e.g. CSE-1234" />
+                            <label className='search-form-element'> Course:
+                            <input type="text" name="course-code" list="course-code-list" placeholder="e.g. CSE-1234" onChange={handleCourse}/>
                                 <datalist id="course-code-list">
-                                    <option value="CSE" />
-                                    <option value="EEE" />
-                                    <option value="ECE" />
-                                    <option value="IPE" />
-                                </datalist>
-                            </label>
-                            <label className='search-form-element'>
-                                Course Name:
-                                <input type="text" name="course-name" list="course-name-list"  placeholder="e.g. Discrete Mathematics" />
-                                <datalist id="course-name-list">
-                                    <option value="Fundamental of Computer Science" />
-                                    <option value="Electrical Circuit" />
-                                    <option value="Semiconductor" />
-                                    <option value="Information Technology" />
+                                    {getCourseOptions()}
                                 </datalist>
                             </label>
                            <label className='search-form-element'>
                             Batch:
-                                <input type="number" name="batch" placeholder="e.g. 25" />
+                                <input type="number" name="batch" placeholder="e.g. 25" onChange={handleBatch} value={batch}/>
                            </label>
                             <label className='search-form-element'> 
                                 Year and Semester:
-                                <input name="year-and-semester" type="text" list="year-and-semester-options" placeholder="Type or select an option" />
+                                <input name="year-and-semester" type="text" list="year-and-semester-options" placeholder="Select an option" value={yearSemester} onChange={handleYearSemester}/>
                                 <datalist id="year-and-semester-options">
                                     <option value="1st Year 1st Semester" />
                                     <option value="1st Year 2nd Semester" />
@@ -67,7 +194,7 @@ function SearchBar() {
                             </label>
                             <label className='search-form-element'>
                                 Teacher:
-                                <input name="teacher-name" type="text" list="available-teachers" placeholder="Type or select an option" />
+                                <input name="teacher-name" type="text" list="available-teachers" placeholder="Type or select an option" onChange={handleTeacher}/>
                                 <datalist id="available-teachers">
                                     <option value="Asif Hossain Khan" />
                                     <option value="Abu Ahmed Ferdaus" />
@@ -78,15 +205,25 @@ function SearchBar() {
                             </label>
                             <div className="radio-button-container search-form-element" >
                                 <label>
-                                    <input type="radio" name="course-question" value="course" />
-                                    Course:
+                                    <input type="radio" name="course-question" value="course" onChange={handleQueryType} checked={queryType==='course'}/>
+                                    Course
                                 </label>
                                 <label>
-                                    <input type="radio" name="course-question" value="question" />
-                                    Question:
+                                    <input type="radio" name="course-question" value="question" onChange={handleQueryType} checked={queryType==='question'}/>
+                                    Question
                                 </label>
                             </div>
-                            <button className='submit-button' type="submit">Search</button>
+                            <div className="radio-button-container search-form-element" >
+                                <label>
+                                    <input type="radio" name="incourse-final" value="Incourse" onChange ={handleExamType} checked={examType==='Incourse'}/>
+                                    Incourse
+                                </label>
+                                <label>
+                                    <input type="radio" name="incourse-final" value="Final" onChange ={handleExamType} checked={examType==='Final'}/>
+                                    Final
+                                </label>
+                            </div>
+                            <button className='submit-button' type="submit" disabled={!submitEnable}>Search</button>
                         </form>
                     </div>
                 )}
