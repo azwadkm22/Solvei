@@ -4,7 +4,7 @@ import './styles/QuestionViewer.css'
 function QuestionViewer(props) {
   const [isFlagPressed, setIsFlagPressed] = useState(false);
   const [isStarred, setIsStarred] = useState(true);
-  const [userPressedFlag, setUserPressedFlag] = useState(true);
+  const [userPressedFlag, setUserPressedFlag] = useState(false);
 
   const toggleDropdown = () => {
     setIsFlagPressed(!isFlagPressed);

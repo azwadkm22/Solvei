@@ -9,7 +9,7 @@ import SolutionContainer from '../components/SolutionContainer'
 
 function Question() {  
 
-    const [isQuillExpanded , setIsQuillExpanded] = useState(true);
+    const [isQuillExpanded , setIsQuillExpanded] = useState(false);
 
     const handleRTEExpansion = () => {
         setIsQuillExpanded(!isQuillExpanded)

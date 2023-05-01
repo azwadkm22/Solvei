@@ -4,7 +4,7 @@ import RichTextEditor from './RichTextEditor';
 
 function SolutionContainer() {
 
-    const [isReplying, setIsReplying] = useState(true);
+    const [isReplying, setIsReplying] = useState(false);
 
     const handleReply = () => {
         console.log("kore felo kemon?")
