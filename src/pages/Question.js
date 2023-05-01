@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
 import "../components/styles/Button.css"
 import "./styles/Question.css"
 import { useLocation } from 'react-router-dom'
+import RichTextEditor from '../components/RichTextEditor'
 
 function Question() {  
+
+    const [isQuillExpanded , setIsQuillExpanded] = useState(true);
+
+    const handleRTEExpansion = () => {
+        setIsQuillExpanded(!isQuillExpanded)
+    }
     const location = useLocation();
     const props = location.state?.parameter;
     console.log(props)
@@ -22,9 +29,22 @@ function Question() {
 
             <div>
                 <QuestionViewer pdfFile={props.pdfFile}/>
-                <div className='add-solution-btn dark'>
-                    Submit a solution 
-                </div>
+
+                { isQuillExpanded ? 
+                    <div> 
+                        < RichTextEditor />
+                        <div className='add-solution-btn small-btn dark' onClick={handleRTEExpansion}>
+                        Submit
+                        </div>
+                    </div>
+                :
+                      <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
+                          Submit a solution
+                      </div>
+                    
+                }
+                
+
                 <div className='solution-container'>
                       <Reply className="main-reply" vote={15} isSolution={true} />
                       <div className='reply-btn dark'> Reply </div>
@@ -35,6 +55,7 @@ function Question() {
                 </div>
 
                 <div className='solution-container'>
+                    
                     <Reply className="main-reply" vote={15} isSolution={true} />
                     <div className='reply-btn dark'> Reply </div>
                     <div className="reply-container">
@@ -47,27 +68,38 @@ function Question() {
         </div>
 
         <div className='side-content'>
-            <div className='card teacher-card'>
+            <div className='card side-card'>
                 <div className='card-header'>
                     <h2>Teacher Name</h2>
                 </div>
                 <h3 className='card-subtext'>{props.teacher}</h3>
             </div>
-            <div className='card topics'>
+              <div className='card side-card'>
                   <div className='card-header'>
                       <h2>Topics</h2>
                   </div>
-
-                  {/* courses.map((course, index) => (
-      <CourseCard key={index} courseCode={course.courseCode} courseName={course.courseName} />
-    )); */}
-
 
                 <ul className='topic-list'>
                     {props.topics.map((topic, index) => (
                         <li id={index}>{topic}</li>
                     ))}
                 </ul>
+            </div>
+
+              <div className='card side-card'>
+                <div className='card-header'>
+                    <h2>Flags</h2>
+                </div>
+                <table className='flag-table'>
+                    <tr className='flag-table-row'>
+                        <td className='flag-table-data'>Blurry</td>
+                          <td className='flag-table-data'>0</td>
+                    </tr >
+                      <tr className='flag-table-row'>
+                          <td className='flag-table-data'>Blurry</td>
+                          <td className='flag-table-data'>0</td>
+                      </tr>
+                </table>
             </div>
         </div>
     </div>

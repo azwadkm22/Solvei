@@ -1,9 +1,54 @@
-.question-container {
+.question {
     width: 100%;
     height: 720px;
     background-color: rgb(255, 255, 255);
+    
+}
+
+.question-container {
+    position: relative;
 }
 
 .react-pdf__Page__canvas {
     width: 100%;
+}
+
+.flag-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid #efefef;
+    border-radius: 10px;
+}
+
+
+.flag-dropdown-container{
+    position: relative;
+}
+
+.flag-dropdown-list {
+    position: absolute;
+    right: 10px;
+    bottom: 65px;
+    background-color: #efefef;
+    
+}
+
+.flag-dropdown-option:hover {
+    background-color: #242424;
+    color: #efefef;
+    padding: 10px 10px;
+}
+
+.flag-dropdown-option{
+    padding: 10px 10px;
+}
+
+.flagged {
+    border: 2px solid #242424;
+    background-color: #EF5350;
+    color: #242424;
 }
