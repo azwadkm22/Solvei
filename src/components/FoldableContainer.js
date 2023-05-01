@@ -15,7 +15,7 @@ function FoldableContainer(props) {
   }
 
   const getCourseCards = () => {
-    console.log("in foldable containers : ",courses);
+    // console.log("in foldable containers : ",courses);
     return courses.map((course, index) => (
       <CourseCard key={index} courseCode={course.courseCode} courseName={course.courseName} />
     ));

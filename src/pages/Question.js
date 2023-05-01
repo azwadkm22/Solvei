@@ -15,7 +15,7 @@ function Question() {
     }
     const location = useLocation();
     const props = location.state?.parameter;
-    console.log(props)
+    // console.log(props)
   return (
     <div>
         <div className='main-content'>

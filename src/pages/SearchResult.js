@@ -3,12 +3,28 @@ import { useState } from 'react'
 import "./styles/SearchResult.css";
 import QuestionCard from '../components/QuestionCard';
 import CourseCard from '../components/CourseCard';
+import { useLocation } from 'react-router-dom';
 
-const typeQuestion = false;
+
 
 function SearchResult() {
-  const [resultType, setResultType] = useState(typeQuestion)
+  const location = useLocation()
+  const typeQuestion = location.state.typeQuestion
+  console.log("typeQuestion:", typeQuestion)
+  const result = location.state.parameter
   
+  const getQuestions = () => {
+    return result.map((question, index) => (
+      <QuestionCard key={index} question={question} examBatch={question.batch} coursreCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
+    ));
+  };
+
+  const getCourses = () => {
+    return result.map((course, index) => (
+      <CourseCard key={index} courseCode={course.courseCode} courseName={course.courseName}/>
+    ));
+  };
+
   return (  
     <div>
       <div className='result-divider'>
@@ -18,28 +34,14 @@ function SearchResult() {
         { typeQuestion ? 
         
             <div className='search-result-container'> 
-              <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" />
-              <QuestionCard examBatch="Batch 24" courseCode="CSE-4101" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-              <QuestionCard examBatch="Batch 23" courseCode="CSE-4101" examType="Incourse" teacherName="Asif Hossain Khan" />
-              <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" />
-              <QuestionCard examBatch="Batch 24" courseCode="CSE-4101" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-              <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" />
-              <QuestionCard examBatch="Batch 24" courseCode="CSE-4101" examType="Final" teacherName="Abu Ahmed Ferdaus" />
-              <QuestionCard examBatch="Batch 23" courseCode="CSE-4101" examType="Incourse" teacherName="Asif Hossain Khan" />
-              <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" />
-
+              {/* <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" /> */}
+              {getQuestions()}
             </div>
             
             :
             <div className='search-result-container'> 
-            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
-            <CourseCard courseCode="CSE-1102" courseName="Physics" />
-            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
-            <CourseCard courseCode="CSE-1102" courseName="Physics" />
-            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
-            <CourseCard courseCode="CSE-1102" courseName="Physics" />
-            <CourseCard courseCode="CSE-1101" courseName="Fundamentals of Computer and Basic Knowledge of the World" />
-            <CourseCard courseCode="CSE-1102" courseName="Physics" />
+              {/* <CourseCard courseCode="CSE-1102" courseName="Physics" /> */}
+              {getCourses()}
             </div>
         
         }
