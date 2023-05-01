@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./styles/UploadForm.css"
 import FileDrop from '../components/FileDrop';
 import { useAuthContext } from '../hook/useAuthContext';
-import { API_BASE_URL } from '../utils/constants';
+import { API_BASE_URL, HOME } from '../utils/constants';
 import { type } from '@testing-library/user-event/dist/type';
+import Axios from 'axios'
 
 const UploadForm = () => {
     const navigate = useNavigate();
@@ -15,8 +16,32 @@ const UploadForm = () => {
     const [teacher, setTeacher] = useState('');
     const [pdfFile, setPdfFile] = useState(null);
     const [topics, setTopics] = useState([]);
-    const [numOfQuestions, setNumOfQuestions] = useState(6);
+    const [numOfQuestions, setNumOfQuestions] = useState(0);
     const {user} = useAuthContext();
+
+    const [courses, setCourses] = useState([])
+
+    useEffect(() => {
+        Axios.get(API_BASE_URL + HOME + "all")
+            .then((response) => {
+                setCourses(response.data.courses)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }, []);
+
+    const getCodes = () => {
+        return courses.map((course, index) => (
+            <option key={index} value={course.courseCode} />
+        ))
+    };
+
+    const getNames = () => {
+        return courses.map((course, index) => (
+            <option key={index} value={course.courseName} />
+        ))
+    };
 
     const handleCourseCodeChange = (e) => {
         setCourseCode(e.target.value);
@@ -60,25 +85,26 @@ const UploadForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("in handle submit")
         
         // Submit form data to server or perform other actions
         // based on the form data
         const formData = new FormData();
 
+        const newTopicList = topics.filter(item => item.length>0)
+        console.log(newTopicList)
+console.log("upload form: ", courseCode, courseName)
         formData.append("postedBy", user.email)
-        console.log("user.email: ", user.email)
         formData.append("courseCode", courseCode)
+        formData.append("courseName", courseName)
         formData.append("batch", batch)
         formData.append("examType", examType)
         formData.append("teacher", teacher)
         formData.append("numOfQuestions", numOfQuestions)
-        formData.append("topics", topics)
-        
+        formData.append("topics", newTopicList)
         formData.append("pdfFile", pdfFile, pdfFile.name)
+        console.log(formData)
 
-        // console.log("form data: ", formData.getAll("postedBy"))
-        console.log("do i fail here?")
-        console.log("numOfQuestions: ", formData.getAll("numOfQuestions") )
 
         const response = await fetch(API_BASE_URL + 'question/post', {
             method: 'POST',
@@ -92,6 +118,7 @@ const UploadForm = () => {
             })            
         } else {
             console.error('Could not post question', response.status);
+            alert("Could not post question")
         }
     };
 
@@ -120,7 +147,7 @@ const UploadForm = () => {
                     />
 
                     <datalist id="course-code-list">
-                        {/* {getCourseOptions()} */}
+                        {getCodes()}
                     </datalist>
                 </label >
 
@@ -134,9 +161,8 @@ const UploadForm = () => {
                         onChange={handleCourseNameChange}
                         required
                     />
-
                     <datalist id="courses-list">
-                        {/* {getCourseOptions()} */}
+                        {getNames()}
                     </datalist>
                 </label >
                 
@@ -151,30 +177,29 @@ const UploadForm = () => {
                     />
                 </label>
                 
-                 {/* question-form-content'> */}
+
                     <label>Exam Type:</label>
-                <div className='radio-container'>
-                    <label className="custom-radio">
-                        <input
-                            type="radio"
-                            name="examType"
-                            value="Incourse"
-                            checked={examType === 'Incourse'}
-                            onChange={() => setExamType('Incourse')}
-                            required
-                        />Incourse
-                    </label>
-                    <label className="custom-radio">
-                        <input
-                            type="radio"
-                            name="examType"
-                            value="Final"
-                            checked={examType === 'Final'}
-                            onChange={() => setExamType('Final')}
-                            required
-                        />Final
-                    </label>
-                </div>
+                        <div className='radio-container'>
+                            <label className="custom-radio">
+                                <input
+                                    type="radio"
+                                    name="examType"
+                                    value="Incourse"
+                                    checked={examType === 'Incourse'}
+                                    onChange={() => setExamType('Incourse')}
+                                    required
+                                />Incourse
+                            </label>
+                            <label className="custom-radio">
+                                <input
+                                    type="radio"
+                                    name="examType"
+                                    value="Final"
+                                    checked={examType === 'Final'}
+                                    onChange={() => setExamType('Final')}
+                                    required/>Final
+                            </label>
+                        </div>
                 <label className='question-form-content'>
                     Teacher:
                     <input
