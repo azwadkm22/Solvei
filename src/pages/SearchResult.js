@@ -15,7 +15,7 @@ function SearchResult() {
   
   const getQuestions = () => {
     return result.map((question, index) => (
-      <QuestionCard key={index} examBatch={question.batch} coursreCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
+      <QuestionCard key={index} question={question} examBatch={question.batch} coursreCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
     ));
   };
 

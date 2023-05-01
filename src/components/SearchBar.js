@@ -28,7 +28,7 @@ function SearchBar() {
           .catch((error) => {
             console.log(error);
           });
-      }, []);
+    }, []);
 
     // for setting teachers
     // useEffect(() )
@@ -90,6 +90,7 @@ function SearchBar() {
           .then((response) => {
             console.log(response.data)
             setSubmit(true) // before navigation
+            setExpanded(false)
             goToResult(response.data)
           })
           .catch((error) => {
