@@ -4,6 +4,7 @@ import "./styles/SearchResult.css";
 import QuestionCard from '../components/QuestionCard';
 import CourseCard from '../components/CourseCard';
 import { useLocation } from 'react-router-dom';
+import QuestionResultCard from '../components/QuestionResultCard';
 
 
 
@@ -15,7 +16,7 @@ function SearchResult() {
   
   const getQuestions = () => {
     return result.map((question, index) => (
-      <QuestionCard key={index} question={question} examBatch={question.batch} coursreCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
+      <QuestionResultCard key={index} question={question} examBatch={question.batch} courseCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
     ));
   };
 

@@ -28,3 +28,8 @@
     color: #efefef;
     background-color: #242424;
 }
+
+.smaller {
+    padding: 4px 4px;
+    margin-right: 10px;
+}
