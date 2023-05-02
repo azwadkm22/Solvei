@@ -42,6 +42,15 @@ function SearchBar() {
         })
     };
 
+    const clearAll = ()=>{
+        setCourse("")
+        setBatch("")
+        setYearSemester("")
+        setTeacher("")
+        setExamType("")
+        setQueryType("")
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         setSubmit(false)
@@ -92,6 +101,7 @@ function SearchBar() {
             setSubmit(true) // before navigation
             setExpanded(false)
             goToResult(response.data)
+            clearAll()
           })
           .catch((error) => {
             console.log(error);
