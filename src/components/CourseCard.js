@@ -13,6 +13,10 @@ function CourseCard(props) {
           }}
          className='card'>
         <div className='card-header'>
+          <div className='question-counter' title='Question Count'>
+            {/* {props.questionCount} */}
+            4
+          </div>
         <h2 className='card-header-h2 clickable-light'>{props.courseCode}</h2>
         </div>
       <h3 className='card-subtext clickable-dark'>{props.courseName}</h3>

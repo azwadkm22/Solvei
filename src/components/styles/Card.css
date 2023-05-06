@@ -6,6 +6,7 @@
     border-radius: 10px 10px 0px 0px;
     margin: 3%;
     width: 80%;
+    position: relative;
 }
 
 
@@ -38,3 +39,13 @@
     width: 95%;
 }
 
+.question-counter{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 18px;
+    background-color: #EFEFEF;
+    color: #242424;
+}
