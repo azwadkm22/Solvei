@@ -122,11 +122,6 @@ ul.nav-links {
 
 
 @media screen and (max-width: 480px) {
-    * {
-        /* background-color: yellow; */
-        /* display: none; */
-    }
-
     
     .navbar {
         color: #efefef;
