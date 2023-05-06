@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 
 
 function CourseCard(props) {
-  
+  const url = "/course/" + props.courseCode + '/' + props.courseName.replaceAll(' ', "%20")
+  console.log("from courseCard url: ", url)
   return (
-    <Link to = "/course"
-          state = {{
-            courseCode: props.courseCode,
-            courseName: props.courseName
-          }}
+    <Link to = {url}
+          
          className='card'>
         <div className='card-header'>
           <div className='question-counter' title='Question Count'>

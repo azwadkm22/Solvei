@@ -1,15 +1,14 @@
 import "./styles/Course.css"
 import React, { useState, useEffect } from 'react'
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import QuestionCard from '../components/QuestionCard'
 import { API_BASE_URL, QUESTION_SEARCH,position } from "../utils/constants";
 import Axios from "axios";
 
 function Course() {
-  const location = useLocation()
   const [questions, setQuestions] = useState([]);
   // console.log("location in course.js: ",location)
-  const { courseCode, courseName } = location.state;
+  const { courseCode, courseName } = useParams();
 
   const getSemesterYear = () => {
     const [letter, code] = courseCode.split('-')
@@ -19,7 +18,7 @@ function Course() {
   }
 
   useEffect(() => {
-    const courseUrl = courseCode + ': ' + courseName.replace(' ', "%20")
+    const courseUrl = courseCode + ': ' + courseName
     Axios.get(API_BASE_URL + QUESTION_SEARCH + 'course=' + courseUrl)
       .then((response) => {
         setQuestions(response.data)
@@ -44,7 +43,7 @@ function Course() {
           <h1 className="course-page-h1">{courseCode}</h1>
           <h2 className="course-page-h2">{getSemesterYear()}</h2>
         </div>
-        <h1 className="course-page-h1">{courseName}</h1>
+        <h1 className="course-page-h1">{courseName.replaceAll("%20", ' ')}</h1>
       </header>
       <div className='question-card-section'>
         <div className='question-divider'>

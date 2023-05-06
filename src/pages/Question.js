@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
 import "../components/styles/Button.css"
@@ -6,10 +6,27 @@ import "./styles/Question.css"
 import { useLocation } from 'react-router-dom'
 import RichTextEditor from '../components/RichTextEditor'
 import SolutionContainer from '../components/SolutionContainer'
+import { useParams } from 'react-router-dom'
+import { API_BASE_URL } from '../utils/constants'
+import Axios from 'axios'
 
 function Question() {  
-
+    const {courseCode, courseName, batch, examType, id} = useParams();
+    console.log("id from params: ",id)
     const [isQuillExpanded , setIsQuillExpanded] = useState(false);
+    const [props, setProps] = useState(null)
+    useEffect(() => {
+        Axios.get(API_BASE_URL + 'question/view?question=' + id)
+            .then((response) => {
+                // props = response.data
+                console.log("response.data through axios: ", response.data)
+                setProps(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
 
     const handleRTEExpansion = () => {
         setIsQuillExpanded(!isQuillExpanded)
@@ -26,10 +43,8 @@ function Question() {
         setPdfFile(e.target.files[0]);
     };
     
-    const location = useLocation();
-    const props = location.state?.parameter;
-    console.log(props)
   return (
+    props && 
     <div>
         <div className='main-content'>
               <header className='question-body-header'>

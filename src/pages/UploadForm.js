@@ -78,7 +78,14 @@ const UploadForm = () => {
     };
 
     const goToQuestionPage = (question) => {
-        navigate("/question", { state: { parameter: question } });
+        // <Link to={`/question/${course}/${batch}/${examType}`}>View question</Link>
+        const courseCode = question.courseCode;
+        const courseName = question.courseName.replaceAll(' ', '%20')
+        const batch = question.batch
+        const examType = question.examType
+        const id = question._id;
+        const url = "/question/" + courseCode + '/' + courseName + '/' + batch + '/' + examType + '/' + id; 
+        navigate(url);
     };
 
    
