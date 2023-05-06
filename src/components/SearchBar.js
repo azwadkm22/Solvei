@@ -173,7 +173,7 @@ function SearchBar() {
 
                 {expanded && (
                     <div className='search-form-container'> 
-                        <form onSubmit={handleSubmit}>
+                        <form className="search-bar-form" onSubmit={handleSubmit}>
                             <label className='search-form-element'> Course:
                             <input type="text" name="course-code" list="course-code-list" placeholder="e.g. CSE-1234" onChange={handleCourse}/>
                                 <datalist id="course-code-list">

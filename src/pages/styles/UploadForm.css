@@ -19,8 +19,8 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-    /* margin: 30px/; */
-    margin-top: 150px;
+    margin: 5%;
+    /* margin-top: 150px; */
 }
 .question-form-box {
     /* width: 80%; */
@@ -122,4 +122,96 @@
 
 .add-topic-btn{
     background-color: rgb(127, 176, 255);
+}
+
+.mobile-empty-space {
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    .question-form-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+    
+        .question-form-content {
+            position: relative;
+            width: 100%;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            margin: auto
+        }
+    
+        .question-form {
+            width: 80%;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            margin: 30px 0px;
+        }
+    
+        .question-form-box {
+            /* width: 80%; */
+            height: 32px;
+            background-color: #FEFEFE;
+            border-radius: 10px;
+            border: 0px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 5px;
+            /* padding-left: 10px; */
+            ;
+        }
+
+        .tt {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+    
+        .topic-box {
+            display: flex;
+            width: 95%;
+            margin: 1% 0px;
+        }
+    
+        .topic-btn-container {
+            position: absolute;
+            top: 4px;
+            left: 50px;
+            display: flex;
+        }
+
+        .mobile-empty-space {
+            display: block;
+            height: 20px;
+            width: 100%;
+        }
+
+        .topic-btn-container {
+            position: absolute;
+            top: 2px;
+            right: 0px;
+            display: flex;
+            margin: 10px 10px;
+    
+        }
+    
+    .remove-topic-btn,
+    .add-topic-btn {
+        border-radius: 10px;
+        font-size:medium;
+        font-weight: bold;
+        padding: 5px 24px;
+        display: flex;
+        justify-content: center;
+        margin: 0px 5px;
+        cursor: pointer;
+        border: 2px solid #242424;
+    }
+    
+        
 }

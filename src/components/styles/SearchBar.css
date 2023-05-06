@@ -50,10 +50,10 @@
 
 .search-form-container {
     position: absolute;
-    top: 50px;
-    background-color: #242424;
+    top: 43px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
+    background-image: linear-gradient(#242424, #373737);
 }
 
 .search-form-element {
@@ -79,4 +79,112 @@
     font-weight: bold;
     color: #242424;
     cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+    * {
+        /* display: none; */
+    }
+
+    .searchbar-container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        z-index: 2;
+    }
+
+    .searchbar-header {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        /* margin: auto; */
+    }
+
+    .search-btn {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        border: 0px;
+        /* border-bottom: 5px solid #efefef; */
+        /* border-radius: 20px; */
+        color: #efefef;
+        background-color: #242424;
+        cursor: pointer;
+    }
+
+    .search-btn:hover {
+        color: #242424;
+        background-color: #efefef;
+        cursor: pointer;
+    }
+    
+    .search-btn-element {
+        position: relative;
+        width: 100%;
+        background-color: none;
+        display: flex;
+        margin: auto;
+    }
+
+    .search-form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* width: 100%; */
+    }
+
+    .searchbar {
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f7f7f7;
+    }
+
+    .empty-div-with-width {
+        width: 400px;
+    }
+
+    .search-form-container {
+        position: absolute;
+        top: 50px;
+        left: -24px;
+        width: 90%;
+        padding: 10px;
+        border-radius: 0px 0px 10px 10px;
+        background-image: linear-gradient(#373737, #242424);
+    }
+
+    .search-bar-form {
+        width: 80%;
+        background-color: none;
+    }
+
+    .search-form-element {
+        color: #efefef;
+        background-color: none;
+        display: flex;
+        margin: 0px;
+        padding: 10px;
+        width: 90%;
+        font-size: 16px;
+        justify-content: space-between;
+    }
+
+    .search-submit-btn {
+        background-color: cyan;
+        margin: auto;
+        margin-bottom: 10px;
+        width: 50%;
+        height: 40px;
+        background-color: #efefef;
+        border-radius: 10px;
+        border: 0px;
+        padding: auto 0px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #242424;
+        cursor: pointer;
+    }
+
 }

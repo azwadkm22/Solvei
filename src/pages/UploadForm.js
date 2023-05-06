@@ -231,7 +231,9 @@ console.log("upload form: ", courseCode, courseName)
                     />
                 </label>
                 <label className='question-form-content'>
+                    <div className='mobile-empty-space'></div>
                     Topics:
+                    <div className='mobile-empty-space'></div>
                     <div className='tt'>
                     {
                         topics.length == 0 ?

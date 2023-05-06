@@ -1,4 +1,5 @@
 import CourseCard from './CourseCard'
+import LoadingBar from './LoadingBar';
 import './styles/FoldableContainer.css'
 import React, { useState, useEffect } from 'react'
 
@@ -27,9 +28,21 @@ function FoldableContainer(props) {
       <div className='foldable-container-header' onClick={toggleFolded}>
         <h1 className="foldable-container-h1">{props.semester}</h1>
       </div>
-      {isFolded ? <></> : <div className='foldable-container-content'>
-      {getCourseCards()}
-    </div>}
+      {isFolded ? <></> : 
+      <div className='foldable-container-content'>
+        
+        { 
+          props.isLoading ? 
+          
+          <LoadingBar />
+          
+          :
+        
+          getCourseCards() 
+        
+        }
+
+      </div>}
       
     </div>
 
