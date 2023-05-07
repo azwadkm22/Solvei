@@ -29,6 +29,12 @@
 }
 
 
+.question-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .teacher-card {
     width: 95%;
 }
