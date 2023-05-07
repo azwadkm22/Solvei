@@ -18,6 +18,19 @@ function SearchBar() {
     const [submitEnable, setSubmit] = useState(true);
 
 
+    const [isFieldFocused, setIsFieldFocused] = useState(false);
+
+    const handleFieldFocus = () => {
+        setIsFieldFocused(true);
+    }
+
+    const handleFieldBlur = () => {
+        setIsFieldFocused(false);
+    }
+
+
+
+
     useEffect(() => {
         // Fetch all courses from the backend when the component mounts
         Axios.get(API_BASE_URL + HOME)
@@ -167,26 +180,26 @@ function SearchBar() {
         <div className='searchbar-container'> 
             <div className='searchbar-header'>
                 <div className='search-btn' onClick={() => setExpanded(!expanded)}>
-                <div className='search-btn-element'> Search</div>
+                    <div className={isFieldFocused ? 'search-btn-element form-focused' : 'search-btn-element'}> Search</div>
                 </div>
             </div>
 
                 {expanded && (
                     <div className='search-form-container'> 
-                        <form onSubmit={handleSubmit}>
+                        <form className="search-bar-form" onSubmit={handleSubmit}>
                             <label className='search-form-element'> Course:
-                            <input type="text" name="course-code" list="course-code-list" placeholder="e.g. CSE-1234" onChange={handleCourse}/>
+                            <input type="text" name="course-code" list="course-code-list" placeholder="e.g. CSE-1234" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleCourse}/>
                                 <datalist id="course-code-list">
                                     {getCourseOptions()}
                                 </datalist>
                             </label>
                            <label className='search-form-element'>
                             Batch:
-                                <input type="number" name="batch" placeholder="e.g. 25" onChange={handleBatch} value={batch}/>
+                            <input type="number" name="batch" placeholder="e.g. 25" onChange={handleBatch} onFocus={handleFieldFocus} onBlur={handleFieldBlur} value={batch}/>
                            </label>
                             <label className='search-form-element'> 
                                 Year and Semester:
-                                <input name="year-and-semester" type="text" list="year-and-semester-options" placeholder="Select an option" value={yearSemester} onChange={handleYearSemester}/>
+                            <input name="year-and-semester" type="text" list="year-and-semester-options" placeholder="Select an option" value={yearSemester} onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleYearSemester}/>
                                 <datalist id="year-and-semester-options">
                                     <option value="1st Year 1st Semester" />
                                     <option value="1st Year 2nd Semester" />
@@ -200,7 +213,7 @@ function SearchBar() {
                             </label>
                             <label className='search-form-element'>
                                 Teacher:
-                                <input name="teacher-name" type="text" list="available-teachers" placeholder="Type or select an option" onChange={handleTeacher}/>
+                            <input name="teacher-name" type="text" list="available-teachers" placeholder="Type or select an option" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleTeacher}/>
                                 <datalist id="available-teachers">
                                     <option value="Asif Hossain Khan" />
                                     <option value="Abu Ahmed Ferdaus" />
@@ -211,21 +224,21 @@ function SearchBar() {
                             </label>
                             <div className="radio-button-container search-form-element" >
                                 <label>
-                                    <input type="radio" name="course-question" value="course" onChange={handleQueryType} checked={queryType==='course'}/>
+                                <input type="radio" name="course-question" value="course" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleQueryType} checked={queryType==='course'}/>
                                     Course
                                 </label>
                                 <label>
-                                    <input type="radio" name="course-question" value="question" onChange={handleQueryType} checked={queryType==='question'}/>
+                                <input type="radio" name="course-question" value="question" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleQueryType} checked={queryType==='question'}/>
                                     Question
                                 </label>
                             </div>
                             <div className="radio-button-container search-form-element" >
                                 <label>
-                                    <input type="radio" name="incourse-final" value="Incourse" onChange ={handleExamType} checked={examType==='Incourse'}/>
+                                <input type="radio" name="incourse-final" value="Incourse" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange ={handleExamType} checked={examType==='Incourse'}/>
                                     Incourse
                                 </label>
                                 <label>
-                                    <input type="radio" name="incourse-final" value="Final" onChange ={handleExamType} checked={examType==='Final'}/>
+                                <input type="radio" name="incourse-final" value="Final" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange ={handleExamType} checked={examType==='Final'}/>
                                     Final
                                 </label>
                             </div>

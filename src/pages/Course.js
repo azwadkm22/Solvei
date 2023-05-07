@@ -46,12 +46,11 @@ function Course() {
         <h1 className="course-page-h1">{courseName.replaceAll("%20", ' ')}</h1>
       </header>
       <div className='question-card-section'>
-        <div className='question-divider'>
+        <div className='content-divider'>
             <h3>Questions</h3>
         </div>
-        <div className='question-card-container'> 
+        <div className='card-content-container'> 
             {getQuestionCards()}
-
         </div>
 
       </div>

@@ -37,8 +37,8 @@ const RegisterForm = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='auth-form-container'>
+            <form onSubmit={handleSubmit} className='auth-form'>
                 <label htmlFor="fullName">Full Name</label>
                 <input
                     className='auth-form-content'

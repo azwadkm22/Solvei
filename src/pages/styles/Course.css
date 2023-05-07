@@ -1,19 +1,6 @@
-.question-card-container {
-    /* padding: 0px 20px; */
-    /* margin-right: 10px; */
-    margin: 1% 2%;
-    /* justify-content: center; */
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    /* gap: 30px; */
-    width: 96%;
-}
-
-
 .course-body {
     background-color: #efefef;
 }
-
 
 .course-body-header {
     /* flex-wrap: wrap; */
@@ -32,28 +19,6 @@
     /* margin: 30px; */
 }
 
-.question-divider {
-    width: 96%;
-    margin: 1% 2%;
-    display: flex;
-    justify-content: center;
-    /* padding: auto; */
-    
-}
-
-
-.question-divider > h3{
-    font-size: 32px;
-    display: inline-block;
-    padding: 20px 30px;
-    background-color: #242424;
-    color: #efefef;
-    border-radius: 10px;
-    margin: auto;
-    width: 100%;
-}
-
-
 .course-page-h1 {
     display: block;
     margin: 10px 0px;
@@ -68,4 +33,37 @@
     font-size: 58px;
     background-color: #efefef;
     color: #242424;
+}
+
+@media screen and (max-width: 1366px) {
+    .course-page-h1 {
+        font-size: 48px;
+    }
+
+    .course-page-h2 {
+        font-size: 46px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .course-page-h1 {
+        font-size: 32px;
+    }
+
+    .course-page-h2 {
+        font-size: 24px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    
+    .course-page-h1 {
+        font-size: 24px;
+    }
+
+    .course-page-h2 {
+        font-size: 18px;
+    }
+
 }

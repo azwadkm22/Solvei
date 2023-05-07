@@ -8,7 +8,7 @@ function QuestionCard(props) {
   return (
     <Link to={url} className='card'>
       <div className='card-header question-card-header'>
-        <h2 className='card-header-h2 clickable-light'>{props.examBatch}</h2>
+        <h2 className='card-header-h2 clickable-light'> Batch {props.examBatch}</h2>
         <div className='btn light'>{props.examType} </div>
       </div>
       <h3 className='card-subtext clickable-dark'>Teacher: {props.teacherName}</h3>
