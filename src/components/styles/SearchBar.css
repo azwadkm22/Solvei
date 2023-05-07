@@ -88,6 +88,7 @@
         display: flex;
         width: 100%;
         flex-direction: column;
+        background-color: none;
         z-index: 2;
     }
 
@@ -117,25 +118,24 @@
         cursor: pointer;
     }
     
-    .search-btn-element {
+    .search-btn-element  {
         position: relative;
         width: 100%;
+        background-color: #242424;
         background-color: none;
         display: flex;
         margin: auto;
     }
 
-    .search-form-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* width: 100%; */
+    .search-btn-element:hover, .form-focused {
+        background-color: #efefef;
+        color: #242424;
     }
 
     .searchbar {
         padding: 10px;
         margin-bottom: 10px;
-        background-color: #f7f7f7;
+        background-color: none;
     }
 
     .empty-div-with-width {
@@ -143,6 +143,9 @@
     }
 
     .search-form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         position: absolute;
         top: 50px;
         left: -24px;
