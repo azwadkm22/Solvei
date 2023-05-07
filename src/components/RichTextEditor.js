@@ -3,54 +3,31 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './styles/RichTextEditor.css';
 import ImageUploader from 'quill-image-uploader';
+import ImageResize from 'quill-image-resize-module-react';
 
 Quill.register('modules/imageUploader', ImageUploader);
+Quill.register('modules/imageResize', ImageResize);
 
-const RichTextEditor = () => {
+const RichTextEditor = (props) => {
     const [text, setText] = useState('');
-
+    console.log("text: ", text)
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            ['link', 'image'],
+            ['link'],
             // [{ 'font': [] }],
             [{ 'align': [] }],
             [{ 'color': [] }, { 'background': [] }],
             ['clean'],
-        ],
-
-        
-
-        // To my Backend developer, this is how Image should be uploaded
-        // uncommenting this will result in error, without proper link I assume
-        // imageUploader: {
-        //     upload: (file) => {
-        //         return new Promise((resolve, reject) => {
-        //             const formData = new FormData();
-        //             formData.append('image', file);
-
-        //             // Replace the URL below with your own server URL that handles image uploads
-        //             fetch('https://example.com/upload', {
-        //                 method: 'POST',
-        //                 body: formData
-        //             })
-        //                 .then(response => response.json())
-        //                 .then(result => {
-        //                     if (result.success) {
-        //                         resolve(result.url);
-        //                     } else {
-        //                         reject(result.message);
-        //                     }
-        //                 })
-        //                 .catch(error => {
-        //                     reject(error.message);
-        //                 });
-        //         });
-        //     }
-        // },
+        ]
     };
+
+    const handleQuillInput = (e) => {
+        setText(e)
+        props.solutionTxtHandler(text)
+    }
 
     return (
 
@@ -59,14 +36,15 @@ const RichTextEditor = () => {
             <ReactQuill
                 theme="snow"
                 value={text}
-                onChange={setText}
+                onChange={handleQuillInput}
                 modules={modules}
             />
         </div>
 
 
-        <div dangerouslySetInnerHTML={{__html: text}}/>
-            {text}
+        {/* <div dangerouslySetInnerHTML={{__html: text}}/> */}
+            {/* {text} */}
+            
         
         </div>
     );

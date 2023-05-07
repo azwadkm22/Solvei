@@ -1,35 +1,132 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
 import "../components/styles/Button.css"
 import "./styles/Question.css"
-import { useLocation } from 'react-router-dom'
 import RichTextEditor from '../components/RichTextEditor'
 import SolutionContainer from '../components/SolutionContainer'
+import { useParams } from 'react-router-dom'
+import { API_BASE_URL } from '../utils/constants'
+import Axios from 'axios'
+import { useAuthContext } from '../hook/useAuthContext'
+
 
 function Question() {  
-
+    const {user} = useAuthContext()
+    const [renderSolution, setRenderSolution] = useState(false)
+    const [solutionStr, setSolutionStr] = useState("")
+    const [solutionList, setSolutionList] = useState(null)
+    const {courseCode, courseName, batch, examType, id} = useParams();
+    console.log("id from params: ",id)
     const [isQuillExpanded , setIsQuillExpanded] = useState(false);
+    const [props, setProps] = useState(null)
+    const [pdfFile, setPdfFile] = useState(null);
+
+    useEffect(() => {
+        console.log("solutionlist state changed to: ", solutionList)
+        if(solutionList !== null) {
+            console.log("you're supposed to be not null solutionlist: ", solutionList)
+            setRenderSolution(true)
+        } else {
+            setRenderSolution(false)
+        }
+    }, [solutionList])
+
+
+    useEffect(() => {
+        Axios.get(API_BASE_URL + 'question/view?question=' + id)
+            .then((response) => {
+                // props = response.data
+                console.log("response.data through axios: ", response.data)
+                setProps(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        Axios.get(API_BASE_URL + 'solution/get?question='+ id)
+            .then((response) => {
+                setSolutionList(Object.values(response.data))
+                console.log("response.data: ", (response.data))
+                console.log("fetched solutions: ", solutionList)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
+
+
 
     const handleRTEExpansion = () => {
+        if(isQuillExpanded) {
+            setPdfFile(null)
+        }
         setIsQuillExpanded(!isQuillExpanded)
     }
 
-    const [pdfFile, setPdfFile] = useState(null);
 
-    const handleSubmit = () => {
-        
+   
+
+
+    const handleSubmit = async () => {
         console.log("You can do it.")
+        let isPDF
+        let hasImage
+        const questionID = id
+        const postedBy = user.email
+        const formData = new FormData()
+        formData.append("postedBy", postedBy)
+        formData.append("questionID", questionID)
+       
+        if(pdfFile !== null) {
+            console.log("in pdfFile !== null")
+            isPDF = true
+            hasImage = false
+            formData.append("isPDF", isPDF)
+            formData.append("hasImage", hasImage)
+            console.log("where do i die")
+            console.log(pdfFile, pdfFile.name)
+            formData.append("pdfFile", pdfFile, pdfFile.name)
+           
+            console.log("pdfFile",formData.get("pdfFile"))
+
+
+        } else {
+            hasImage = false
+            isPDF = false
+            formData.append("isPDF", isPDF)
+            formData.append("hasImage", hasImage)
+            formData.append("solution", solutionStr)
+
+
+            console.log("solution: ",formData.get("solution"))
+        }
+ 
+        const response = await fetch(API_BASE_URL + "solution/add", {
+            method: 'POST',
+            body: formData
+        });
+
+
+        if(response.ok) {
+            console.log(response)
+            console.log(response.text)
+            setIsQuillExpanded(false)
+            window.location.reload()
+        } else {
+            console.error(response.status)
+            alert("Could not post solution.")
+        }
     }
+
 
     const handlePdfFileChange = (e) => {
         setPdfFile(e.target.files[0]);
     };
-    
-    const location = useLocation();
-    const props = location.state?.parameter;
-    console.log(props)
+
+
   return (
+    props &&
     <div>
         <div className='main-content'>
               <header className='question-body-header'>
@@ -40,27 +137,31 @@ function Question() {
                   </div>
               </header>
 
+
             <div>
                 <QuestionViewer pdfFile={props.pdfFile}/>
 
-                
+
+               
                 <div className='solution-container'>
                       {isQuillExpanded ?
                           <div>
-                              < RichTextEditor />
+                              < RichTextEditor solutionTxtHandler={setSolutionStr}/>
                               <div title="Hide" className='reply-btn hide-btn hide-soln-editor-btn dark' onClick={handleRTEExpansion}>
                                   {">"}
                               </div>
+
 
                               <div className='add-solution-btn small-btn dark' onClick={handleSubmit}>
                                   Submit
                               </div>
                                 <label htmlFor="fileInput" className='add-solution-btn small-btn dark'>
-                                    {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'} 
+                                    {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'}
                                     <input
                                         type="file"
                                         id="fileInput"
-                                        accept="application/pdf"
+                                        name="pdfFile"
+                                        accept=".pdf"
                                         capture="environment"
                                         style={{ display: 'none'}}
                                         onChange={handlePdfFileChange}
@@ -72,13 +173,15 @@ function Question() {
                               Submit a solution
                           </div>
 
-                      }
 
-                      <SolutionContainer />
+                      }
+                   
+                      {renderSolution===true}?<SolutionContainer solutionList = {solutionList}/>:<></>
                 </div>
-                
+               
             </div>
         </div>
+
 
         <div className='side-content'>
             <div className='card side-card'>
@@ -92,12 +195,14 @@ function Question() {
                       <h2>Topics</h2>
                   </div>
 
+
                 <ul className='topic-list'>
                     {props.topics.map((topic, index) => (
                         <li id={index}>{topic}</li>
                     ))}
                 </ul>
             </div>
+
 
               <div className='card side-card'>
                 <div className='card-header'>
@@ -119,4 +224,6 @@ function Question() {
   )
 }
 
+
 export default Question
+

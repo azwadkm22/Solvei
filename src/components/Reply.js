@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "./styles/Reply.css"
+import { getSuggestedQuery } from "@testing-library/react";
 
 function Reply(props) {
-    const [voteCount, setVoteCount] = useState(props.vote);
+    const [voteCount, setVoteCount] = useState(props.vote)
+    const [solution, setSolution] = useState(props.solution)
+
+    console.log("solution: ", solution, " isPDf: ", solution.isPDF)
 
     function upvote() {
         setVoteCount(voteCount + 1);
@@ -10,6 +14,19 @@ function Reply(props) {
 
     function downvote() {
         setVoteCount(voteCount - 1);
+    }
+
+    const getLink = ()=> {
+        const link = solution.pdfFile?.split('?')[0].replace('view', 'preview')
+        console.log("parsed link: ", link)
+        return link
+    }
+
+    const getSolutionDisplay = () => {
+        if(solution.isPDF === true) {
+            return <iframe className='question' src={getLink()} allow="autoplay"/>
+        }
+        return <div dangerouslySetInnerHTML={{__html:solution.solution}}/>
     }
 
 
@@ -35,19 +52,7 @@ function Reply(props) {
                     {props.isSolution ? <>Solution 1 </> : <>Reply to 1</>}                    
                 </div> */}
                 <p className="reply-text">
-                    Lorem Ipsum is simply dummy text of the printi
-                    ng and typesetting industry. Lorem Ipsum has b
-                    een the industry's standard dummy text ever si
-                    nce the 1500s, when an unknown printer took a 
-                    galley of type and scrambled it to make a type 
-                    specimen book. It has survived not only five c
-                    enturies, but also the leap into electronic ty
-                    pesetting, remaining essentially unchanged. It
-                    was popularised in the 1960s with the release 
-                    of Letraset sheets containing Lorem Ipsum pass
-                    ages, and more recently with desktop publishing
-                    software like Aldus PageMaker including versions 
-                    of Lorem Ipsum
+                    {getSolutionDisplay()}
                 </p>
             </div>
         </div>
