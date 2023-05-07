@@ -9,6 +9,7 @@
     "axios": "^1.3.5",
     "draft-js": "^0.11.7",
     "pdfjs-dist": "^3.5.141",
+    "quill-image-resize-module-react": "^3.0.0",
     "quill-image-uploader": "^1.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
