@@ -11,7 +11,7 @@ function Register () {
       <div className='auth-content'>
         <img className='logo-content' src='https://i.imgur.com/qaZ4f4R.png' />
       </div>
-      <div className='auth-content form-content'>
+      <div className='auth-content'>
         <RegisterForm />
       </div>
     </div>

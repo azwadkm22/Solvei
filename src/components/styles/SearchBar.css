@@ -11,6 +11,12 @@
     cursor: pointer;
 }
 
+.search-bar-form{
+    display: grid;
+    gap: 8px;
+    width: 90%;
+}
+
 .search-btn-element {
     display: flex;
     margin: auto 20%;
@@ -34,7 +40,6 @@
     flex-direction: column;
     justify-content: center;
     z-index: 2;
-    
 }
 
 .searchbar {
@@ -43,10 +48,6 @@
     background-color: #f7f7f7;
 } 
 
-
-.empty-div-with-width{
-    width: 400px;
-}
 
 .search-form-container {
     position: absolute;
@@ -81,7 +82,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 960px) {
 
     .searchbar-container {
         position: relative;
@@ -136,10 +137,6 @@
         padding: 10px;
         margin-bottom: 10px;
         background-color: none;
-    }
-
-    .empty-div-with-width {
-        width: 400px;
     }
 
     .search-form-container {

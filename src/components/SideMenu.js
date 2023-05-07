@@ -4,7 +4,7 @@ function SideMenu(props) {
   return (
     <div className='sidemenu-container'>
         <div className='sidemenu-header'> 
-            <h3>{props.title}</h3>
+        <h3 className='sidemenu-header-title'>{props.title}</h3>
         </div>
     
         <div className='sidemenu-content'>

@@ -12,6 +12,7 @@
 .main-content {
     margin-right: 1%;
     width: 74%;
+    float: left;
 }
 
 .question-section {
@@ -25,6 +26,7 @@
 }
 
 .side-content {
+    float: right;
     width: 20%;
     margin: 2%;
     margin-left: 1%;

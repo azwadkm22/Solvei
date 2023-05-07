@@ -5,7 +5,7 @@
     margin-bottom: 20px;
     border: solid 1px;
     border-color: #242424;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 12px 12px 0px 0px;
     width: 100%;
     float: left;
 }
@@ -25,10 +25,21 @@ h1 {
     font-size: 28px;
 }
 
-.foldable-container-content {
-    padding: 10px 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* Change the number '3' to the desired number of columns */
-    /* gap: 10px; */
+@media screen and (max-width: 480px) {
+
+    .foldable-container {
+            width: 96%;
+            margin: 2%;
+        }
+
+    .foldable-container-header {
+        /* display: flex; */
+        width: 95%;
+        padding: 0px 2.5%;
+        border-radius: 8px 8px 0px 0px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
 }

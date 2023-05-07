@@ -38,7 +38,7 @@ function Home() {
     return (
         
         <div>
-            <div className='main-content'>
+            <div className='home-main-content'>
                 <FoldableContainer semester='1st Year 1st Semester' courses={filterCourses('-11')} isLoading={!gotResponse} />
                 <FoldableContainer semester='1st Year 2nd Semester' courses={filterCourses('-12')} isLoading={!gotResponse} />
                 <FoldableContainer semester='2nd Year 1st Semester' courses={filterCourses('-21')} isLoading={!gotResponse} />
@@ -49,7 +49,7 @@ function Home() {
                 <FoldableContainer semester='4th Year 2nd Semester' courses={filterCourses('-42')} isLoading={!gotResponse} />
             </div>
             
-            <div className='side-content'>
+            <div className='home-side-content'>
             <SideMenu title="Semester Top Contributors" content="Azwad" />
 
             <SideMenu title="Recent Activity" content={<Activity />} />

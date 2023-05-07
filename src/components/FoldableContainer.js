@@ -29,7 +29,7 @@ function FoldableContainer(props) {
         <h1 className="foldable-container-h1">{props.semester}</h1>
       </div>
       {isFolded ? <></> : 
-      <div className='foldable-container-content'>
+      <div className='card-content-container'>
         
         { 
           props.isLoading ? 

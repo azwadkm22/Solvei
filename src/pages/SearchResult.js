@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import "./styles/SearchResult.css";
+import "./styles/CardContainer.css";
 import QuestionCard from '../components/QuestionCard';
 import CourseCard from '../components/CourseCard';
 import { useLocation } from 'react-router-dom';
@@ -28,19 +28,19 @@ function SearchResult() {
 
   return (  
     <div>
-      <div className='result-divider'>
+      <div className='content-divider'>
         <h3>Search Results</h3>
       </div>
       <div>
         { typeQuestion ? 
         
-            <div className='search-result-container'> 
+            <div className='card-content-container'> 
               {/* <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" /> */}
               {getQuestions()}
             </div>
             
             :
-            <div className='search-result-container'> 
+            <div className='card-content-container'> 
               {/* <CourseCard courseCode="CSE-1102" courseName="Physics" /> */}
               {getCourses()}
             </div>
