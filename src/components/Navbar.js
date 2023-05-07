@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./styles/Navbar.css"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useAuthContext } from '../hook/useAuthContext'
 import SearchBar from './SearchBar';
 
@@ -9,6 +9,10 @@ function Navbar() {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const profileBtnRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false); 
+  }, [useLocation()]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -65,17 +69,18 @@ function Navbar() {
                     <li >Go to Profile</li>
                     </Link >
                     :
-                    <li className='menu-nav-link'>Login</li>
+                    <> </>
+                    
                   }
                 
 
                 {
-                  user ?
-                    <li className='menu-nav-link'>
-                      Log out
-                    </li>
+                  !user ?
+                    <Link to="/login" className='menu-nav-link'>
+                        <li >Login </li>
+                    </Link >
                     :
-                    <></>
+                    <li className='menu-nav-link'>Log out</li>
                 }
 
                 <li className='menu-empty'></li>
