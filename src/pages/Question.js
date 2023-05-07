@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/constants'
 import Axios from 'axios'
 import { useAuthContext } from '../hook/useAuthContext'
+import LoadingBar from '../components/LoadingBar'
 
 
 function Question() {  
@@ -21,41 +22,49 @@ function Question() {
     const [isQuillExpanded , setIsQuillExpanded] = useState(false);
     const [props, setProps] = useState(null)
     const [pdfFile, setPdfFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    var responseData = [];
+    var tryAgain = false;
 
     useEffect(() => {
-        console.log("solutionlist state changed to: ", solutionList)
-        if(solutionList !== null) {
-            console.log("you're supposed to be not null solutionlist: ", solutionList)
-            setRenderSolution(true)
-        } else {
-            setRenderSolution(false)
+        console.log("Ok")
+        if(isLoading === false)
+        {
+            setSolutionList(responseData)
         }
-    }, [solutionList])
+        else{
+            tryAgain = true;
+        }
+    }, [])
+
+
+    useEffect(() => {
+        Axios.get(API_BASE_URL + 'solution/get?question='+ id)
+            .then((response) => {
+                tryAgain = false;
+                responseData = response.data;
+                setIsLoading(false);
+                setSolutionList(Object.values(response.data))
+                // console.log("response.data: ", (response.data))
+                // console.log("fetched solutions: ", solutionList)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [tryAgain])
 
 
     useEffect(() => {
         Axios.get(API_BASE_URL + 'question/view?question=' + id)
             .then((response) => {
-                // props = response.data
-                console.log("response.data through axios: ", response.data)
+                // console.log("response.data through axios: ", response.data)
                 setProps(response.data)
             })
             .catch((error) => {
                 console.log(error)
             })
-        Axios.get(API_BASE_URL + 'solution/get?question='+ id)
-            .then((response) => {
-                setSolutionList(Object.values(response.data))
-                console.log("response.data: ", (response.data))
-                console.log("fetched solutions: ", solutionList)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
     }, [])
-
-
-
+    
 
     const handleRTEExpansion = () => {
         if(isQuillExpanded) {
@@ -63,10 +72,6 @@ function Question() {
         }
         setIsQuillExpanded(!isQuillExpanded)
     }
-
-
-   
-
 
     const handleSubmit = async () => {
         console.log("You can do it.")
@@ -128,102 +133,108 @@ function Question() {
   return (
     props &&
     <div>
-        <div className='main-content'>
-              <header className='question-body-header'>
-                  <div className='first-line'>
-                      <h3>{props.courseCode + ": " + props.courseName}</h3>
-                      <div className='btn big dark'>{props.batch}</div>
-                      <div className='btn big dark'>{props.examType}</div>
-                  </div>
-              </header>
+        <header className='question-body-header'>
+            <div className='first-line'>
+                <h3>{props.courseCode + ": " + props.courseName}</h3>
 
-
-            <div>
-                <QuestionViewer pdfFile={props.pdfFile}/>
-
-
-               
-                <div className='solution-container'>
-                      {isQuillExpanded ?
-                          <div>
-                              < RichTextEditor solutionTxtHandler={setSolutionStr}/>
-                              <div title="Hide" className='reply-btn hide-btn hide-soln-editor-btn dark' onClick={handleRTEExpansion}>
-                                  {">"}
-                              </div>
-
-
-                              <div className='add-solution-btn small-btn dark' onClick={handleSubmit}>
-                                  Submit
-                              </div>
-                                <label htmlFor="fileInput" className='add-solution-btn small-btn dark'>
-                                    {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'}
-                                    <input
-                                        type="file"
-                                        id="fileInput"
-                                        name="pdfFile"
-                                        accept=".pdf"
-                                        capture="environment"
-                                        style={{ display: 'none'}}
-                                        onChange={handlePdfFileChange}
-                                    />
-                                </label>
-                          </div>
-                          :
-                          <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
-                              Submit a solution
-                          </div>
-
-
-                      }
-                   
-                      {renderSolution===true}?<SolutionContainer solutionList = {solutionList}/>:<></>
+                <div className='question-header-btn-container'>
+                    <div className='dark question-page-btn'>{props.batch}</div>
+                    <div className='dark question-page-btn'>{props.examType}</div>
                 </div>
-               
+                
             </div>
-        </div>
+        </header>
+        <div className='question-page-container'>
+            <div className='question-main-content'>
+                
+                <div>
+                    <QuestionViewer pdfFile={props.pdfFile}/>
 
+                    <div className='solution-container'>
+                        {
+                        isQuillExpanded ?
+                        <div>
+                            < RichTextEditor solutionTxtHandler={setSolutionStr}/>
+                            <div title="Hide" className='reply-btn hide-btn hide-soln-editor-btn dark' onClick={handleRTEExpansion}>
+                                {">"}
+                            </div>
+                            <div className='add-solution-btn small-btn dark' onClick={handleSubmit}>
+                                Submit
+                            </div>
+                            <label htmlFor="fileInput" className='add-solution-btn small-btn dark'>
+                                {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'}
+                                <input
+                                    type="file"
+                                    id="fileInput"
+                                    name="pdfFile"
+                                    accept=".pdf"
+                                    capture="environment"
+                                    style={{ display: 'none'}}
+                                    onChange={handlePdfFileChange}
+                                />
+                            </label>
+                        </div>
+                        :
+                        <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
+                            Submit a solution
+                        </div>
+                        }
 
-        <div className='side-content'>
-            <div className='card side-card'>
-                <div className='card-header'>
-                    <h2>Teacher Name</h2>
+                        
+                        {
+                        isLoading ? 
+                        <LoadingBar /> 
+                        : 
+                        <SolutionContainer solutionList={solutionList} />
+                        }
+                    </div>
+                
                 </div>
-                <h3 className='card-subtext'>{props.teacher}</h3>
-            </div>
-              <div className='card side-card'>
-                  <div className='card-header'>
-                      <h2>Topics</h2>
-                  </div>
-
-
-                <ul className='topic-list'>
-                    {props.topics.map((topic, index) => (
-                        <li id={index}>{topic}</li>
-                    ))}
-                </ul>
             </div>
 
 
-              <div className='card side-card'>
-                <div className='card-header'>
-                    <h2>Received Flags</h2>
+            <div className='question-side-content'>
+                <div className='question-page-card question-teacher-card'>
+                    <div className='question-page-card-header'>
+                        <h2>Teacher Name</h2>
+                    </div>
+                    <h3 className='question-card-subtext'>{props.teacher}</h3>
                 </div>
+
+                <div className='question-page-card topics-card'>
+                    <div className='question-page-card-header'>
+                        <h2>Topics</h2>
+                    </div>
+
+
+                    <ul className='topic-list'>
+                        {props.topics.map((topic, index) => (
+                            <li id={index}>{topic}</li>
+                        ))}
+                    </ul>
+                </div>
+                
+
+                <div className='question-page-card flags-card'>
+                    <div className='question-page-card-header'>
+                        <h2>Received Flags</h2>
+                    </div>
                 <table className='flag-table'>
                     <tr className='flag-table-row'>
                         <td className='flag-table-data'>Blurry</td>
-                          <td className='flag-table-data'>0</td>
+                            <td className='flag-table-data'>0</td>
                     </tr >
-                      <tr className='flag-table-row'>
-                          <td className='flag-table-data'>Incorrect</td>
-                          <td className='flag-table-data'>0</td>
-                      </tr>
+                        <tr className='flag-table-row'>
+                            <td className='flag-table-data'>Incorrect</td>
+                            <td className='flag-table-data'>0</td>
+                        </tr>
                 </table>
+            </div>
             </div>
         </div>
     </div>
   )
 }
-
 
 export default Question
 

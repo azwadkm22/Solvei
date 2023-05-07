@@ -67,3 +67,11 @@
     background-color: #EF5350;
     color: #242424;
 }
+
+
+@media screen and (max-width: 600px) {
+    .flag-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}

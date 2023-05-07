@@ -104,10 +104,6 @@ input[type="submit"] {
         vertical-align: middle;
     }
 
-    .auth-content {
-        /* display: none; */
-    }
-
     .form-content {
         width: 100%;
         display: block;
