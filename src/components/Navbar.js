@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./styles/Navbar.css"
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../hook/useAuthContext'
+import { useLogout } from '../hook/useLogout'
 import SearchBar from './SearchBar';
 
 function Navbar() {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
+  const logout  = useLogout();
+  const location = useLocation()
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const profileBtnRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setMenuOpen(false); 
-  }, [useLocation()]);
+  }, [location]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -25,6 +29,14 @@ function Navbar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [profileBtnRef]);
+
+  const handleLogout = ()=> {
+    logout()
+    console.log(location.pathname)
+    if(location.pathname === '/profile') {
+      navigate('/')
+    }
+  }
 
   return (
     <div className='navbar'>
@@ -80,7 +92,8 @@ function Navbar() {
                         <li >Login </li>
                     </Link >
                     :
-                    <li className='menu-nav-link'>Log out</li>
+                    <li className='menu-nav-link' >Log out</li>
+                    
                 }
 
                 <li className='menu-empty'></li>
@@ -127,8 +140,8 @@ function Navbar() {
                           <div className='profile-dropdown-option'>Go to Profile</div>
                           </Link >
                           
-                          
-                        <div className='profile-dropdown-option'>Log out</div>
+                        
+                        <div className='profile-dropdown-option' onClick={handleLogout}>Log out</div>
                       </div>
                     </div>
                 }
