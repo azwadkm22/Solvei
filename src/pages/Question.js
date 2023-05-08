@@ -18,7 +18,7 @@ function Question() {
     const [solutionStr, setSolutionStr] = useState("")
     const [solutionList, setSolutionList] = useState(null)
     const {courseCode, courseName, batch, examType, id} = useParams();
-    console.log("id from params: ",id)
+    // console.log("id from params: ",id)
     const [isQuillExpanded , setIsQuillExpanded] = useState(false);
     const [props, setProps] = useState(null)
     const [pdfFile, setPdfFile] = useState(null);
@@ -84,16 +84,16 @@ function Question() {
         formData.append("questionID", questionID)
        
         if(pdfFile !== null) {
-            console.log("in pdfFile !== null")
+            // console.log("in pdfFile !== null")
             isPDF = true
             hasImage = false
             formData.append("isPDF", isPDF)
             formData.append("hasImage", hasImage)
-            console.log("where do i die")
-            console.log(pdfFile, pdfFile.name)
+            // console.log("where do i die")
+            // console.log(pdfFile, pdfFile.name)
             formData.append("pdfFile", pdfFile, pdfFile.name)
            
-            console.log("pdfFile",formData.get("pdfFile"))
+            // console.log("pdfFile",formData.get("pdfFile"))
 
 
         } else {
@@ -104,7 +104,7 @@ function Question() {
             formData.append("solution", solutionStr)
 
 
-            console.log("solution: ",formData.get("solution"))
+            // console.log("solution: ",formData.get("solution"))
         }
  
         const response = await fetch(API_BASE_URL + "solution/add", {
@@ -114,8 +114,8 @@ function Question() {
 
 
         if(response.ok) {
-            console.log(response)
-            console.log(response.text)
+            // console.log(response)
+            // console.log(response.text)
             setIsQuillExpanded(false)
             window.location.reload()
         } else {
@@ -148,7 +148,7 @@ function Question() {
             <div className='question-main-content'>
                 
                 <div>
-                    <QuestionViewer pdfFile={props.pdfFile}/>
+                    <QuestionViewer pdfFile={props.pdfFile} question={props._id}/>
 
                     <div className='solution-container'>
                         {
@@ -222,11 +222,11 @@ function Question() {
                 <table className='flag-table'>
                     <tr className='flag-table-row'>
                         <td className='flag-table-data'>Blurry</td>
-                            <td className='flag-table-data'>0</td>
+                            <td className='flag-table-data'>{props.flagBlurry.length}</td>
                     </tr >
                         <tr className='flag-table-row'>
                             <td className='flag-table-data'>Incorrect</td>
-                            <td className='flag-table-data'>0</td>
+                            <td className='flag-table-data'>{props.flagIncorrect.length}</td>
                         </tr>
                 </table>
             </div>

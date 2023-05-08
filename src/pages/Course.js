@@ -7,6 +7,7 @@ import Axios from "axios";
 
 function Course() {
   const [questions, setQuestions] = useState([]);
+  const [qCount, setCount] = useState(0);
   // console.log("location in course.js: ",location)
   const { courseCode, courseName } = useParams();
 
@@ -22,6 +23,7 @@ function Course() {
     Axios.get(API_BASE_URL + QUESTION_SEARCH + 'course=' + courseUrl)
       .then((response) => {
         setQuestions(response.data)
+        setCount(response.data.length)
       })
       .catch((error) => {
         console.log(error);
@@ -47,7 +49,7 @@ function Course() {
       </header>
       <div className='question-card-section'>
         <div className='content-divider'>
-            <h3>Questions</h3>
+            <h3>Questions : {qCount}</h3>
         </div>
         <div className='card-content-container question-card-content-container'> 
             {getQuestionCards()}
