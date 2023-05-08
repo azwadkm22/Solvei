@@ -1,35 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import './styles/QuestionViewer.css'
 import { SwalErrorAlert, SwalSuccessAlert, SwalInfoAlert, SwalQuestionAlert } from './SwalCustomAlerts';
+import { useAuthContext } from '../hook/useAuthContext.js'
+import { API_BASE_URL, USER } from '../utils/constants';
+import Axios from 'axios'
 
 function QuestionViewer(props) {
+  const {user} = useAuthContext()
+  const questionId = props.question
   const [isFlagPressed, setIsFlagPressed] = useState(false);
-  const [isStarred, setIsStarred] = useState(true);
+  const [isStarred, setIsStarred] = useState(false);
   const [userPressedFlag, setUserPressedFlag] = useState(false);
 
   const toggleDropdown = () => {
     setIsFlagPressed(!isFlagPressed);
   }
 
+  useEffect(() => {
+    Axios.get(API_BASE_URL + USER + user.email)
+        .then((response) => {
+          const starredList = response.data.starred
+          starredList.forEach(function(item) {
+            if (item.questionId === questionId) {
+              setIsStarred(true)
+            }
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }, [isStarred])
+  
+
   const starQuestion = () => {
 
     isStarred ?
     SwalQuestionAlert("Remove from Starred?", 
-    () =>{
+    async () =>{
       console.log("Accept");
-      setIsStarred(false)
-
-      SwalInfoAlert("Question removed from starred.", "")
+      await Axios.post(API_BASE_URL + "user/star/remove", {
+        "email": user.email,
+        "questionId": questionId
+      })
+      .then(function (response) {
+        setIsStarred(false)
+        SwalInfoAlert("Question removed from starred.", "")
+      })
+      .catch(function (error) {
+        SwalErrorAlert(error.message)
+      }) 
     },
     () => {
       console.log("Reject");
     })
-    
     :
+    Axios.post(API_BASE_URL + "user/star/add", {
+      "email":user.email,
+      "questionId": questionId
+    })
+    .then(function (response) {
+      setIsStarred(true)
+      SwalInfoAlert("Question is starred.", "You can view your starred posts in your Profile.")
+    })
+    .catch(function(error) {
+      SwalErrorAlert(error.message)
+    })
     
-    SwalInfoAlert("Question is starred.", "You can view your starred posts in your Profile.")
     
-    setIsStarred(true)
     // Write stuff here
     // if(set)
   }
