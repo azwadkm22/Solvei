@@ -3,9 +3,8 @@
     display: flex;
     border-radius: 10px;
     padding: 4px 10px;
-    text-align: center;
     align-items: center;
-    vertical-align: middle;
+    justify-content: center;
     margin: auto 20px;
     height: 20px;
     width: 60px;
