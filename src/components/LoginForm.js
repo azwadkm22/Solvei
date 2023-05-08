@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./styles/AuthForm.css";
 import { useLogin } from '../hook/useLogin'
 import { Link , useNavigate} from 'react-router-dom';
+import { SwalErrorAlert, SwalSuccessAlert } from './SwalCustomAlerts';
 
 const LoginForm = () => {
     const {login, error, isLoading} = useLogin();
@@ -20,11 +21,11 @@ const LoginForm = () => {
         e.preventDefault();
         // Handle form submission logic here
         const ok = await login(email, password)
-        
         if(ok) {
+            SwalSuccessAlert("Successfully logged in.");
             redirectToHome();
         } else {
-            alert("Could not log in")
+            SwalErrorAlert("Could not log in.")
         }
     };
 

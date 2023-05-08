@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../hook/useAuthContext'
 import { useLogout } from '../hook/useLogout'
 import SearchBar from './SearchBar';
+import Swal from 'sweetalert2';
 
 function Navbar() {
   const { user } = useAuthContext();
@@ -31,11 +32,41 @@ function Navbar() {
   }, [profileBtnRef]);
 
   const handleLogout = ()=> {
-    logout()
-    console.log(location.pathname)
-    if(location.pathname === '/profile') {
-      navigate('/')
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'swal-btn swal-btn-success',
+        cancelButton: 'swal-btn swal-btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Do you want to Log out?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'No!',
+      reverseButtons: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        if (location.pathname === '/profile') {
+          navigate('/')
+        }
+        else {
+          navigate(location.pathname)
+        }
+        swalWithBootstrapButtons.fire(
+          'Logged out',
+          "",
+          'info'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+      }
+    })
   }
 
   return (

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Activity from "../components/Activity";
 import "./styles/Profile.css"
 import { useLocation } from 'react-router-dom';
 import { API_BASE_URL, AUTH, USER } from '../utils/constants';
 import  Axios  from 'axios';
-import ActivityContainer from '../components/ActivityContainer';
+import { ActivityContainer, StarredListContainer } from '../components/ActivityContainer';
+
+import LoadingBar from '../components/LoadingBar';
 
 function Profile() {
   const location = useLocation()
@@ -21,10 +22,9 @@ function Profile() {
 
     useEffect(() => {
       // Fetch all courses from the backend when the component mounts
-      Axios.get(API_BASE_URL + AUTH + USER + email)
+      Axios.get(API_BASE_URL + USER + email)
         .then((response) => {
           console.log(response.data)
-          // setAllCourses(response.data.courses);
           setIsUser(true)
           setUserInfo(response.data)
         })
@@ -63,8 +63,27 @@ function Profile() {
       </div>
 
       <div className='user-activity-container'>
-        <ActivityContainer title="Recent Activities" activityList={["Ok", "Not cool."]}/>        
-        <ActivityContainer title="Starred Posts" activityList={["Ok", "Not cool."]} />
+
+        {(userInfo.recentActivity === undefined) ?
+          <LoadingBar />
+          :
+          <ActivityContainer title="Recent Activities" activityList={
+            userInfo.recentActivity
+            // []
+
+          } userName={userInfo.name} />  
+        }
+
+        {(userInfo.starred === undefined) ?
+          <LoadingBar />
+          :
+          <StarredListContainer title="Starred Posts" starredList={
+            userInfo.starred
+            // []
+
+          }/>
+        }
+              
 
       </div>
     </div>

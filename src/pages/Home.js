@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FoldableContainer from '../components/FoldableContainer'
 import SideMenu from '../components/SideMenu'
-import Activity from '../components/Activity'
 import Axios from 'axios';
 import './styles/Home.css'
 import { API_BASE_URL, HOME } from '../utils/constants';
@@ -52,7 +51,7 @@ function Home() {
             <div className='home-side-content'>
             <SideMenu title="Semester Top Contributors" content="Azwad" />
 
-            <SideMenu title="Recent Activity" content={<Activity />} />
+            {/* <SideMenu title="Recent Activity" content={<Activity />} /> */}
             </div>
             
         </div>

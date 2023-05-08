@@ -1,0 +1,21 @@
+.swal-btn {
+    padding: 12px 24px;
+    margin: 10px 40px;
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    cursor: pointer;
+} 
+
+.swal-btn-success {
+    background-color: #3ed84d;
+}
+
+.swal-btn-danger {
+    background-color: #dc4f4c;
+}
+
+.swal-btn-info {
+    background-color: #187bcd;
+}

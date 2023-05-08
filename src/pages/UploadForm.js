@@ -6,6 +6,7 @@ import { useAuthContext } from '../hook/useAuthContext';
 import { API_BASE_URL, HOME } from '../utils/constants';
 import { type } from '@testing-library/user-event/dist/type';
 import Axios from 'axios'
+import { SwalErrorAlert, SwalSuccessAlert } from '../components/SwalCustomAlerts';
 
 const UploadForm = () => {
     const navigate = useNavigate();
@@ -120,12 +121,12 @@ console.log("upload form: ", courseCode, courseName)
       
         if (response.ok) {
             response.json().then(data => {
-                console.log('Question posted successfully');
+                SwalSuccessAlert("Question posted successfully")
+                // console.log('Question posted successfully');
                 goToQuestionPage(data);
             })            
         } else {
-            console.error('Could not post question', response.status);
-            alert("Could not post question")
+            SwalErrorAlert("Could not post question");
         }
     };
 
