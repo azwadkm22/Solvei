@@ -67,18 +67,27 @@
     width: 96%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .activity-list-container {
     padding: auto;
+    /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); */
+    /* border-radius: 10px; */
     width: 96%;
+    margin: 2%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
+    overflow-y: auto;
+    /* overflow-x: none; */
+    scroll-behavior: smooth;
+    height: 340px;
 }
 
 .profile-activity {
-    width: 96%;
+    width: 92%;
+    align-self: center;
     display: flex;
     border-radius: 12px;
     background-color: #E2E2E2;
@@ -87,6 +96,7 @@
     font-size: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    
 }
 
 

@@ -49,6 +49,7 @@
     background-color: #efefef;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.9);
 }
 
 .profile-dropdown-container {

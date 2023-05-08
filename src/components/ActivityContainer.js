@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export function ActivityContainer(props) {
     const navigate = useNavigate();
+    const [isActivityMinimized, toggleActivityView] = useState(false);
     const getActivities = () => {
         console.log(props.activityList)
         const activityDescriptionList = props.activityList.map((activity) => activity.description);
@@ -20,18 +21,23 @@ export function ActivityContainer(props) {
     };
     return (
         <div className='activity-container'>
-            <div className='activity-header'>
+            <div className='activity-header' onClick={() => toggleActivityView(!isActivityMinimized)}>
                 {props.title}
             </div>
+            {isActivityMinimized ? 
+            <></>
+            :
+
             <div className='activity-list-container'>
                 {getActivities()}
-            </div>
+            </div>}
         </div>
     )
 }
 
 
 export function StarredListContainer(props) {
+    const [isStarredMinimized, toggleStarredView] = useState(false);
     const navigate = useNavigate();
     const getStarredList = () => {
         console.log(props.starredList)
@@ -49,12 +55,46 @@ export function StarredListContainer(props) {
     };
     return (
         <div className='activity-container'>
-            <div className='activity-header'>
+            <div className='activity-header' onClick={() => toggleStarredView(!isStarredMinimized)}>
                 {props.title}
             </div>
+            {isStarredMinimized ?
+                <></>
+                :
             <div className='activity-list-container'>
                 {getStarredList()}
-            </div>
+            </div>}
         </div>
     )
 }
+
+// export function GlobalActivityContainer(props) {
+//     const navigate = useNavigate();
+//     const getStarredList = () => {
+//         console.log(props.starredList)
+//         return props.starredList.map((starredPost, index) => (
+//             <div className='profile-activity' key={index}
+//                 onClick={() => {
+//                     const url = "/question/" + starredPost.courseCode + '/' + starredPost.courseName + '/' + starredPost.batch + '/' + starredPost.examType + '/' + starredPost.questionId;
+//                     navigate(url);
+//                 }}
+
+//             >
+//                 {`Batch ${starredPost.batch} ${starredPost.examType} Question, ${starredPost.courseCode}: ${starredPost.courseName}.`}
+//             </div>
+//         ));
+//     };
+//     return (
+//         <div className='activity-container'>
+//             <div className='activity-header' onClick={() => toggleStarredView(!isStarredMinimized)}>
+//                 {props.title}
+//             </div>
+//             {isStarredMinimized ?
+//                 <></>
+//                 :
+//                 <div className='activity-list-container'>
+//                     {getStarredList()}
+//                 </div>}
+//         </div>
+//     )
+// }
