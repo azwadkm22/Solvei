@@ -1,20 +1,15 @@
-.profile-page-container {
-    background-color: #efefef;
-}
-
 .user-details-container {
     display: flex;
     flex-direction: row;
-    margin: 30px;
-    margin-bottom: 0px;
-
+    margin: 1% 2%;
+    width: 48%;
+    /* background-color: aquamarine; */
 }
 
 #user-image {
     width: 256px;
     height: 256px;
     border-radius: 30px;
-    /* border: 20px solid #dedede; */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -23,59 +18,17 @@
     flex-direction: column;
     height: 256px;
     justify-content:space-around;
-    /* padding: 30px 0px; */
 }
 
 .user-info {
-    margin: 0px 30px;
+    margin: 0px 10%;
     font-size: 24px;
-    height: 50px;
-}
-
-.user-activity-container {
-    width: 95%;
-    display: grid;
-    /* change here for different layout; */
-    grid-template-columns: repeat(2, 1fr);
-    /* margin: 0px 30px; */
-    gap: 50px;
-}
-
-.activity-container {
-    width: 95%;
-    padding: 30px;
-    /* margin: ;
-    background-color: aqua; */
-}
-
-.activity-header {
-    font-size: 32px;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #242424;
-    color: #efefef;
-    border-radius: 10px;
-    display: flex;
-    justify-content: start;
-    width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 10px;
-}
-
-.activity-list-container {
-    padding: auto;
-    /* margin: 10px 20px; */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: 20%;
 }
 
 .edit-pass-btn {
-    background-color: #242424;
-    color: #efefef;
-    width: 150px;
-    padding: 0px 20px;
+    width: 50%;
+    padding: 1% 10%;
     margin: auto;
     align-items: center;
     text-align: center;
@@ -86,13 +39,132 @@
     display: flex;
 }
 
-.profile-activity {
-    width: 100%;
-    display: flex;
+.user-activity-container {
+    width: 98%;
+    display: grid;
+    /* change here for different layout; */
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1%;
+    gap: 40px;
+}
+
+.activity-container {
+    width: 95%;
+    padding: 2.5%;
+    /* margin: 0px 2.5%; */
+    /* background-color: aqua;  */
+}
+
+.activity-header {
+    font-size: 32px;
+    display: inline-block;
+    padding: 2%;
+    background-color: #242424;
+    color: #efefef;
     border-radius: 10px;
+    display: flex;
+    justify-content: start;
+    width: 96%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.activity-list-container {
+    padding: auto;
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-activity {
+    width: 96%;
+    display: flex;
+    border-radius: 12px;
     background-color: #E2E2E2;
-    padding: 5px 10px;
-    margin: 10px 10px;
+    padding: 1% 2%;
+    margin: 1% 2%;
     font-size: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+@media screen and (max-width: 960px) {
+
+    .activity-header {
+        font-size: 28px;
+        
+    }
+
+    .profile-activity {
+        font-size: 16px;
+    }
+
+    .user-activity-container {
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .user-details-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 1% 2%;
+        width: 96%;
+    }
+
+    #user-image {
+        width: 128px;
+        height: 128px;
+        border-radius: 200px;
+        margin: auto;
+    }
+
+    .user-info-container {
+        height: 150px;
+        width: 90%;
+        /* background-color: bisque; */
+        margin: 1% 5%;
+        align-items: center;
+    }
+
+    .user-info {
+        /* margin: 0px 10%; */
+        font-size: 18px;
+        /* height: 300px; */
+        align-self: flex-start;
+    }
+
+    .user-img-container{
+        margin: auto;
+    }
+
+    .edit-pass-btn {
+        margin: 2% auto;
+        padding: 10px 20px;
+        width: 120px;
+        font-size: 16px;
+        height: 50px;
+    }
+
+    .activity-header {
+        font-size: 24px;
+    }
+
+    .profile-activity {
+        font-size: 16px;
+    }
+
+    .user-activity-container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    
+
 }

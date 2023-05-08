@@ -4,6 +4,7 @@ import "./styles/Profile.css"
 import { useLocation } from 'react-router-dom';
 import { API_BASE_URL, AUTH, USER } from '../utils/constants';
 import  Axios  from 'axios';
+import ActivityContainer from '../components/ActivityContainer';
 
 function Profile() {
   const location = useLocation()
@@ -37,7 +38,7 @@ function Profile() {
       <div className='user-account-info-container'>
 
       <div className='user-details-container'>
-        <div>
+        <div className='user-img-container'>
           <img id='user-image' src='https://2.gravatar.com/avatar/b5d5383385b2dd615bb34a7114d3f49f?s=512&d=identicon&r=G'/>
         </div>
         {
@@ -47,7 +48,7 @@ function Profile() {
               <p className='user-info'>{userInfo.batch}</p>
               <p className='user-info'>{userInfo.registrationNumber}</p>
               <p className='user-info'>{userInfo.email}</p>
-              <div className='edit-pass-btn user-info'> Edit Password </div>
+              <div className='edit-pass-btn user-info dark'> Edit Password </div>
           </div>
 
           :
@@ -62,39 +63,9 @@ function Profile() {
       </div>
 
       <div className='user-activity-container'>
-        <div className='activity-container'>
-          <div className='activity-header'>
-            Recent Activities
-          </div>
-          <div className='activity-list-container'>
-            <div className='profile-activity'>
-              azwadkm22 just answered a question in CSE-3103 question for Batch 24.
-            </div>
-            <div className='profile-activity'>
-              azwadkm22 just answered a question in CSE-3103 question for Batch 24.
-            </div>
-            
-          </div>
-        </div>
+        <ActivityContainer title="Recent Activities" activityList={["Ok", "Not cool."]}/>        
+        <ActivityContainer title="Starred Posts" activityList={["Ok", "Not cool."]} />
 
-        <div className='activity-container'>
-          <div className='activity-header'>
-            Starred Posts
-          </div>
-          <div className='activity-list-container'>
-            <div className='profile-activity'>
-              CSE-4102 course question for Batch 25 was added by quantum_habib.
-            </div>
-
-            <div className='profile-activity'>
-              CSE-4102 course question for Batch 25 was added by quantum_habib.
-            </div>
-
-            <div className='profile-activity'>
-              CSE-4102 course question for Batch 25 was added by quantum_habib.
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

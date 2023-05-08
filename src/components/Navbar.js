@@ -92,7 +92,7 @@ function Navbar() {
                         <li >Login </li>
                     </Link >
                     :
-                    <li className='menu-nav-link' >Log out</li>
+                    <li className='menu-nav-link' onClick={handleLogout}>Log out</li>
                     
                 }
 
