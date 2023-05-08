@@ -15,8 +15,8 @@ function SolutionContainer(props) {
     };
 
     const populateSolutions = ()=> {
-        console.log("inside populate solutions")
-        console.log("inside populate: solutions:",solutions)
+        // console.log("inside populate solutions")
+        // console.log("inside populate: solutions:",solutions)
         // return result.map((question, index) => (
         //     <QuestionResultCard key={index} question={question} examBatch={question.batch} courseCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
         //   ));
@@ -46,7 +46,7 @@ function SolutionContainer(props) {
                 </div>
             </div>
         ))
-        console.log("toreturn: ", toReturn )
+        // console.log("toreturn: ", toReturn )
         return toReturn;
     }
     
