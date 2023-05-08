@@ -42,12 +42,19 @@ input[type="submit"] {
 }
 
 
-.link-page:visited, .link-page:active, .link-page {
+.link-page {
     margin: auto;
     width: 100%;
     justify-content: center;
     text-align: center;
     display: flex;
+    color: #242424;
+}
+
+.link-page:visited,
+.link-page:active,
+.link-page:hover {
+    text-decoration: underline;
 }
 
 .auth-form-container {
@@ -159,17 +166,6 @@ input[type="submit"] {
         width: auto;
     }
 
-
-    .link-page:visited,
-    .link-page:active,
-    .link-page {
-        margin: auto;
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        display: flex;
-
-    }
 
     .logo-container,
     .logo-content {
