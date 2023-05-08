@@ -182,4 +182,8 @@ input[type="submit"] {
             gap: 8px;
             width: 240px;
     }
+
+    .auth-content {
+        padding: 10px 0px;
+    }
 }
