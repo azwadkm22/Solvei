@@ -256,30 +256,13 @@ header > div > h3 {
         display: flex;
         flex-direction: row;
     }
-
-    .topic-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* change to your desired number of columns */
-        grid-gap: 4%;
-        /* change to your desired gap between items */
-        list-style: none;
-        padding: 4%;
-        margin: 0;
-    }
-
     .topic-list li {
         font-size: 12px;
-        color: #efefef;
-        /* border: 1px solid #efefef; */
-        border-radius: 10px;
-        background-color: #242424;
-        padding: 5% 20%;
-        text-align: center;
-        margin: auto;
-        /* height: 50px; */
+        margin: 0px;
+        margin-left: -24px;
+        margin-top: -1px;
     }
-
+    
     .add-solution-btn {
         font-size: 24px;
     }
