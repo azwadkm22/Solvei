@@ -75,7 +75,7 @@
     }
     .question {
         width: 100%;
-        height: fit-content;
+        height: 378px;
         background-color: rgb(255, 255, 255);
     }
 }
