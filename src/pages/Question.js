@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Reply from '../components/Reply'
 import QuestionViewer from '../components/QuestionViewer'
 import "../components/styles/Button.css"
 import "./styles/Question.css"
