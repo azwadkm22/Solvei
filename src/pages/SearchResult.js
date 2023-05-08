@@ -34,7 +34,7 @@ function SearchResult() {
       <div>
         { typeQuestion ? 
         
-            <div className='card-content-container'> 
+          <div className='card-content-container question-card-content-container'> 
               {/* <QuestionCard examBatch="Batch 25" courseCode="CSE-4101" examType="Final" teacherName="Asif Hossain Khan" /> */}
               {getQuestions()}
             </div>

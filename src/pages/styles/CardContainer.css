@@ -44,4 +44,8 @@
         font-size: 20px;
         padding: 10px 15px;
     }
+
+    .question-card-content-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

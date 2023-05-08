@@ -49,7 +49,7 @@ function Course() {
         <div className='content-divider'>
             <h3>Questions</h3>
         </div>
-        <div className='card-content-container'> 
+        <div className='card-content-container question-card-content-container'> 
             {getQuestionCards()}
         </div>
 

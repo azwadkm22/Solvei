@@ -117,13 +117,12 @@ header > div > h3 {
     font-size: 18px;
 }
 
-.flag-table-row {
+/* .flag-table-row {
 }
 
 .flag-table-data {
 
-    /* border-left: 1px solid #242424; */
-}   
+}    */
 
 
 .hide-btn {
@@ -262,7 +261,6 @@ header > div > h3 {
         margin-left: -24px;
         margin-top: -1px;
     }
-    
     .add-solution-btn {
         font-size: 24px;
     }
