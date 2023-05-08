@@ -68,33 +68,32 @@ export function StarredListContainer(props) {
     )
 }
 
-// export function GlobalActivityContainer(props) {
-//     const navigate = useNavigate();
-//     const getStarredList = () => {
-//         console.log(props.starredList)
-//         return props.starredList.map((starredPost, index) => (
-//             <div className='profile-activity' key={index}
-//                 onClick={() => {
-//                     const url = "/question/" + starredPost.courseCode + '/' + starredPost.courseName + '/' + starredPost.batch + '/' + starredPost.examType + '/' + starredPost.questionId;
-//                     navigate(url);
-//                 }}
+export function GlobalActivityContainer(props) {
+    const navigate = useNavigate();
+    const getGlobalActivityList = () => {
 
-//             >
-//                 {`Batch ${starredPost.batch} ${starredPost.examType} Question, ${starredPost.courseCode}: ${starredPost.courseName}.`}
-//             </div>
-//         ));
-//     };
-//     return (
-//         <div className='activity-container'>
-//             <div className='activity-header' onClick={() => toggleStarredView(!isStarredMinimized)}>
-//                 {props.title}
-//             </div>
-//             {isStarredMinimized ?
-//                 <></>
-//                 :
-//                 <div className='activity-list-container'>
-//                     {getStarredList()}
-//                 </div>}
-//         </div>
-//     )
-// }
+
+        const activityOfUser = props.globalActivity.map(
+            (activity) => activity.name + " " + activity.recentActivity.description
+        );
+        console.log(activityOfUser)
+        return props.globalActivity.map((activity, index) => (
+            <div className='profile-activity' id='home-activity' key={index}
+                onClick={() => {
+                    const url = "/question/" + activity.recentActivity.courseCode + '/' + activity.recentActivity.courseName + '/' + activity.recentActivity.batch + '/' + activity.recentActivity.examType + '/' + activity.recentActivity.questionId;
+                    navigate(url);
+                }}
+
+            >
+                {`${activity.name} ${activity.recentActivity.description}`}
+            </div>
+        ));
+    };
+    return (
+        <div className='activity-container'>
+            <div className='activity-list-container' id='home-activity-container'>
+                {getGlobalActivityList()}
+            </div>
+        </div>
+    )
+}

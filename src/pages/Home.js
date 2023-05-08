@@ -4,10 +4,24 @@ import SideMenu from '../components/SideMenu'
 import Axios from 'axios';
 import './styles/Home.css'
 import { API_BASE_URL, HOME } from '../utils/constants';
+import LoadingBar from '../components/LoadingBar';
+import { GlobalActivityContainer } from '../components/ActivityContainer';
 
 function Home() {
     const [allCourses, setAllCourses] = useState([]);
     const [gotResponse, setGotResponse] = useState(false);
+    const [globalActivityList, setGlobalActivityList] = useState();
+
+    useEffect(() => {
+        Axios.get(API_BASE_URL + "global/activity?fetch=10")
+            .then((response) => {
+                console.log(response.data)
+                setGlobalActivityList(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
 
     
@@ -49,9 +63,18 @@ function Home() {
             </div>
             
             <div className='home-side-content'>
-            <SideMenu title="Semester Top Contributors" content="Azwad" />
+            
 
-            {/* <SideMenu title="Recent Activity" content={<Activity />} /> */}
+            <SideMenu title="Recent Activity" content={
+                (globalActivityList === undefined) ?
+                <LoadingBar />
+                :
+                <GlobalActivityContainer globalActivity={globalActivityList} />
+                
+            } />
+
+            {/* <SideMenu title="Semester Top Contributors" content="Azwad" /> */}
+
             </div>
             
         </div>
