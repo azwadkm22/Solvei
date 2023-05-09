@@ -9,6 +9,7 @@ import { API_BASE_URL } from '../utils/constants'
 import Axios from 'axios'
 import { useAuthContext } from '../hook/useAuthContext'
 import LoadingBar from '../components/LoadingBar'
+import { SwalInfoAlert } from '../components/SwalCustomAlerts'
 
 
 function Question() {  
@@ -73,53 +74,60 @@ function Question() {
     }
 
     const handleSubmit = async () => {
-        console.log("You can do it.")
-        let isPDF
-        let hasImage
-        const questionID = id
-        const postedBy = user.email
-        const formData = new FormData()
-        formData.append("postedBy", postedBy)
-        formData.append("questionID", questionID)
-       
-        if(pdfFile !== null) {
-            // console.log("in pdfFile !== null")
-            isPDF = true
-            hasImage = false
-            formData.append("isPDF", isPDF)
-            formData.append("hasImage", hasImage)
-            // console.log("where do i die")
-            // console.log(pdfFile, pdfFile.name)
-            formData.append("pdfFile", pdfFile, pdfFile.name)
-           
-            // console.log("pdfFile",formData.get("pdfFile"))
-
-
-        } else {
-            hasImage = false
-            isPDF = false
-            formData.append("isPDF", isPDF)
-            formData.append("hasImage", hasImage)
-            formData.append("solution", solutionStr)
-
-
-            // console.log("solution: ",formData.get("solution"))
-        }
- 
-        const response = await fetch(API_BASE_URL + "solution/add", {
-            method: 'POST',
-            body: formData
-        });
-
-
-        if(response.ok) {
-            // console.log(response)
-            // console.log(response.text)
+        if(!user) {
+            SwalInfoAlert("Log in to submit solution!")
             setIsQuillExpanded(false)
-            window.location.reload()
+            return
         } else {
-            console.error(response.status)
-            alert("Could not post solution.")
+            console.log("You can do it.")
+            let isPDF
+            let hasImage
+            const questionID = id
+            const postedBy = user?.email
+            const formData = new FormData()
+            formData.append("postedBy", postedBy)
+            formData.append("questionID", questionID)
+        
+            if(pdfFile !== null) {
+                // console.log("in pdfFile !== null")
+                isPDF = true
+                hasImage = false
+                formData.append("isPDF", isPDF)
+                formData.append("hasImage", hasImage)
+                // console.log("where do i die")
+                // console.log(pdfFile, pdfFile.name)
+                formData.append("pdfFile", pdfFile, pdfFile.name)
+            
+                // console.log("pdfFile",formData.get("pdfFile"))
+
+
+            } else {
+                hasImage = false
+                isPDF = false
+                formData.append("isPDF", isPDF)
+                formData.append("hasImage", hasImage)
+                formData.append("solution", solutionStr)
+
+
+                // console.log("solution: ",formData.get("solution"))
+            }
+    
+            const response = await fetch(API_BASE_URL + "solution/add", {
+                method: 'POST',
+                body: formData
+            });
+
+
+            if(response.ok) {
+                // console.log(response)
+                // console.log(response.text)
+                setIsQuillExpanded(false)
+                window.location.reload()
+            } else {
+                console.error(response.status)
+                SwalInfoAlert("Could not post solution.")
+            }
+
         }
     }
 

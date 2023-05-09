@@ -11,7 +11,7 @@ export const useLogout = ()=>{
         // dispatch logout action
         dispatch({type: 'LOGOUT'})
     };
-    console.log("type of logout: ", typeof(logout))
+    // console.log("type of logout: ", typeof(logout))
 
     return logout
 }

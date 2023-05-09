@@ -2,17 +2,63 @@ import React, { useState } from "react";
 import "./styles/Solution.css"
 import { getSuggestedQuery } from "@testing-library/react";
 import RichTextEditor from "./RichTextEditor";
+import { useAuthContext } from '../hook/useAuthContext';
+import { SwalInfoAlert } from './SwalCustomAlerts'
+import { API_BASE_URL } from "../utils/constants";
+import Axios from 'axios'
 
 function Solution(props) {
+    const {user} = useAuthContext();
     const [voteCount, setVoteCount] = useState(props.vote)
     const [solution, setSolution] = useState(props.solution)
-    const [userUpvoted, setUserUpvoted] = useState(false);
-    const [userDownvoted, setUserDownvoted] = useState(false);
+    const [userUpvoted, setUserUpvoted] = useState(props.solution.upvotes.includes(user?.email));
+    const [userDownvoted, setUserDownvoted] = useState(props.solution.downvotes.includes(user?.email));
     const [isReplying, setIsReplying] = useState(false);
+    const [replyText, setReplyText] = useState("")
     
-    
-    const handleReply = () => {
-        console.log("kore felo kemon?")
+    const handleReply = async () => {
+        if(!user) {
+            SwalInfoAlert("Log in to reply!")
+            setIsReplying(false)
+
+            return
+        } else {
+            if( replyText.length > 11) {
+                const postedBy = user?.email
+                const solutionId = solution._id
+                const questionId = solution.questionID 
+                const reply = replyText
+
+                const body = {
+                    "postedBy" : postedBy,
+                    "solutionId": solutionId,
+                    "questionId": questionId, 
+                    "reply": reply
+                }
+
+
+                await Axios.post(API_BASE_URL + "reply/add",
+                body,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                )
+                .then((response) => {
+                    setIsReplying(false)
+                    window.location.reload()
+                })
+                .catch((error) => {
+                    console.log(error)
+                    SwalInfoAlert("Could not post reply")
+                }) 
+
+            } else {
+                return
+            }
+        }
+        
     };
 
     const handleReplyBtnPress = () => {
@@ -66,7 +112,7 @@ function Solution(props) {
 
     const getLink = ()=> {
         const link = solution.pdfFile?.split('?')[0].replace('view', 'preview')
-        console.log("parsed link: ", link)
+        // console.log("parsed link: ", link)
         return link
     }
 
@@ -132,7 +178,7 @@ function Solution(props) {
             <div className="solution-container">
                 {isReplying ?
                     <div className="reply-text-editor">
-                        <RichTextEditor minimal={true}/>
+                        <RichTextEditor minimal={true} solutionTxtHandler={setReplyText} value={replyText}/>
                         <div className='add-reply-btn small-btn dark' onClick={handleReply}>
                             Submit
                         </div>
