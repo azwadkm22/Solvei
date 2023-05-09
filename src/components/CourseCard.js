@@ -6,7 +6,7 @@ import { API_BASE_URL } from '../utils/constants';
 
 function CourseCard(props) {
   const url = "/course/" + props.courseCode + '/' + props.courseName.replaceAll(' ', "%20")
-  console.log("from courseCard url: ", url)
+  // console.log("from courseCard url: ", url)
   const [qCount, setCount] = useState(0)
 
   useEffect(() => {

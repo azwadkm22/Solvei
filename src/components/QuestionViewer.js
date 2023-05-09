@@ -17,7 +17,7 @@ function QuestionViewer(props) {
   }
 
   useEffect(() => {
-    Axios.get(API_BASE_URL + USER + user.email)
+    Axios.get(API_BASE_URL + USER + user?.email)
         .then((response) => {
           const starredList = response.data.starred
           starredList.forEach(function(item) {
@@ -39,7 +39,7 @@ function QuestionViewer(props) {
     async () =>{
       console.log("Accept");
       await Axios.post(API_BASE_URL + "user/star/remove", {
-        "email": user.email,
+        "email": user?.email,
         "questionId": questionId
       })
       .then(function (response) {
@@ -55,7 +55,7 @@ function QuestionViewer(props) {
     })
     :
     Axios.post(API_BASE_URL + "user/star/add", {
-      "email":user.email,
+      "email":user?.email,
       "questionId": questionId
     })
     .then(function (response) {

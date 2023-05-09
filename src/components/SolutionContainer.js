@@ -13,7 +13,10 @@ function SolutionContainer(props) {
         //   ));
         const toReturn = solutions.map((sol, index) => (
             <div key={index}>
-                <Solution className="main-reply" vote={15} isSolution={true} solution={sol}/>
+                
+                <Solution className="main-reply" vote={sol.upvotes.length - sol.downvotes.length} isSolution={true} solution={sol}/>
+                
+                
             </div>
         ))
         // console.log("toreturn: ", toReturn )
