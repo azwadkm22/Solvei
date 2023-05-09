@@ -19,7 +19,7 @@ const RichTextEditor = (props) => {
             ['link'],
             // [{ 'font': [] }],
             [{ 'align': [] }],
-            [{ 'color': [] }, { 'background': [] }],
+            // [{ 'color': [] }, { 'background': [] }],
             ['clean'],
         ]
     };

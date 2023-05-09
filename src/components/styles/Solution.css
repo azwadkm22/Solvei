@@ -59,3 +59,23 @@
     align-items: center;
     justify-content: center;
 }
+
+.solution-reply{
+    width: 95%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #efefef;
+    margin: 10px 0px;
+}
+
+.solution-box {
+    width: 91%;
+    margin-left: 5%;
+    background-color: #E2E2E2;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.solution-box-container {
+    margin-bottom: 4%;
+}

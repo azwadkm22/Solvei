@@ -31,11 +31,79 @@ function Solution(props) {
             })
     }, [])
 
+    const addUpvote = () => {
+        // api / solution / add / upvote
+        const url = API_BASE_URL + "solution/add/upvote"
+
+        Axios.post(url, {
+            "solutionId": solution._id,
+            "email": user?.email
+        })
+            .then(function (response) {
+                // setUserFlaggedBlurry(false)
+                // props.updateFlags();
+                // SwalInfoAlert("Blurry Flag removed.", "")
+            })
+            .catch(function (error) {
+                SwalErrorAlert(error.message)
+            })
+    }
+
+    const removeUpvote = () => {
+        const url = API_BASE_URL + "solution/remove/upvote"
+        
+        Axios.post(url, {
+            "solutionId": solution._id,
+            "email": user?.email
+        })
+            .then(function (response) {
+                // setUserFlaggedBlurry(false)
+                // props.updateFlags();
+                // SwalInfoAlert("Blurry Flag removed.", "")
+            })
+            .catch(function (error) {
+                SwalErrorAlert(error.message)
+            })
+    }
+
+    const addDownvote = () => {
+        const url = API_BASE_URL + "solution/add/downvote"
+
+        Axios.post(url, {
+            "solutionId": solution._id,
+            "email": user?.email
+        })
+            .then(function (response) {
+                // setUserFlaggedBlurry(false)
+                // props.updateFlags();
+                // SwalInfoAlert("Blurry Flag removed.", "")
+            })
+            .catch(function (error) {
+                SwalErrorAlert(error.message)
+            })
+    }
+
+    const removeDownvote = () => {
+        const url = API_BASE_URL + "solution/remove/downvote"
+
+        Axios.post(url, {
+            "solutionId": solution._id,
+            "email": user?.email
+        })
+            .then(function (response) {
+                // setUserFlaggedBlurry(false)
+                // props.updateFlags();
+                // SwalInfoAlert("Blurry Flag removed.", "")
+            })
+            .catch(function (error) {
+                SwalErrorAlert(error.message)
+            })
+    }
     const handleReply = async () => {
+        console.log("PRESSED")
         if(!user) {
             SwalInfoAlert("Log in to reply!")
             setIsReplying(false)
-
             return
         } else {
             if( replyText.length > 11) {
@@ -89,18 +157,32 @@ function Solution(props) {
         {
             setVoteCount(voteCount-1)
             setUserUpvoted(false);
+            removeUpvote();
+            //##solution/remove/upvote
         }
         else if (userUpvoted === false && userDownvoted === true) {
             setVoteCount(voteCount + 2);
             setUserUpvoted(true);
             setUserDownvoted(false);
+            //##solution/add/upvote
+            addUpvote();
+            removeDownvote();
+            //##solution/remove/downvote
         }
         else 
         {
             setVoteCount(voteCount + 1);
             setUserUpvoted(true);
             setUserDownvoted(false);
+            //##solution/add/upvote
+            addUpvote();
         }
+
+        // updateVoteCount()
+
+        // solution/add/upvote
+
+
         console.log(userUpvoted)
         
     }
@@ -110,16 +192,20 @@ function Solution(props) {
         if (userDownvoted === true && userUpvoted === false) {
             setVoteCount(voteCount + 1)
             setUserDownvoted(false);
+            removeDownvote()
         }
         else if (userDownvoted === false && userUpvoted === true) {
             setVoteCount(voteCount -2);
             setUserUpvoted(false);
             setUserDownvoted(true);
+            removeUpvote();
+            addDownvote();
         }
         else {
             setVoteCount(voteCount - 1);
             setUserUpvoted(false);
             setUserDownvoted(true);
+            addDownvote();
         }
 
     }
@@ -138,23 +224,6 @@ function Solution(props) {
         return <div dangerouslySetInnerHTML={{__html:solution.solution}}/>
     }
 
-    // const getReplies = async () => {
-    //     try {
-    //         const url = API_BASE_URL + "reply/get?solution=" + solution._id
-    //         const response = await Axios.get(url)
-    //         console.log(typeof(response.data))
-    //         const toReturn = response.data?.map((res, index) => {
-    //             return <SolutionReply key={index} replyText={res.reply} reply={res}/>
-    //         })
-
-    //         return toReturn
-
-    //     } catch(error) {
-    //         SwalErrorAlert(error.message)
-    //     }
-        
-    // }
-
     const getReplies = () => {
         const toRet = replies.map((res, index) => {
             return <SolutionReply key={index} replyText={res.reply} reply={res}/>
@@ -165,7 +234,7 @@ function Solution(props) {
 
 
     return (
-        <div>
+        <div className="solution-box">
             <div className="solution-row">
                 <div className="solution-votes">
                     <div className="upvote" onClick={upvote}>
@@ -230,7 +299,6 @@ function Solution(props) {
                     :
                     <></>
                 }
-
 
             </div>
 

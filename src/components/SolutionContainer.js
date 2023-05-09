@@ -12,7 +12,7 @@ function SolutionContainer(props) {
         //     <QuestionResultCard key={index} question={question} examBatch={question.batch} courseCode={question.courseCode} examType={question.examType} teacherName={question.teacher} />
         //   ));
         const toReturn = solutions.map((sol, index) => (
-            <div key={index}>
+            <div key={index} className='solution-box-container'>
                 
                 <Solution className="main-reply" vote={sol.upvotes.length - sol.downvotes.length} isSolution={true} solution={sol}/>
   
