@@ -16,7 +16,8 @@
 .user-info-container {
     display: flex;
     flex-direction: column;
-    height: 256px;
+    height: 128px;
+    align-self: center;
     justify-content:space-around;
 }
 
@@ -134,7 +135,7 @@
     }
 
     .user-info-container {
-        height: 150px;
+        height: 100px;
         width: 90%;
         /* background-color: bisque; */
         margin: 1% 5%;

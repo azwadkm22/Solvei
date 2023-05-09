@@ -18,6 +18,7 @@ function Solution(props) {
     const [replyText, setReplyText] = useState("")
     const [replies, setReplies] = useState([])
     
+    
     useEffect(() => {
         const url = API_BASE_URL + "reply/get?solution=" + solution._id
 
@@ -152,30 +153,34 @@ function Solution(props) {
     console.log("solution: ", solution, " isPDf: ", solution.isPDF)
 
     function upvote() {
-        
-        if(userUpvoted === true && userDownvoted === false)
-        {
-            setVoteCount(voteCount-1)
-            setUserUpvoted(false);
-            removeUpvote();
-            //##solution/remove/upvote
+        if (user) {
+            if(userUpvoted === true && userDownvoted === false)
+            {
+                setVoteCount(voteCount-1)
+                setUserUpvoted(false);
+                removeUpvote();
+                //##solution/remove/upvote
+            }
+            else if (userUpvoted === false && userDownvoted === true) {
+                setVoteCount(voteCount + 2);
+                setUserUpvoted(true);
+                setUserDownvoted(false);
+                //##solution/add/upvote
+                addUpvote();
+                removeDownvote();
+                //##solution/remove/downvote
+            }
+            else 
+            {
+                setVoteCount(voteCount + 1);
+                setUserUpvoted(true);
+                setUserDownvoted(false);
+                //##solution/add/upvote
+                addUpvote();
+            }
         }
-        else if (userUpvoted === false && userDownvoted === true) {
-            setVoteCount(voteCount + 2);
-            setUserUpvoted(true);
-            setUserDownvoted(false);
-            //##solution/add/upvote
-            addUpvote();
-            removeDownvote();
-            //##solution/remove/downvote
-        }
-        else 
-        {
-            setVoteCount(voteCount + 1);
-            setUserUpvoted(true);
-            setUserDownvoted(false);
-            //##solution/add/upvote
-            addUpvote();
+        else {
+            SwalInfoAlert("Please Login First")
         }
 
         // updateVoteCount()
@@ -189,24 +194,32 @@ function Solution(props) {
 
     function downvote() {
         console.log(userDownvoted)
-        if (userDownvoted === true && userUpvoted === false) {
-            setVoteCount(voteCount + 1)
-            setUserDownvoted(false);
-            removeDownvote()
+
+        if (user)
+        {
+            if (userDownvoted === true && userUpvoted === false) {
+                setVoteCount(voteCount + 1)
+                setUserDownvoted(false);
+                removeDownvote()
+            }
+            else if (userDownvoted === false && userUpvoted === true) {
+                setVoteCount(voteCount - 2);
+                setUserUpvoted(false);
+                setUserDownvoted(true);
+                removeUpvote();
+                addDownvote();
+            }
+            else {
+                setVoteCount(voteCount - 1);
+                setUserUpvoted(false);
+                setUserDownvoted(true);
+                addDownvote();
+            }
         }
-        else if (userDownvoted === false && userUpvoted === true) {
-            setVoteCount(voteCount -2);
-            setUserUpvoted(false);
-            setUserDownvoted(true);
-            removeUpvote();
-            addDownvote();
+        else{
+            SwalInfoAlert("Please Login First")
         }
-        else {
-            setVoteCount(voteCount - 1);
-            setUserUpvoted(false);
-            setUserDownvoted(true);
-            addDownvote();
-        }
+        
 
     }
     

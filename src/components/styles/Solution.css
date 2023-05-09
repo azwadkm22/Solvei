@@ -39,6 +39,7 @@
 }
 
 .solution-header {
+    font-size: 1em;
     display: flex;
     font-size: 32px;
     margin: 0% 2%;
@@ -78,4 +79,15 @@
 
 .solution-box-container {
     margin-bottom: 4%;
+}
+
+.upvote, .downvote{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+
+    .solution-header{
+        font-size: 24px;
+    }
 }

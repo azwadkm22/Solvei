@@ -45,10 +45,10 @@ function Profile() {
           isUser ? 
           <div className='user-info-container'>
               <p className='user-info'>{userInfo.name}</p>
-              <p className='user-info'>{userInfo.batch}</p>
-              <p className='user-info'>{userInfo.registrationNumber}</p>
+              <p className='user-info'>Batch {userInfo.batch}</p>
+              {/* <p className='user-info'>{userInfo.registrationNumber}</p> */}
               <p className='user-info'>{userInfo.email}</p>
-              <div className='edit-pass-btn user-info dark'> Edit Password </div>
+              {/* <div className='edit-pass-btn user-info dark'> Edit Password </div> */}
           </div>
 
           :
