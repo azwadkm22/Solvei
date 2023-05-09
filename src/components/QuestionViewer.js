@@ -10,11 +10,132 @@ function QuestionViewer(props) {
   const questionId = props.question
   const [isFlagPressed, setIsFlagPressed] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
-  const [userPressedFlag, setUserPressedFlag] = useState(false);
+  const [userFlaggedIncorrect, setUserFlaggedIncorrect] = useState(false);
+  const [userFlaggedBlurry, setUserFlaggedBlurry] = useState(false);
 
   const toggleDropdown = () => {
     setIsFlagPressed(!isFlagPressed);
   }
+
+  const removeBlurryFlagPrompt = () => {
+    SwalQuestionAlert("Do you want to remove the Blurry Flag?",
+      async () => {
+        console.log("Accept");
+        await Axios.post(API_BASE_URL + "question/unflag/blurry", {
+          "questionId": questionId,
+          "email": user?.email
+        })
+          .then(function (response) {
+            setUserFlaggedBlurry(false)
+            props.updateFlags();
+            SwalInfoAlert("Blurry Flag removed.", "")
+          })
+          .catch(function (error) {
+            SwalErrorAlert(error.message)
+          })
+      },
+      () => { }
+    )
+  }
+
+  const addBlurryFlagPrompt = () => {
+    userFlaggedBlurry === false ? 
+
+    SwalQuestionAlert("Do you want to add the Blurry Flag?",
+      async () => {
+        console.log("Accept");
+        await Axios.post(API_BASE_URL + "question/flag/blurry", {
+          "questionId": questionId,
+          "email": user?.email
+        })
+          .then(function (response) {
+            setUserFlaggedBlurry(true)
+            props.updateFlags();
+            SwalInfoAlert("Blurry Flag added.", "")
+          })
+          .catch(function (error) {
+            SwalErrorAlert(error.message)
+          })
+      },
+      () => { }
+    )
+    :
+    SwalInfoAlert("Already flagged blurry by you.")
+  }
+
+
+  const removeIncorrectFlagPrompt = () => {
+    SwalQuestionAlert("Do you want to remove the Incorrect Flag?",
+      async () => {
+        console.log("Accept");
+        await Axios.post(API_BASE_URL + "question/unflag/incorrect", {
+          "questionId": questionId,
+          "email": user?.email
+        })
+          .then(function (response) {
+            setUserFlaggedIncorrect(false)
+            props.updateFlags();
+            SwalInfoAlert("Incorrect Flag removed.", "")
+          })
+          .catch(function (error) {
+            SwalErrorAlert(error.message)
+          })
+      },
+      () => { }
+    )
+  }
+
+  const addIncorrectFlagPrompt = () => {
+    userFlaggedIncorrect === false? 
+    SwalQuestionAlert("Do you want to add the Incorrect Flag?",
+      async () => {
+        console.log("Accept");
+        await Axios.post(API_BASE_URL + "question/flag/incorrect", {
+          "questionId": questionId,
+          "email": user?.email
+        })
+          .then(function (response) {
+            setUserFlaggedIncorrect(true)
+            props.updateFlags();
+            SwalInfoAlert("Incorrect Flag added.", "")
+          })
+          .catch(function (error) {
+            SwalErrorAlert(error.message)
+          })
+      },
+      () => { }
+    )
+    :
+    SwalInfoAlert("Already flagged incorrect by you.")
+  }
+
+  useEffect(() => {
+    // console.log("req", API_BASE_URL + "/question/view?question=" + questionId)
+    Axios.get(API_BASE_URL + "question/view?question=" + questionId)
+      .then((response) => {
+        console.log(response.data)
+        const flaggedBlurryList = response.data.flagBlurry;
+
+        // console.log( "BLURRR ", flaggedBlurryList)
+        flaggedBlurryList.forEach(function(item) {
+          if(user.email === item)
+          {
+            setUserFlaggedBlurry(true);
+          }
+        })
+
+        const flaggedIncorrectList = response.data.flagIncorrect;
+        flaggedIncorrectList.forEach(function (item) {
+          if (user.email === item) {
+            setUserFlaggedIncorrect(true);
+          }
+        })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [])
 
   useEffect(() => {
     Axios.get(API_BASE_URL + USER + user?.email)
@@ -88,17 +209,29 @@ function QuestionViewer(props) {
         </svg>}
       
       </div>
-      <div className={`flag-btn ${userPressedFlag ? 'flagged' : 'dark'}`} onClick={toggleDropdown}> 
+
+      <div className='question-flag-container'>
+        {userFlaggedBlurry ? 
+          <div className='question-flag blurry-flag' onClick={removeBlurryFlagPrompt}>Blurry</div> 
+        :
+          <></>
+        }
+        {userFlaggedIncorrect ? 
+        <div className='question-flag incorrect-flag' onClick={removeIncorrectFlagPrompt}>Incorrect</div>
+        :
+        <></>
+        }
+      </div>
+      <div className={`flag-btn dark`} onClick={toggleDropdown}> 
         Flag
       </div>
-
 
       {
         isFlagPressed ? 
           <div className='flag-dropdown-container'>
             <div className='flag-dropdown-list'>
-              <div className='flag-dropdown-option'>Flag as blurry</div>
-              <div className='flag-dropdown-option'>Flag as incorrect</div>
+              <div className='flag-dropdown-option' onClick={addBlurryFlagPrompt}>Flag as blurry</div>
+              <div className='flag-dropdown-option' onClick={addIncorrectFlagPrompt}>Flag as incorrect</div>
             </div>
         </div>
         

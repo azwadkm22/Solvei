@@ -26,16 +26,37 @@ function Question() {
     var responseData = [];
     var tryAgain = false;
 
+
+    var [blurryFlagsCount, updateBlurryFlagsCount] = useState(0)
+    var [incorrectFlagsCount, updateIncorrectFlagsCount] = useState(0)
+
+
+    const updateFlagCount = () => {
+        Axios.get(API_BASE_URL + 'question/view?question=' + id)
+            .then((response) => {
+                updateBlurryFlagsCount(response.data.flagBlurry.length);
+                updateIncorrectFlagsCount(response.data.flagIncorrect.length);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     useEffect(() => {
         console.log("Ok")
         if(isLoading === false)
         {
             setSolutionList(responseData)
+            console.log("AAAAAAAAA", responseData)
         }
         else{
             tryAgain = true;
         }
     }, [])
+
+    useEffect(() => {
+
+    }, [blurryFlagsCount, incorrectFlagsCount])
 
 
     useEffect(() => {
@@ -45,8 +66,6 @@ function Question() {
                 responseData = response.data;
                 setIsLoading(false);
                 setSolutionList(Object.values(response.data))
-                // console.log("response.data: ", (response.data))
-                // console.log("fetched solutions: ", solutionList)
             })
             .catch((error) => {
                 console.log(error)
@@ -59,6 +78,8 @@ function Question() {
             .then((response) => {
                 // console.log("response.data through axios: ", response.data)
                 setProps(response.data)
+                updateBlurryFlagsCount(response.data.flagBlurry.length);
+                updateIncorrectFlagsCount(response.data.flagIncorrect.length);
             })
             .catch((error) => {
                 console.log(error)
@@ -155,7 +176,7 @@ function Question() {
             <div className='question-main-content'>
                 
                 <div>
-                    <QuestionViewer pdfFile={props.pdfFile} question={props._id}/>
+                    <QuestionViewer pdfFile={props.pdfFile} question={props._id} updateFlags={updateFlagCount}/>
 
                     <div>
                         {
@@ -236,11 +257,11 @@ function Question() {
                 <table className='flag-table'>
                     <tr className='flag-table-row'>
                         <td className='flag-table-data'>Blurry</td>
-                            <td className='flag-table-data'>{props.flagBlurry.length}</td>
+                                  <td className='flag-table-data'>{blurryFlagsCount}</td>
                     </tr >
                         <tr className='flag-table-row'>
                             <td className='flag-table-data'>Incorrect</td>
-                            <td className='flag-table-data'>{props.flagIncorrect.length}</td>
+                                  <td className='flag-table-data'>{incorrectFlagsCount}</td>
                         </tr>
                 </table>
             </div>

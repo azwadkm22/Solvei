@@ -34,6 +34,30 @@
     border-radius: 10px;
 }
 
+.question-flag-container {
+    position: absolute;
+    top: 80px;
+    left: 16px;
+}
+
+.question-flag {
+    margin-bottom: 16px;
+    font-size: 18px;
+    padding: 4px 8px;
+    background-color: #fefefe;
+    border: 2px solid #242424;
+    border-radius: 10px;
+    text-align: center;
+    width: 80px;
+}
+
+.blurry-flag {
+    background-color: rgb(140, 103, 58);
+}
+.incorrect-flag {
+    background-color: #dc4f4c;
+}
+
 .gold-variant {
     background-color: #303030;
 }
