@@ -160,32 +160,38 @@ function Solution(props) {
 
                     </div>
                 </div>
-
-                <div className="solution-main-container">
-                    <p className="solution-text">
-                        {getSolutionDisplay()}
-                    </p>
+                
+                <div className="solution-header">
+                    {`Solution by ${solution.postedBy}`}
                 </div>
                 
-                
-            </div>
-            <div title="Hide"
-                className={`reply-btn dark ${isReplying ? "hide-btn" : ""}`}
-                onClick={handleReplyBtnPress}>
-                {isReplying ? ">" : "Reply"}
             </div>
 
-            <div className="solution-container">
+            <div className="solution-main-container">
+                <p className="solution-text">
+                    {getSolutionDisplay()}
+                </p>
+            </div>
+
+            <div className={`rte-container ${isReplying ? "" : "alignment-right"}`}>
+                <div title="Hide"
+                    className={`reply-btn dark ${isReplying ? "hide-btn" : ""}`}
+                    onClick={handleReplyBtnPress}>
+                    {isReplying ? ">" : "Reply"}
+                </div>
+
                 {isReplying ?
-                    <div className="reply-text-editor">
+                    <div className="rich-text-editor">
                         <RichTextEditor minimal={true} solutionTxtHandler={setReplyText} value={replyText}/>
-                        <div className='add-reply-btn small-btn dark' onClick={handleReply}>
+                        <div className='add-solution-btn small-btn dark' onClick={handleReply}>
                             Submit
                         </div>
                     </div>
                     :
                     <></>
                 }
+
+
             </div>
         </div>
     );

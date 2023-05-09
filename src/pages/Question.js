@@ -157,44 +157,51 @@ function Question() {
                 <div>
                     <QuestionViewer pdfFile={props.pdfFile} question={props._id}/>
 
-                    <div className='solution-container'>
+                    <div>
                         {
                         isQuillExpanded ?
-                        <div>
-                            < RichTextEditor solutionTxtHandler={setSolutionStr}/>
+                            <div className="rte-container">
                             <div title="Hide" className='reply-btn hide-btn hide-soln-editor-btn dark' onClick={handleRTEExpansion}>
                                 {">"}
                             </div>
-                            <div className='add-solution-btn small-btn dark' onClick={handleSubmit}>
-                                Submit
-                            </div>
-                            <label htmlFor="fileInput" className='add-solution-btn small-btn dark'>
-                                {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'}
-                                <input
-                                    type="file"
-                                    id="fileInput"
-                                    name="pdfFile"
-                                    accept=".pdf"
-                                    capture="environment"
-                                    style={{ display: 'none'}}
-                                    onChange={handlePdfFileChange}
-                                />
-                            </label>
+                            <div className='rich-text-editor'>
+                                < RichTextEditor solutionTxtHandler={setSolutionStr} />
+                                <div className='add-solution-btn small-btn dark' onClick={handleSubmit}>
+                                    Submit
+                                </div>
+                                <label htmlFor="fileInput" className='add-solution-btn small-btn dark'>
+                                    {pdfFile ? pdfFile.name : 'Upload a PDF file Instead?'}
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        name="pdfFile"
+                                        accept=".pdf"
+                                        capture="environment"
+                                        style={{ display: 'none' }}
+                                        onChange={handlePdfFileChange}
+                                    />
+                                </label>
+                            </div>                            
                         </div>
                         :
-                        <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
-                            Submit a solution
+                        <div className='rte-container alignment-right'>
+                            <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
+                                Submit a solution
+                            </div>
                         </div>
+                        
                         }
 
                         
-                        {
+                        
+                    </div>
+
+                    {
                         isLoading ? 
                         <LoadingBar /> 
                         : 
                         <SolutionContainer solutionList={solutionList} />
-                        }
-                    </div>
+                    }
                 
                 </div>
             </div>

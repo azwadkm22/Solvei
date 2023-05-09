@@ -4,11 +4,6 @@ import RichTextEditor from './RichTextEditor';
 
 function SolutionContainer(props) {
     const [solutions, setSolutionList] = useState(props.solutionList)
-    const [isReplying, setIsReplying] = useState(false);
-
-    
-
-    
 
     const populateSolutions = ()=> {
         // console.log("inside populate solutions")
