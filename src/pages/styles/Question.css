@@ -81,7 +81,6 @@ header > div > h3 {
     /* width: 20%; */
     font-size: 36px;
     position: relative;
-    float: right;
     padding: 10px 30px;
     display: flex;
     justify-content: center;
@@ -100,13 +99,10 @@ header > div > h3 {
 }
 
 .reply-btn {
-    border-radius: 20px;
-    padding: 5px 0px;
+    border-radius: 10px;
+    padding: 12px 20px;
     font-size: 18px;
     float: right;
-    width: 8%;
-    margin: 0px 20px;
-    margin-top: -15px;
     display: flex;
     justify-content: center;
     cursor: pointer;
@@ -123,20 +119,6 @@ header > div > h3 {
 .flag-table-data {
 }    */
 
-
-.hide-btn {
-    border-radius: 5px;
-    /* height: 20px; */
-    position: absolute;
-    left: -50px;
-    width: 2%;
-    height: 20px;
-    margin: 10px 28px;
-    /* padding: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .hide-soln-editor-btn {
     top: 0px;
@@ -166,7 +148,11 @@ header > div > h3 {
     font-size: 24px;
 
 }
-
+.alignment-right
+{
+    justify-content: end;
+    align-items: end;
+}
 .question-page-card h3 {
     font-size: 1em;
     font-size: 18px;
@@ -220,6 +206,9 @@ header > div > h3 {
 }
 
 @media screen and (max-width: 600px) {
+    .reply-btn {
+        font-size: 12px;
+    }
 
     .question-page-container {
         display: flex;
