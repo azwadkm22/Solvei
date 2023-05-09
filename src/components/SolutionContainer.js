@@ -15,8 +15,7 @@ function SolutionContainer(props) {
             <div key={index}>
                 
                 <Solution className="main-reply" vote={sol.upvotes.length - sol.downvotes.length} isSolution={true} solution={sol}/>
-                
-                
+  
             </div>
         ))
         // console.log("toreturn: ", toReturn )
