@@ -14,7 +14,7 @@ import { SwalInfoAlert } from '../components/SwalCustomAlerts'
 
 function Question() {  
     const {user} = useAuthContext()
-    const [renderSolution, setRenderSolution] = useState(false)
+    // const [renderSolution, setRenderSolution] = useState(false)
     const [solutionStr, setSolutionStr] = useState("")
     const [solutionList, setSolutionList] = useState(null)
     const {courseCode, courseName, batch, examType, id} = useParams();

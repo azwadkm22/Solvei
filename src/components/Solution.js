@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./styles/Solution.css"
 import { getSuggestedQuery } from "@testing-library/react";
 import RichTextEditor from "./RichTextEditor";
 import { useAuthContext } from '../hook/useAuthContext';
-import { SwalInfoAlert } from './SwalCustomAlerts'
+import { SwalErrorAlert, SwalInfoAlert } from './SwalCustomAlerts'
 import { API_BASE_URL } from "../utils/constants";
 import Axios from 'axios'
+import SolutionReply from "./SolutionReply";
 
 function Solution(props) {
     const {user} = useAuthContext();
@@ -15,7 +16,21 @@ function Solution(props) {
     const [userDownvoted, setUserDownvoted] = useState(props.solution.downvotes.includes(user?.email));
     const [isReplying, setIsReplying] = useState(false);
     const [replyText, setReplyText] = useState("")
+    const [replies, setReplies] = useState([])
     
+    useEffect(() => {
+        const url = API_BASE_URL + "reply/get?solution=" + solution._id
+
+        Axios.get(url)
+            .then((response) => {
+                console.log("response data; ", response.data)
+                setReplies(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
     const handleReply = async () => {
         if(!user) {
             SwalInfoAlert("Log in to reply!")
@@ -123,6 +138,31 @@ function Solution(props) {
         return <div dangerouslySetInnerHTML={{__html:solution.solution}}/>
     }
 
+    // const getReplies = async () => {
+    //     try {
+    //         const url = API_BASE_URL + "reply/get?solution=" + solution._id
+    //         const response = await Axios.get(url)
+    //         console.log(typeof(response.data))
+    //         const toReturn = response.data?.map((res, index) => {
+    //             return <SolutionReply key={index} replyText={res.reply} reply={res}/>
+    //         })
+
+    //         return toReturn
+
+    //     } catch(error) {
+    //         SwalErrorAlert(error.message)
+    //     }
+        
+    // }
+
+    const getReplies = () => {
+        const toRet = replies.map((res, index) => {
+            return <SolutionReply key={index} replyText={res.reply} reply={res}/>
+        })
+        return toRet
+    } 
+
+
 
     return (
         <div>
@@ -193,6 +233,8 @@ function Solution(props) {
 
 
             </div>
+
+            {getReplies()}
         </div>
     );
 }
