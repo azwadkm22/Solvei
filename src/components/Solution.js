@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from "react";
 import "./styles/Solution.css"
-import { getSuggestedQuery } from "@testing-library/react";
+import { Link } from "react-router-dom";
 import RichTextEditor from "./RichTextEditor";
 import { useAuthContext } from '../hook/useAuthContext';
 import { SwalErrorAlert, SwalInfoAlert } from './SwalCustomAlerts'
@@ -24,7 +24,7 @@ function Solution(props) {
 
         Axios.get(url)
             .then((response) => {
-                console.log("response data; ", response.data)
+                // console.log("response data; ", response.data)
                 setReplies(response.data)
             })
             .catch((error) => {
@@ -101,7 +101,7 @@ function Solution(props) {
             })
     }
     const handleReply = async () => {
-        console.log("PRESSED")
+        // console.log("PRESSED")
         if(!user) {
             SwalInfoAlert("Log in to reply!")
             setIsReplying(false)
@@ -150,7 +150,7 @@ function Solution(props) {
     };
     
 
-    console.log("solution: ", solution, " isPDf: ", solution.isPDF)
+    // console.log("solution: ", solution, " isPDf: ", solution.isPDF)
 
     function upvote() {
         if (user) {
@@ -188,12 +188,12 @@ function Solution(props) {
         // solution/add/upvote
 
 
-        console.log(userUpvoted)
+        // console.log(userUpvoted)
         
     }
 
     function downvote() {
-        console.log(userDownvoted)
+        // console.log(userDownvoted)
 
         if (user)
         {
@@ -284,7 +284,10 @@ function Solution(props) {
                 </div>
                 
                 <div className="solution-header">
-                    {`Solution by ${solution.postedBy}`}
+                Solution by&nbsp;
+                <Link to={`/profile/${solution.postedBy}`}>
+                    {solution.postedBy}
+                </Link>
                 </div>
                 
             </div>

@@ -43,11 +43,11 @@ function Question() {
     }
 
     useEffect(() => {
-        console.log("Ok")
+        // console.log("Ok")
         if(isLoading === false)
         {
             setSolutionList(responseData)
-            console.log("AAAAAAAAA", responseData)
+            // console.log("AAAAAAAAA", responseData)
         }
         else{
             tryAgain = true;
@@ -100,7 +100,7 @@ function Question() {
             setIsQuillExpanded(false)
             return
         } else {
-            console.log("You can do it.")
+            // console.log("You can do it.")
             let isPDF
             let hasImage
             const questionID = id

@@ -69,29 +69,29 @@ function SearchBar() {
         setSubmit(false)
         
         var params = ""
-        console.log(course.length, batch.length, yearSemester.length, teacher.length, examType.length)
+        // console.log(course.length, batch.length, yearSemester.length, teacher.length, examType.length)
         if(course.length > 0) {
-            console.log("in course")
+            // console.log("in course")
             params += (params.length > 0?'&':"") + 'course=' + course.replaceAll(' ', "%20")
         }
 
         if(batch.length > 0) {
-            console.log("in batch")
+            // console.log("in batch")
             params += (params.length > 0?'&':"") + 'batch='+ batch
         }
 
         if(yearSemester.length > 0) {
-            console.log("in year semester ", yearSemester[0], yearSemester[9])
+            // console.log("in year semester ", yearSemester[0], yearSemester[9])
             params += (params.length > 0?'&':"") + 'yearSemester=' + yearSemester[0] + yearSemester[9]
         }
 
         if(teacher.length > 0) {
-            console.log("in teacher")
+            // console.log("in teacher")
             params += (params.length > 0?'&':"") + 'teacher=' + teacher.replaceAll(' ', "%20")
         }
 
         if(examType.length > 0) {
-            console.log("in exam type")
+            // console.log("in exam type")
             params += (params.length > 0?'&':"") + 'examType=' + examType
         }
         
@@ -106,11 +106,11 @@ function SearchBar() {
         } else {
             getReq = QUESTION_SEARCH
         }
-        console.log("params:", params, "_getReq:", getReq)
+        // console.log("params:", params, "_getReq:", getReq)
 
         Axios.get(API_BASE_URL + getReq + params)
           .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             setSubmit(true) // before navigation
             setExpanded(false)
             goToResult(response.data)

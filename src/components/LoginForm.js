@@ -13,7 +13,7 @@ const LoginForm = () => {
     const navigate = useNavigate();
 
     const redirectToHome = () => {
-        console.log("in redirect to home");
+        // console.log("in redirect to home");
         navigate('/')
     }
 

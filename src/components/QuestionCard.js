@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function QuestionCard(props) {
   const question = props.question
   const url = "/question/" + question.courseCode + '/' + question.courseName.replaceAll(' ', '%20') + '/' + question.batch + '/' + question.examType + '/' + question._id
-  console.log(url)
+  // console.log(url)
   return (
     <Link to={url} className='card'>
       <div className='card-header question-card-header'>

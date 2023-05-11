@@ -15,7 +15,7 @@ function Home() {
     useEffect(() => {
         Axios.get(API_BASE_URL + "global/activity?fetch=10")
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 setGlobalActivityList(response.data);
             })
             .catch((error) => {

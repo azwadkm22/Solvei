@@ -5,7 +5,7 @@ export function ActivityContainer(props) {
     const navigate = useNavigate();
     const [isActivityMinimized, toggleActivityView] = useState(false);
     const getActivities = () => {
-        console.log(props.activityList)
+        // console.log(props.activityList)
         const activityDescriptionList = props.activityList.map((activity) => activity.description);
         // console.log(activityDescriptionList);
         return props.activityList.map((activity, index) => (
@@ -40,7 +40,7 @@ export function StarredListContainer(props) {
     const [isStarredMinimized, toggleStarredView] = useState(false);
     const navigate = useNavigate();
     const getStarredList = () => {
-        console.log(props.starredList)
+        // console.log(props.starredList)
         return props.starredList.map((starredPost, index) => (
             <div className='profile-activity' key={index} 
             onClick={ () => {
@@ -76,7 +76,7 @@ export function GlobalActivityContainer(props) {
         const activityOfUser = props.globalActivity.map(
             (activity) => activity.name + " " + activity.recentActivity.description
         );
-        console.log(activityOfUser)
+        // console.log(activityOfUser)
         return props.globalActivity.map((activity, index) => (
             <div className='profile-activity' id='home-activity' key={index}
                 onClick={() => {
