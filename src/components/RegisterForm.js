@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./styles/AuthForm.css";
 import { useRegister } from '../hook/useRegister';
 import { Link , useNavigate} from 'react-router-dom';
+import { SwalErrorAlert } from './SwalCustomAlerts';
 
 const RegisterForm = () => {
     const {register, error, isLoading} = useRegister();
@@ -17,7 +18,7 @@ const RegisterForm = () => {
     const navigate = useNavigate()
 
     const redirectToHome = () => {
-        console.log("in redirect to home");
+        // console.log("in redirect to home");
         navigate('/')
     }
 
@@ -25,13 +26,13 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
-        console.log(email, password, fullName, batchNumber)
-        const ok = await register(email, password, fullName,batchNumber)
-        console.log("ok", ok)
+        // console.log(email, password, fullName, batchNumber, univRegNumber)
+        const ok = await register(email, password, fullName, batchNumber, univRegNumber)
+        // console.log("ok", ok)
         if(ok) {
             redirectToHome();
         } else {
-            alert("Could not register user")
+            SwalErrorAlert("Could not register user")
         }
         
     };

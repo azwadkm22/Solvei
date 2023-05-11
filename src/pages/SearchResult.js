@@ -11,7 +11,7 @@ import QuestionResultCard from '../components/QuestionResultCard';
 function SearchResult() {
   const location = useLocation()
   const typeQuestion = location.state.typeQuestion
-  console.log("typeQuestion:", typeQuestion)
+  // console.log("typeQuestion:", typeQuestion)
   const result = location.state.parameter
   
   const getQuestions = () => {

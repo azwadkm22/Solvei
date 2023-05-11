@@ -10,7 +10,7 @@ Quill.register('modules/imageResize', ImageResize);
 
 const RichTextEditor = (props) => {
     const [text, setText] = useState('');
-    console.log("text: ", text)
+    // console.log("text: ", text)
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],

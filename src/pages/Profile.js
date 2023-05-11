@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import "./styles/Profile.css"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { API_BASE_URL, AUTH, USER } from '../utils/constants';
 import  Axios  from 'axios';
+import { useAuthContext } from '../hook/useAuthContext'
 import { ActivityContainer, StarredListContainer } from '../components/ActivityContainer';
 
 import LoadingBar from '../components/LoadingBar';
 
 function Profile() {
   const location = useLocation()
-  const {email} = location.state
+  const { user } = useAuthContext();
+  
+  const {email} = useParams()
   const [isUser, setIsUser] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
@@ -24,7 +27,7 @@ function Profile() {
       // Fetch all courses from the backend when the component mounts
       Axios.get(API_BASE_URL + USER + email)
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           setIsUser(true)
           setUserInfo(response.data)
         })
@@ -74,15 +77,18 @@ function Profile() {
           } userName={userInfo.name} />  
         }
 
+              
         {(userInfo.starred === undefined) ?
           <LoadingBar />
           :
-          <StarredListContainer title="Starred Posts" starredList={
-            userInfo.starred
-            // []
-
-          }/>
+          (user && user.email === userInfo.email) ?
+            <StarredListContainer 
+              title="Starred Posts" 
+              starredList={userInfo.starred}
+            />
+            : <></>
         }
+        
               
 
       </div>

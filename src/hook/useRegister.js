@@ -7,17 +7,17 @@ export const useRegister = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
   
-    const register = async (email, password, name, batch) => {
+    const register = async (email, password, name, batch, registrationNumber) => {
       setIsLoading(true)
       setError(null)
   
       const response = await fetch(API_BASE_URL + AUTH + REG, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ email, password, name, batch })
+        body: JSON.stringify({ email, password, name, batch, registrationNumber })
       })
       const json = await response.json()
-      console.log("json of response: ", json)
+      // console.log("json of response: ", json)
       if (!response.ok) {
         setIsLoading(false)
         setError(json.error)

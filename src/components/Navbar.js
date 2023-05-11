@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 function Navbar() {
   const { user } = useAuthContext();
+  const path = '/profile/' + user?.email
   const navigate = useNavigate();
   const logout  = useLogout();
   const location = useLocation()
@@ -106,9 +107,7 @@ function Navbar() {
               
                 {
                   user ?
-                    <Link to="/profile" state={{
-                      email: user.email
-                    }} className='menu-nav-link'>
+                    <Link to={path}  className='menu-nav-link'>
                     <li >Go to Profile</li>
                     </Link >
                     :
@@ -165,9 +164,7 @@ function Navbar() {
                   :
                     <div className='profile-dropdown-container'>
                       <div className='profile-dropdown-list'>
-                          <Link to="/profile" state={{
-                            email: user.email
-                          }}>
+                          <Link to={path}>
                           <div className='profile-dropdown-option'>Go to Profile</div>
                           </Link >
                           

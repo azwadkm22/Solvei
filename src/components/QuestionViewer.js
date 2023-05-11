@@ -20,7 +20,7 @@ function QuestionViewer(props) {
   const removeBlurryFlagPrompt = () => {
     SwalQuestionAlert("Do you want to remove the Blurry Flag?",
       async () => {
-        console.log("Accept");
+        // console.log("Accept");
         await Axios.post(API_BASE_URL + "question/unflag/blurry", {
           "questionId": questionId,
           "email": user?.email
@@ -43,7 +43,7 @@ function QuestionViewer(props) {
 
     SwalQuestionAlert("Do you want to add the Blurry Flag?",
       async () => {
-        console.log("Accept");
+        // console.log("Accept");
         await Axios.post(API_BASE_URL + "question/flag/blurry", {
           "questionId": questionId,
           "email": user?.email
@@ -67,7 +67,7 @@ function QuestionViewer(props) {
   const removeIncorrectFlagPrompt = () => {
     SwalQuestionAlert("Do you want to remove the Incorrect Flag?",
       async () => {
-        console.log("Accept");
+        // console.log("Accept");
         await Axios.post(API_BASE_URL + "question/unflag/incorrect", {
           "questionId": questionId,
           "email": user?.email
@@ -89,7 +89,7 @@ function QuestionViewer(props) {
     userFlaggedIncorrect === false? 
     SwalQuestionAlert("Do you want to add the Incorrect Flag?",
       async () => {
-        console.log("Accept");
+        // console.log("Accept");
         await Axios.post(API_BASE_URL + "question/flag/incorrect", {
           "questionId": questionId,
           "email": user?.email
@@ -113,7 +113,7 @@ function QuestionViewer(props) {
     // console.log("req", API_BASE_URL + "/question/view?question=" + questionId)
     Axios.get(API_BASE_URL + "question/view?question=" + questionId)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         const flaggedBlurryList = response.data.flagBlurry;
 
         // console.log( "BLURRR ", flaggedBlurryList)
@@ -158,7 +158,7 @@ function QuestionViewer(props) {
     isStarred ?
     SwalQuestionAlert("Remove from Starred?", 
     async () =>{
-      console.log("Accept");
+      // console.log("Accept");
       await Axios.post(API_BASE_URL + "user/star/remove", {
         "email": user?.email,
         "questionId": questionId
@@ -192,7 +192,7 @@ function QuestionViewer(props) {
     // if(set)
   }
   const link = props.pdfFile.split('?')[0].replace('view', 'preview')
-  console.log("link", link)
+  // console.log("link", link)
 
   return (
     <div className='question-container' >

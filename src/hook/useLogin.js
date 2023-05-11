@@ -18,13 +18,13 @@ export const useLogin = () => {
     })
     const json = await response.json()
 
-    console.log("in uselogin: ", json, "response: ", response, "response.ok", response.ok)
+    // console.log("in uselogin: ", json, "response: ", response, "response.ok", response.ok)
     if (!response.ok) {
       setIsLoading(false)
       setError(json.error)
     }
     if (response.ok) {
-        console.log("in uselog, ok was true")
+        // console.log("in uselog, ok was true")
       // save the user to local storage
       localStorage.setItem('user', JSON.stringify(json))
 

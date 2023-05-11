@@ -93,15 +93,15 @@ const UploadForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("in handle submit")
+        // console.log("in handle submit")
         
         // Submit form data to server or perform other actions
         // based on the form data
         const formData = new FormData();
 
         const newTopicList = topics.filter(item => item.length>0)
-        console.log(newTopicList)
-console.log("upload form: ", courseCode, courseName)
+        // console.log(newTopicList)
+// console.log("upload form: ", courseCode, courseName)
         formData.append("postedBy", user.email)
         formData.append("courseCode", courseCode)
         formData.append("courseName", courseName)
@@ -111,7 +111,7 @@ console.log("upload form: ", courseCode, courseName)
         formData.append("numOfQuestions", numOfQuestions)
         formData.append("topics", newTopicList)
         formData.append("pdfFile", pdfFile, pdfFile.name)
-        console.log(formData)
+        // console.log(formData)
 
 
         const response = await fetch(API_BASE_URL + 'question/post', {
