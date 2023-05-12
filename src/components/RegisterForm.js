@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./styles/AuthForm.css";
 import { useRegister } from '../hook/useRegister';
 import { Link , useNavigate} from 'react-router-dom';
-import { SwalErrorAlert } from './SwalCustomAlerts';
+import { SwalErrorAlert, SwalSuccessAlert } from './SwalCustomAlerts';
 
 const RegisterForm = () => {
     const {register, error, isLoading} = useRegister();
@@ -30,6 +30,7 @@ const RegisterForm = () => {
         const ok = await register(email, password, fullName, batchNumber, univRegNumber)
         // console.log("ok", ok)
         if(ok) {
+            SwalSuccessAlert("Successfully registerd your account.");
             redirectToHome();
         } else {
             SwalErrorAlert("Could not register user")
