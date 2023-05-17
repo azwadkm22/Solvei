@@ -264,7 +264,7 @@ function Question() {
                                   <td className='flag-table-data'>{incorrectFlagsCount}</td>
                         </tr>
                 </table>
-            </div>
+                </div>
             </div>
         </div>
     </div>

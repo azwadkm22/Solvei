@@ -12,6 +12,7 @@ function QuestionViewer(props) {
   const [isStarred, setIsStarred] = useState(false);
   const [userFlaggedIncorrect, setUserFlaggedIncorrect] = useState(false);
   const [userFlaggedBlurry, setUserFlaggedBlurry] = useState(false);
+  const [isStarBtnDisabled, toggleStarBtn] = useState(false);
 
   const toggleDropdown = () => {
     setIsFlagPressed(!isFlagPressed);
@@ -153,9 +154,19 @@ function QuestionViewer(props) {
   }, [isStarred])
   
 
+  const enableStarBtn = (state) => {
+    toggleStarBtn(state);
+  }
   const starQuestion = () => {
+    console.log("Pressed star btn:", isStarBtnDisabled)
 
+    if(isStarBtnDisabled === true)
+    {
+      return;
+    }
+    enableStarBtn(true);
     isStarred ?
+    
     SwalQuestionAlert("Remove from Starred?", 
     async () =>{
       // console.log("Accept");
@@ -166,13 +177,16 @@ function QuestionViewer(props) {
       .then(function (response) {
         setIsStarred(false)
         SwalInfoAlert("Question removed from starred.", "")
+        enableStarBtn(false);
       })
       .catch(function (error) {
         SwalErrorAlert(error.message)
+        enableStarBtn(false);
       }) 
     },
     () => {
       console.log("Reject");
+      enableStarBtn(false);
     })
     :
     Axios.post(API_BASE_URL + "user/star/add", {
@@ -182,9 +196,11 @@ function QuestionViewer(props) {
     .then(function (response) {
       setIsStarred(true)
       SwalInfoAlert("Question is starred.", "You can view your starred posts in your Profile.")
+      enableStarBtn(false);
     })
     .catch(function(error) {
       SwalErrorAlert(error.message)
+      enableStarBtn(false);
     })
     
     

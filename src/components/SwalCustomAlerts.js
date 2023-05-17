@@ -76,7 +76,8 @@ export function SwalQuestionAlert(title, onConfirm, onCancel)
         showCancelButton: true,
         confirmButtonText: 'Yes!',
         cancelButtonText: 'No!',
-        reverseButtons: false
+        reverseButtons: false,
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
             onConfirm()
