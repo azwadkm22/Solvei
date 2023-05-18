@@ -18,7 +18,7 @@ const RichTextEditor = (props) => {
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link'],
             // [{ 'font': [] }],
-            [{ 'align': [] }],
+            
             // [{ 'color': [] }, { 'background': [] }],
             ['clean'],
         ]

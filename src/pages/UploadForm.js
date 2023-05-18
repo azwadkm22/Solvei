@@ -21,11 +21,13 @@ const UploadForm = () => {
     const {user} = useAuthContext();
 
     const [courses, setCourses] = useState([])
+    const [courseShortList, setShortList] = useState([])
 
     useEffect(() => {
         Axios.get(API_BASE_URL + HOME + "all")
             .then((response) => {
                 setCourses(response.data.courses)
+                setShortList(response.data.courses)
             })
             .catch((error) => {
                 console.log(error)
@@ -33,23 +35,25 @@ const UploadForm = () => {
     }, []);
 
     const getCodes = () => {
-        return courses.map((course, index) => (
+        return courseShortList.map((course, index) => (
             <option key={index} value={course.courseCode} />
         ))
     };
 
     const getNames = () => {
-        return courses.map((course, index) => (
+        return courseShortList.map((course, index) => (
             <option key={index} value={course.courseName} />
         ))
     };
 
     const handleCourseCodeChange = (e) => {
         setCourseCode(e.target.value);
+        setShortList(courseShortList.filter(item => item.courseCode === e.target.value))
     };
 
     const handleCourseNameChange = (e) => {
         setCourseName(e.target.value);
+        setShortList(courseShortList.filter(item => item.courseName === e.target.value))
     };
 
     const handleBatchChange = (e) => {
@@ -260,8 +264,21 @@ const UploadForm = () => {
                     </div>
                     
                     <div className='topic-btn-container'>
-                        <div title="Add Topic" className='add-topic-btn' onClick={addTopic}> + </div>
-                        <div title="Remove Topic" className='remove-topic-btn' onClick={removeTopic}> - </div>
+                        <div title="Add Topic" className='add-topic-btn' onClick={addTopic}> 
+                            
+
+                        <svg className='add-logo' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19V13H5V11H11V5H13V11H19V13H13V19H11Z" fill="black" />
+                        </svg>
+
+                         </div>
+                        <div title="Remove Topic" className='remove-topic-btn' onClick={removeTopic}> 
+                            
+                            <svg className='remove-logo' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 13V11H19V13H5Z" fill="black" />
+                            </svg>
+
+                        </div>
                     </div>
                     
                 </label>

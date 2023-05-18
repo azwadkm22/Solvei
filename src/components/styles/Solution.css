@@ -18,9 +18,13 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    align-items: center;
+    vertical-align: middle;
+    align-self: center;
+    
     /* padding: 20px 0px; */
     /* padding-right: 30px; */
-    margin: 0%;
+    margin: auto 0px;
 }
 
 .rte-container {
@@ -62,6 +66,7 @@
 }
 
 .solution-reply{
+    position: relative;
     width: 95%;
     padding: 10px 10px;
     border-radius: 10px;
@@ -70,6 +75,7 @@
 }
 
 .solution-box {
+    position: relative;
     width: 91%;
     margin-left: 5%;
     background-color: #E2E2E2;
@@ -85,8 +91,101 @@
     cursor: pointer;
 }
 
+.delete-solution-btn {
+    position: absolute;
+    margin: auto 10px;
+    right: 0px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dc4f4c;
+    padding: 16px 24px;
+    border: 2px solid #242424;
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+}
+
+.delete-reply-btn {
+    position: absolute;
+    margin: auto 5px;
+    right: 0px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dc4f4c;
+    padding: 10px;
+    border: 2px solid #242424;
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+}
+
+.reply-trash-logo{
+    height: 18px;
+    width: 18px;
+}
+
+.trash-logo {
+    height: 24px;
+    width: 24px;
+}
+
+
+@media screen and (max-width: 960px) {
+
+    .delete-solution-btn {
+        padding: 10px;
+        width: 30px;
+    }
+
+    .delete-reply-btn {
+        margin: auto 5px;
+        width: 20px;
+        padding: 10px;
+    }
+
+    .trash-logo {
+        height: 18px;
+        width: 18px;
+    }
+
+    .reply-trash-logo {
+        height: 16px;
+        width: 16px;
+    }
+    
+    .solution-header {
+        font-size: 21px;
+    }
+}
+
 @media screen and (max-width: 600px) {
 
+    .solution-box {
+        margin-left: 2%;
+    }
+
+    .delete-solution-btn, .delete-reply-btn{
+        padding: 5px;
+        right: 0px;
+        width: 20px;
+        border: 1px solid #242424;
+        border-radius: 5px;
+    }
+    .delete-solution-btn {
+        width: 30px;
+    }
+
+    .trash-logo, .reply-trash-logo {
+        height: 12px;
+        width: 12px;
+    }
+    .vote-count {
+        margin: 4px auto;
+        font-size: 16px;
+        /* margin-left: 4px; */
+}
     .solution-header{
         font-size: 18px;
     }

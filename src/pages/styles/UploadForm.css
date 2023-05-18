@@ -112,22 +112,37 @@
 
 .remove-topic-btn, .add-topic-btn {
     border-radius: 10px;
-    font-size: large;
-    font-weight: bold;
-    padding: 10px 20px;
+    font-size: 18px;
+    color: #242424;
+    font-weight: bolder;
+    padding: 8px 16px;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 0px 5px;
     cursor: pointer;
     border: 2px solid #242424;
+    align-items: center;
+    align-self: center;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.add-logo, .remove-logo {
+    height: 24px;
+    width: 24px;
+    
+}
+
 .remove-topic-btn
 {
-    background-color: rgb(255, 142, 127);
+    background-color: #dc4f4c;
 }
 
 .add-topic-btn{
-    background-color: rgb(127, 176, 255);
+    background-color: #3ed84d;
 }
 
 .mobile-empty-space {

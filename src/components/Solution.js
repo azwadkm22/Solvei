@@ -1,14 +1,15 @@
 import React, { useState , useEffect } from "react";
 import "./styles/Solution.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RichTextEditor from "./RichTextEditor";
 import { useAuthContext } from '../hook/useAuthContext';
-import { SwalErrorAlert, SwalInfoAlert } from './SwalCustomAlerts'
+import { SwalErrorAlert, SwalInfoAlert, SwalQuestionAlert } from './SwalCustomAlerts'
 import { API_BASE_URL } from "../utils/constants";
 import Axios from 'axios'
 import SolutionReply from "./SolutionReply";
 
 function Solution(props) {
+    const navigate = useNavigate();
     const {user} = useAuthContext();
     const [voteCount, setVoteCount] = useState(props.vote)
     const [solution, setSolution] = useState(props.solution)
@@ -106,8 +107,10 @@ function Solution(props) {
             SwalInfoAlert("Log in to reply!")
             setIsReplying(false)
             return
-        } else {
-            if( replyText.length > 11) {
+        } 
+        
+        else {
+            if( replyText.length > 20) {
                 const postedBy = user?.email
                 const solutionId = solution._id
                 const questionId = solution.questionID 
@@ -139,6 +142,7 @@ function Solution(props) {
                 }) 
 
             } else {
+                SwalErrorAlert("Your reply needs to be atleast 20 characters long.")
                 return
             }
         }
@@ -148,6 +152,31 @@ function Solution(props) {
     const handleReplyBtnPress = () => {
         setIsReplying(!isReplying);
     };
+
+    const deleteSolution = () => {
+        SwalQuestionAlert("Do you want to delete this solution?",
+            () => {
+
+                Axios.delete(API_BASE_URL + "solution/delete/" + solution._id)
+                    .then(response => {
+                        SwalInfoAlert("Solution deleted successfully.")
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        SwalErrorAlert("Deletion unsuccessful.")
+                    })
+                
+
+            }
+            ,
+            () => {
+
+                console.log("Rejected")
+            })
+        console.log(props)
+    }
     
 
     // console.log("solution: ", solution, " isPDf: ", solution.isPDF)
@@ -248,10 +277,21 @@ function Solution(props) {
 
     return (
         <div className="solution-box">
+
+            {
+                user.email === solution.postedBy &&
+                <div className='delete-solution-btn' onClick={deleteSolution} title='Delete Solution'>
+                    <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" className='trash-logo'>
+                        <path d="M5 0V1H0V3H1V16C1 16.5304 1.21071 17.0391 1.58579 17.4142C1.96086 17.7893 2.46957 18 3 18H13C13.5304 18 14.0391 17.7893 14.4142 17.4142C14.7893 17.0391 15 16.5304 15 16V3H16V1H11V0H5ZM3 3H13V16H3V3ZM5 5V14H7V5H5ZM9 5V14H11V5H9Z" fill="#efefef" />
+                    </svg>
+                </div>
+            }
             <div className="solution-row">
                 <div className="solution-votes">
                     <div className="upvote" onClick={upvote}>
                         {
+                            // http://localhost:8080/api/solution/delete/solutionID
+                            // http://localhost:8080/api/reply/delete/replyID
                             userUpvoted ? 
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.00003 14H8.00003V21C8.00003 21.2653 8.10539 21.5196 8.29292 21.7072C8.48046 21.8947 8.73481 22 9.00003 22H15C15.2652 22 15.5196 21.8947 15.7071 21.7072C15.8947 21.5196 16 21.2653 16 21V14H20C20.1883 13.9997 20.3727 13.9463 20.5319 13.846C20.6912 13.7456 20.819 13.6024 20.9005 13.4327C20.9821 13.263 21.0141 13.0737 20.993 12.8867C20.9719 12.6996 20.8984 12.5223 20.781 12.375L12.781 2.37505C12.4 1.90005 11.6 1.90005 11.219 2.37505L3.21903 12.375C3.10167 12.5223 3.0282 12.6996 3.00706 12.8867C2.98592 13.0737 3.01797 13.263 3.09953 13.4327C3.18108 13.6024 3.30883 13.7456 3.46812 13.846C3.6274 13.9463 3.81176 13.9997 4.00003 14Z" fill="black" />
@@ -289,6 +329,8 @@ function Solution(props) {
                     {solution.postedBy}
                 </Link>
                 </div>
+
+                
                 
             </div>
 

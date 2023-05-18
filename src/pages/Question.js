@@ -4,15 +4,16 @@ import "../components/styles/Button.css"
 import "./styles/Question.css"
 import RichTextEditor from '../components/RichTextEditor'
 import SolutionContainer from '../components/SolutionContainer'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/constants'
 import Axios from 'axios'
 import { useAuthContext } from '../hook/useAuthContext'
 import LoadingBar from '../components/LoadingBar'
-import { SwalInfoAlert } from '../components/SwalCustomAlerts'
+import { SwalErrorAlert, SwalInfoAlert, SwalQuestionAlert } from '../components/SwalCustomAlerts'
 
 
 function Question() {  
+    const navigate = useNavigate();
     const {user} = useAuthContext()
     // const [renderSolution, setRenderSolution] = useState(false)
     const [solutionStr, setSolutionStr] = useState("")
@@ -157,6 +158,29 @@ function Question() {
         setPdfFile(e.target.files[0]);
     };
 
+    const deleteQuestion = () => {
+        SwalQuestionAlert("Do you want to delete this question?",
+        () => 
+        {
+            // http://localhost:8080/api/question/delete/6465803f7ad8dd4d9ffa6bdd
+            Axios.delete(API_BASE_URL + "question/delete/" + id)
+            .then(response => {
+                SwalInfoAlert("Question deleted successfully.")
+            })
+            .catch(error => {
+                SwalErrorAlert("Deletion unsuccessful.")
+            })
+            navigate('/')
+    
+        }
+        ,
+        () => {
+
+            console.log("Rejected")
+        })
+        console.log(props)
+    }
+
 
   return (
     props &&
@@ -209,6 +233,15 @@ function Question() {
                             <div className='add-solution-btn dark' onClick={handleRTEExpansion}>
                                 Submit a solution
                             </div>
+                            
+                            {
+                                user.email === props.postedBy &&
+                                <div className='delete-question-btn' onClick={deleteQuestion} title='Delete Question'>
+                                    <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" className='trash-logo'>
+                                        <path d="M5 0V1H0V3H1V16C1 16.5304 1.21071 17.0391 1.58579 17.4142C1.96086 17.7893 2.46957 18 3 18H13C13.5304 18 14.0391 17.7893 14.4142 17.4142C14.7893 17.0391 15 16.5304 15 16V3H16V1H11V0H5ZM3 3H13V16H3V3ZM5 5V14H7V5H5ZM9 5V14H11V5H9Z" fill="#efefef" />
+                                    </svg>
+                                </div>
+                            }
                         </div>
                         
                         }
@@ -265,6 +298,7 @@ function Question() {
                         </tr>
                 </table>
                 </div>
+                
             </div>
         </div>
     </div>
