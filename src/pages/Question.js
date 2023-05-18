@@ -4,7 +4,7 @@ import "../components/styles/Button.css"
 import "./styles/Question.css"
 import RichTextEditor from '../components/RichTextEditor'
 import SolutionContainer from '../components/SolutionContainer'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/constants'
 import Axios from 'axios'
 import { useAuthContext } from '../hook/useAuthContext'
@@ -14,7 +14,7 @@ import { SwalErrorAlert, SwalInfoAlert, SwalQuestionAlert } from '../components/
 
 function Question() {  
     const navigate = useNavigate();
-    const {user} = useAuthContext()
+    const {user} = useAuthContext();
     // const [renderSolution, setRenderSolution] = useState(false)
     const [solutionStr, setSolutionStr] = useState("")
     const [solutionList, setSolutionList] = useState(null)
@@ -31,6 +31,14 @@ function Question() {
     var [blurryFlagsCount, updateBlurryFlagsCount] = useState(0)
     var [incorrectFlagsCount, updateIncorrectFlagsCount] = useState(0)
 
+    function removeEmailEnding(email) {
+        var atIndex = email.indexOf('@');
+        if (atIndex !== -1) {
+            return email.substring(0, atIndex);
+        } else {
+            return email;
+        }
+    }
 
     const updateFlagCount = () => {
         Axios.get(API_BASE_URL + 'question/view?question=' + id)
@@ -235,7 +243,7 @@ function Question() {
                             </div>
                             
                             {
-                                user.email === props.postedBy &&
+                                user?.email && user?.email === props.postedBy &&
                                 <div className='delete-question-btn' onClick={deleteQuestion} title='Delete Question'>
                                     <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" className='trash-logo'>
                                         <path d="M5 0V1H0V3H1V16C1 16.5304 1.21071 17.0391 1.58579 17.4142C1.96086 17.7893 2.46957 18 3 18H13C13.5304 18 14.0391 17.7893 14.4142 17.4142C14.7893 17.0391 15 16.5304 15 16V3H16V1H11V0H5ZM3 3H13V16H3V3ZM5 5V14H7V5H5ZM9 5V14H11V5H9Z" fill="#efefef" />
@@ -243,10 +251,8 @@ function Question() {
                                 </div>
                             }
                         </div>
-                        
                         }
 
-                        
                         
                     </div>
 
@@ -275,13 +281,33 @@ function Question() {
                     </div>
 
 
-                    <ul className='topic-list'>
-                        {props.topics.map((topic, index) => (
-                            <li id={index}>{topic}</li>
-                        ))}
+                    <ul className='topic-list' onClick={
+                              () => console.log(props.topics)
+                    }>
+                        {
+                            props.topics.length <2 && props.topics[0] === '' ? 
+                            <>No topics listed.</>
+                            :
+                            props.topics.map((topic, index) => (
+                                <li id={index}>{topic}</li>
+                            ))
+                                      
+                        }
                     </ul>
                 </div>
                 
+                
+                <div className='question-page-card poster-card'>
+                    <div className='question-page-card-header'>
+                        <h2>Question Posted By</h2>
+                    </div>
+                    <h3>
+                        <Link to={`/profile/${props.postedBy}`}>
+                            {removeEmailEnding(props.postedBy)}
+                        </Link>
+                    </h3>
+                    
+                </div>
 
                 <div className='question-page-card flags-card'>
                     <div className='question-page-card-header'>

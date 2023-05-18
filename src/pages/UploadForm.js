@@ -15,19 +15,28 @@ const UploadForm = () => {
     const [batch, setBatch] = useState('');
     const [examType, setExamType] = useState('');
     const [teacher, setTeacher] = useState('');
+    const [teachersList, setTeachersList] = useState('');
     const [pdfFile, setPdfFile] = useState(null);
     const [topics, setTopics] = useState([]);
     const [numOfQuestions, setNumOfQuestions] = useState(0);
     const {user} = useAuthContext();
 
     const [courses, setCourses] = useState([])
-    const [courseShortList, setShortList] = useState([])
+    // const [courseShortList, setShortList] = useState([])
 
     useEffect(() => {
         Axios.get(API_BASE_URL + HOME + "all")
             .then((response) => {
                 setCourses(response.data.courses)
-                setShortList(response.data.courses)
+                // setShortList(response.data.courses)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+        Axios.get(API_BASE_URL + 'teachers/all')
+            .then((response) => {
+                setTeachersList(response.data)
             })
             .catch((error) => {
                 console.log(error)
@@ -35,25 +44,31 @@ const UploadForm = () => {
     }, []);
 
     const getCodes = () => {
-        return courseShortList.map((course, index) => (
+        return courses.map((course, index) => (
             <option key={index} value={course.courseCode} />
         ))
     };
 
     const getNames = () => {
-        return courseShortList.map((course, index) => (
+        return courses.map((course, index) => (
             <option key={index} value={course.courseName} />
+        ))
+    };
+
+    const getTeachers = () => {
+        return teachersList.map((t, index) => (
+            <option key={index} value={t} />
         ))
     };
 
     const handleCourseCodeChange = (e) => {
         setCourseCode(e.target.value);
-        setShortList(courseShortList.filter(item => item.courseCode === e.target.value))
+        // setShortList(courseShortList.filter(item => item.courseCode === e.target.value))
     };
 
     const handleCourseNameChange = (e) => {
         setCourseName(e.target.value);
-        setShortList(courseShortList.filter(item => item.courseName === e.target.value))
+        // setShortList(courseShortList.filter(item => item.courseName === e.target.value))
     };
 
     const handleBatchChange = (e) => {
@@ -215,12 +230,16 @@ const UploadForm = () => {
                 <label className='question-form-content'>
                     Teacher:
                     <input
+                        list='teachers-list'
                         className='question-form-box'
                         type="text"
                         value={teacher}
                         onChange={handleTeacherChange}
                         required
                     />
+                    <datalist id="teachers-list">
+                        {getTeachers()};
+                    </datalist>
                 </label>
                 <label className='question-form-content'>
                     Question PDF:

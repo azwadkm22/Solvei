@@ -229,6 +229,9 @@ header > div > h3 {
         font-size: 12px;
     }
 
+    .poster-card, .flags-card {
+        display: none;
+    }
     .question-page-container {
         display: flex;
         flex-direction: column-reverse;

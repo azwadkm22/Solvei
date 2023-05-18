@@ -119,7 +119,7 @@ function QuestionViewer(props) {
 
         // console.log( "BLURRR ", flaggedBlurryList)
         flaggedBlurryList.forEach(function(item) {
-          if(user.email === item)
+          if (user && user.email === item)
           {
             setUserFlaggedBlurry(true);
           }
@@ -127,7 +127,7 @@ function QuestionViewer(props) {
 
         const flaggedIncorrectList = response.data.flagIncorrect;
         flaggedIncorrectList.forEach(function (item) {
-          if (user.email === item) {
+          if (user && user.email === item) {
             setUserFlaggedIncorrect(true);
           }
         })
@@ -139,6 +139,9 @@ function QuestionViewer(props) {
   }, [])
 
   useEffect(() => {
+
+    if(user)
+    {
     Axios.get(API_BASE_URL + USER + user?.email)
         .then((response) => {
           const starredList = response.data.starred
@@ -150,7 +153,8 @@ function QuestionViewer(props) {
         })
         .catch((error) => {
           console.log(error);
-        });
+        })
+      };
   }, [isStarred])
   
 

@@ -17,12 +17,20 @@ function SearchBar() {
     const [queryType, setQueryType] = useState("");
     const [submitEnable, setSubmit] = useState(true);
 
+    const [teachersList, setTeachersList] = useState('');
+
 
     const [isFieldFocused, setIsFieldFocused] = useState(false);
 
     const handleFieldFocus = () => {
         setIsFieldFocused(true);
     }
+
+    const getTeachers = () => {
+        return teachersList.map((t, index) => (
+            <option key={index} value={t} />
+        ))
+    };
 
     const handleFieldBlur = () => {
         setIsFieldFocused(false);
@@ -41,6 +49,13 @@ function SearchBar() {
           .catch((error) => {
             console.log(error);
           });
+        Axios.get(API_BASE_URL + 'teachers/all')
+            .then((response) => {
+                setTeachersList(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }, []);
 
     // for setting teachers
@@ -215,10 +230,7 @@ function SearchBar() {
                                 Teacher:
                             <input name="teacher-name" type="text" list="available-teachers" placeholder="Type or select an option" onFocus={handleFieldFocus} onBlur={handleFieldBlur} onChange={handleTeacher}/>
                                 <datalist id="available-teachers">
-                                    <option value="Asif Hossain Khan" />
-                                    <option value="Abu Ahmed Ferdaus" />
-                                    <option value="Md. Mosaddek Hossain" />
-                                    <option value="Hasnain Heickal" />
+                                    {getTeachers()} 
                                 </datalist>
                                 
                             </label>
