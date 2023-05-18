@@ -15,7 +15,7 @@ const UploadForm = () => {
     const [batch, setBatch] = useState('');
     const [examType, setExamType] = useState('');
     const [teacher, setTeacher] = useState('');
-    const [teachersList, setTeachersList] = useState('');
+    const [teachersList, setTeachersList] = useState([]);
     const [pdfFile, setPdfFile] = useState(null);
     const [topics, setTopics] = useState([]);
     const [numOfQuestions, setNumOfQuestions] = useState(0);
