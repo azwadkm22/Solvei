@@ -3,6 +3,8 @@ Solvei is a platform dedicated to helping CSEDU students by providing a searchab
 
 ## [Figma Prototype Link](https://www.figma.com/proto/1C8AeC26326StRcAQPELWZ/Solvei-Prototype?node-id=55-177&node-type=canvas&t=PhwlWsstM4uJdfwK-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=55%3A177)
 
+
+## [YouTube Showcase](https://www.youtube.com/watch?v=qRuwAFonHb4&ab_channel=AzwadHossain)
 ## Screens
 
 
